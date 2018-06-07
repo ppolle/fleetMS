@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'sacco',
 ]
 
 MIDDLEWARE = [
@@ -83,8 +84,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'fleetms',
-        'USER': 'peter',
-        'PASSWORD': 'iamBOSS12'
+        'USER': 'alexander',
+        'PASSWORD': 'lazypass'
+
     }
 }
 DATABASES['default'].update(db_from_env)
@@ -113,7 +115,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Africa/Nairobi'
 
 USE_I18N = True
 
