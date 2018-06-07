@@ -3,5 +3,8 @@ from django.contrib.auth.models import AbstractUser
 # Create your models here.
 
 class User(AbstractUser):
+	'''
+	This function will create an abstract user to create an extra field in the user model
+	'''
 	roles = models.TextField(max_length = 100)
 	
