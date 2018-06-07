@@ -82,8 +82,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'fleetms',
-        'USER': 'abdullahinur',
-        'PASSWORD': 'totpot90210'
+        'USER': 'peter',
+        'PASSWORD': 'iamBOSS12'
     }
 }
 DATABASES['default'].update(db_from_env)
@@ -132,6 +132,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 # Media files folder
+AUTH_USER_MODEL = 'fleet_base.User'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
