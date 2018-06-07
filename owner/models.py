@@ -2,16 +2,16 @@ from django.db import models
 from django.conf import settings
 from django.dispatch import receiver
 from django.db.models.signals import post_save
+from sacco.models import Sacco
 
 # Create your models here.
 class Owner(models.Model):
    
-   nat_id = models.IntegerField(unique=True,default=number)
+   nat_id = models.IntegerField(unique=True,default=00000000)
    email = models.EmailField()
    user=models.OneToOneField(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
-   telephone = models.IntegerField(unique=True)
-   vehicle_num = models.ForeignKey(Vehicle)
-   profile_pic = models.ImageField(upload_to='/media')
+   telephone = models.IntegerField(unique=True,blank=True)
+   profile_pic = models.ImageField(upload_to='ownerProfile/',blank=True)
    sacco = models.ForeignKey(Sacco)
 
    @receiver(post_save, sender = settings.AUTH_USER_MODEL)
@@ -22,5 +22,5 @@ class Owner(models.Model):
 
 
 class Vehicle(models.Model):
-	number_plate = models.Charfield()
+	number_plate = models.CharField(max_length = 200)
 	capacity =  models.IntegerField()

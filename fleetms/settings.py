@@ -84,8 +84,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'fleetms',
-        'USER': 'alexander',
-        'PASSWORD': 'lazypass'
+        'USER': 'peter',
+        'PASSWORD': 'iamBOSS12'
 
     }
 }
