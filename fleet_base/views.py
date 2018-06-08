@@ -23,15 +23,18 @@ def ownerSignup(request):
 	if request.method == 'POST':
 		form = OwnerSignUpForm(request.POST)
 		if form.is_valid():
-			user = form.save()
+			user = form.save(commit = False)
+			user.roles = 'owner'
 			user.refresh_from_db()
 			user.owner.nat_id = form.cleaned_data.get('national_id')
 			# user.owner.sacco = form.cleaned_data.get('sacco')
+			
 			user.save()
 			raw_password = form.cleaned_data.get('password1')
 			user = authenticate(username = user.username,password = raw_password)
 			login(request,user)
-			return redirect (home)
+			messages.success(request, 'Success! Signup was a success!')
+			return redirect ('home')
 	else:
 		form = OwnerSignUpForm()
 		return render(request,'authentication/owner_signup.html',{"form":form})

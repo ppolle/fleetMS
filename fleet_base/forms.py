@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from sacco.models import Sacco
 
 
 
@@ -12,9 +13,12 @@ class OwnerSignUpForm(UserCreationForm):
 	last_name = forms.CharField(max_length=30, required=False)
 	email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
 	national_id = forms.IntegerField()
+	sacco =forms.ModelChoiceField(widget=forms.Select(attrs={'class': 'form-control'}),queryset = Sacco.objects.all())
+	
 	class Meta:
 		model = User
-		fields = ('username', 'first_name', 'last_name', 'email','national_id', 'password1', 'password2', )
+		fields = ('username', 'first_name', 'last_name', 'email','national_id','sacco', 'password1', 'password2', )
+
 	def __init__(self,*args, **kwargs):
 		super(OwnerSignUpForm, self).__init__(*args, **kwargs)
 		self.fields['username'].widget.attrs['class'] ='form-control'
@@ -24,3 +28,5 @@ class OwnerSignUpForm(UserCreationForm):
 		self.fields['last_name'].widget.attrs['class'] ='form-control'
 		self.fields['password1'].widget.attrs['class'] ='form-control'
 		self.fields['password2'].widget.attrs['class'] ='form-control'
+
+	
