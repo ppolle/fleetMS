@@ -16,9 +16,6 @@ class SaccoForm(forms.ModelForm):
                   'office_location', 'office_telephone', 'office_email', 'logo', 'details')
 
 class Super_listForm(forms.ModelForm):
-    full_name = forms.CharField(help_text="Please Enter Your Full Name")
-    id_number = forms.CharField(help_text="Please Enter Your National ID Number")
-    
     class Meta:
         model = Super_list
         fields = ('full_name', 'id_number')
