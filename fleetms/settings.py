@@ -35,6 +35,7 @@ ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'fleet_base',
+    'owner',
     'bootstrap3',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -42,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'sacco',
 ]
 
 MIDDLEWARE = [
@@ -82,8 +84,14 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'fleetms',
+<<<<<<< HEAD
         'USER': 'abdullahinur',
         'PASSWORD': 'totpot90210'
+=======
+        'USER': 'peter',
+        'PASSWORD': 'iamBOSS12'
+
+>>>>>>> a2fdb385522108eedcc042e2c8f78e44e6a8266b
     }
 }
 DATABASES['default'].update(db_from_env)
@@ -112,7 +120,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Africa/Nairobi'
 
 USE_I18N = True
 
