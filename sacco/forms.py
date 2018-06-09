@@ -20,3 +20,14 @@ class Super_listForm(forms.ModelForm):
         model = Super_list
         fields = ('full_name', 'id_number')
 
+
+class EditProfile(forms.ModelForm):
+    class Meta:
+        model = Sacco
+        fields = ('name', 'registration_no', 'office_location', 'office_telephone', 'office_email', 'logo', 'details')
+
+
+class EditSupervisor(forms.ModelForm):
+    class Meta:
+        model = Super_list
+        fields = ('full_name', 'id_number')

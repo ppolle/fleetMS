@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Sacco, Super_list
-from .forms import SaccoForm, Super_listForm
+from .forms import SaccoForm, Super_listForm, EditProfile
 
 # Create your views here.
 
@@ -39,3 +39,33 @@ def superlist(request):
     else:
         form = Super_listForm()
     return render(request, 'all/supervisor.html', {"form": form})
+
+
+def profile(request, sacco_id):
+    current_user = request.user
+    profiles = Sacco.objects.filter(user__id__iexact=sacco_id)
+    profile = Sacco.objects.get(user=sacco_id)
+    all_profile = Sacco.objects.all()
+    content = {
+        "profiles": profiles,
+        "profile": profile,
+        "user": current_user,
+        "profile_id": sacco_id,
+        "all_profile": all_profile
+    }
+    return render(request, "all/profile.html", content)
+
+
+def edit_profile(request):
+    # profile = request.user.profile
+    if request.method == 'POST':
+        form = EditProfile(request.POST, request.FILES)
+        if form.is_valid():
+            current_user = request.user
+            profile = form.save(commit=False)
+            profile.user = request.user
+            profile.save()
+            return redirect('profile', current_user.id)
+    else:
+        form = EditProfile()
+    return render(request, 'all/editprofile.html', {"form": form})
