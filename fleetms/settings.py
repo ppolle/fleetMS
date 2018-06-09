@@ -84,14 +84,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'fleetms',
-<<<<<<< HEAD
         'USER': 'abdullahinur',
         'PASSWORD': 'totpot90210'
-=======
-        'USER': 'peter',
-        'PASSWORD': 'iamBOSS12'
-
->>>>>>> a2fdb385522108eedcc042e2c8f78e44e6a8266b
     }
 }
 DATABASES['default'].update(db_from_env)
