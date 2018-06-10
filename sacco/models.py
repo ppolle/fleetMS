@@ -9,7 +9,7 @@ from django.db.models.signals import post_save
 class Sacco(models.Model):
     name = models.CharField(max_length=100)
     user=models.OneToOneField(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
-    registration_no = models.CharField(max_length=10, unique=True,blank=True)
+    registration_no = models.CharField(max_length=10,blank=True)
     office_location = models.CharField(max_length=200,blank=True)
     office_telephone = models.CharField(max_length=200,blank=True)
     office_email = models.EmailField(max_length=254,blank=True)

@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.http  import HttpResponse,Http404,HttpResponseRedirect,JsonResponse
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate,logout
 from django.contrib.auth.forms import UserCreationForm
 from .forms import OwnerSignUpForm,SaccoSignUpForm
 # from .models import Neighbourhood,Business,Profile,Join,Posts,Comments
@@ -15,6 +15,20 @@ def home(request):
 	Function to render the home page
 	'''
 	return render(request, 'home/home.html')
+
+def select(request):
+	'''
+	View function to select the apppropriate signup page
+	'''
+	return render(request,'authentication/choice.html')
+
+def logout(request):
+	'''
+	View function to handle loggin out users
+	'''
+	logout(request)
+	messages.success(request, 'Successfully logged-Out. Please come back again!')
+	return redirect('home')
 
 def ownerSignup(request):
 	'''
@@ -47,8 +61,9 @@ def saccoSignup(request):
 		form = SaccoSignUpForm(request.POST)
 		if form.is_valid():
 			user = form.save()
-			user.refresh_fromdb()
+			user.refresh_from_db()
 			user.sacco.name = form.cleaded_data.get('name')
+			user.sacco.registration_no =  forms.cleaned_data.get('registration_no')
 			user.roles = 'sacco'
 
 			user.save()

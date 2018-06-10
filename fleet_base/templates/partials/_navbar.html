@@ -20,15 +20,19 @@
         
         {% if user.is_authenticated %}
          <li>
-            <a  href="/accounts/login">Signup</a>
+            <a  href="{% url 'select' %}">Signup</a>
           </li>
         
           {% else %}
           <li>
-            <a  href="/accounts/login">Login</a>
+            <a  href="/logout">Logout</a>
           </li>
            <li>
-            <a  href="">{{user.username}}</a>
+            <a  href="">{{user}}</a>
+          </li>
+
+          <li>
+            <a  href="{% url 'select' %}">Signup</a>
           </li>
 
           {% endif %}

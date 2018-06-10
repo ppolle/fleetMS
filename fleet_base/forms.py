@@ -40,7 +40,7 @@ class SaccoSignUpForm(UserCreationForm):
 
 	class Meta:
 		model = get_user_model()
-		fields = ('name','username','email','password1','password2',)
+		fields = ('name','username','registration_no','email','password1','password2',)
 	
 	def __init__(self,*args, **kwargs):
 		super(SaccoSignUpForm, self).__init__(*args, **kwargs)
