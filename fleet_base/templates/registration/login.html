@@ -1,3 +1,7 @@
+{% extends "registration/base-login.html" %}
+
+{% block content %}
+
 <!DOCTYPE html>
 <html>
 
@@ -5,7 +9,7 @@
     <title>Login</title>
 </head>
 
-<body>
+<body style="text-align: center;">
     <form method="POST">
         {% csrf_token %}
         <p>
@@ -14,10 +18,11 @@
         </p>
         <p>
             <label>Password</label>
-            <input type="password" name="password">
+            <input style="color: black;" type="password" name="password">
         </p>
         <button type="submit">Login</button>
     </form>
 </body>
 
 </html>
+{% endblock %}
