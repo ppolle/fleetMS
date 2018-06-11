@@ -20,11 +20,11 @@ class Owner(models.Model):
    def __str__(self):
         return self.user
 
-   @receiver(post_save, sender = settings.AUTH_USER_MODEL)
-   def update_owner(sender,instance,created,**kwargs):
-   	if created:
-   		Owner.objects.create(user = instance)
-   	instance.owner.save()
+   # @receiver(post_save, sender = settings.AUTH_USER_MODEL)
+   # def update_owner(sender,instance,created,**kwargs):
+   # 	if created:
+   # 		Owner.objects.create(user = instance)
+   # 	instance.owner.save()
 
 
 class Vehicle(models.Model):

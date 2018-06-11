@@ -3,7 +3,8 @@ from django.http  import HttpResponse,Http404,HttpResponseRedirect,JsonResponse
 from django.contrib.auth import login, authenticate,logout
 from django.contrib.auth.forms import UserCreationForm
 from .forms import OwnerSignUpForm,SaccoSignUpForm
-# from .models import Neighbourhood,Business,Profile,Join,Posts,Comments
+from sacco.models import Sacco
+from owner.models import Owner
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
@@ -37,13 +38,21 @@ def ownerSignup(request):
 	if request.method == 'POST':
 		form = OwnerSignUpForm(request.POST)
 		if form.is_valid():
-			user = form.save()
-			user.refresh_from_db()
-			user.owner.nat_id = form.cleaned_data.get('national_id')
-			user.owner.sacco = form.cleaned_data.get('sacco')
+			user = form.save(commit = False)
 			user.roles = 'owner'
-			
 			user.save()
+			# user.refresh_from_db()
+			# user.owner.nat_id = form.cleaned_data.get('national_id')
+			# user.owner.sacco = form.cleaned_data.get('sacco')
+			
+
+			owner= Owner.objects.create(user=user)
+			owner.refresh_from_db()
+			owner.nat_id = form.cleaned_data.get('national_id')
+			owner.sacco = form.cleaned_data.get('sacco')
+			owner.save()
+			
+			# user.save()
 			raw_password = form.cleaned_data.get('password1')
 			user = authenticate(username = user.username,password = raw_password)
 			login(request,user)
@@ -61,17 +70,28 @@ def saccoSignup(request):
 		form = SaccoSignUpForm(request.POST)
 		if form.is_valid():
 			user = form.save()
+
 			user.refresh_from_db()
-			user.sacco.name = form.cleaded_data.get('name')
-			user.sacco.registration_no =  forms.cleaned_data.get('registration_no')
 			user.roles = 'sacco'
+			user.sacco.name = form.cleaned_data.get('name')
+			user.sacco.registration_no = form.cleaned_data.get('registration_no')
 
 			user.save()
+
+			# user.refresh_from_db()
+			# sacco = Sacco.objects.create(user = user)
+			# sacco.refresh_from_db()
+
+
+			# sacco.name = form.cleaded_data.get('name')
+			# sacco.registration_no =  forms.cleaned_data.get('registration_no')
+			# sacco.save()
+
 			raw_password = form.cleaned_data.get('password1')
 			user = authenticate(username = user.username,password = raw_password)
 			login(request,user)
 			messages.success(request, 'Success! You have succesfullly created a new sacco!')
-			return redirect ('home')
+			return render(request,'home/home.html')
 	else:
 		form = SaccoSignUpForm()
 		return render(request,'authentication/sacco_signup.html',{"form":form})
