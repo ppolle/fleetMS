@@ -5,10 +5,14 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^$', views.dashboard, name='sacco_home'),
-    # url(r'^new/sacco/$', views.sacco, name='register_sacco'),
     url(r'^new/supervisor/$', views.superlist, name='supervisor'),
+    url(r'^editSupervisor/(\d+)', views.edit_superlist, name='editSupervisor'),
+    url(r'^delete_supervisor/(\d+)', views.delete_supervisor, name='deleteSupervisor'),
+    
+    
     url(r'^profile/(?P<profile_id>[-\w]+)/$', views.profile, name='profile'),
-    url(r'^edit/$', views.edit_profile, name='edit'),
+    url(r'^editSacco/$', views.edit_profile, name='edit'),
+    url(r'^delete_sacco/(\d+)', views.delete_sacco, name='deleteSacco'),
         
 ]
 if settings.DEBUG:

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponse, Http404, HttpResponseRedirect, JsonResponse
 from .models import Sacco, Super_list
-from .forms import SaccoForm, Super_listForm, EditProfile
+from .forms import SaccoForm, Super_listForm, EditProfile, EditSupervisor
 
 # Create your views here.
 
@@ -8,38 +9,49 @@ def dashboard(request):
     '''
     View function to display all that a user will be interacting with fromm the onset of the app.
     '''
-    return render(request, 'all/dashboard.html')
+    supervisor = Super_list.objects.all()
+    return render(request, 'all/dashboard.html', {"supervisor": supervisor})
 
-# def sacco(request):
-#     '''
-#     View function to enable one register a new sacco
-#     '''
-#     current_user = request.user
-#     if request.method == 'POST':
-#         user_form = SaccoForm(data=request.POST)
-#         if user_form.is_valid():
-#             post = user_form.save(commit=False)
-#             post.user = current_user
-#             post.save()
-#             return redirect('sacco_home')
-#     else:
-#         user_form = SaccoForm()
-#     return render(request, 'all/sacco.html', {"user_form": user_form})
-
+# Supervisor section
 
 def superlist(request):
-    current_user = request.user
+    '''
+    View function to add a new supervisor
+    '''
     if request.method == 'POST':
         form = Super_listForm(request.POST)
         if form.is_valid():
             supervisor = form.save(commit=False)
-            supervisor.user = current_user
+            # supervisor.user = current_user
             supervisor.save()
             return redirect('sacco_home')
     else:
         form = Super_listForm()
     return render(request, 'all/supervisor.html', {"form": form})
 
+def edit_superlist(request, supervisor_id):
+    '''
+    View function to edit an instance of a supervisor already created
+    '''
+    supervisor = Super_list.objects.get(pk=supervisor_id)
+    if request.method == 'POST':
+        form = EditSupervisor(request.POST, instance=supervisor)
+        if form.is_valid():
+            form.save()
+            return redirect('supervisorDisplay')
+    else:
+        form = EditSupervisor(instance=supervisor)
+    return render(request, 'all/editsupervisor.html', {"form": form, "supervisor":supervisor})
+
+def delete_supervisor(request, supervisorID):
+    '''
+    View function that enables one delete a given supervisor in a sacco
+    '''
+    Super_list.objects.filter(pk=supervisorID).delete()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+# Sacco section
 
 def profile(request, sacco_id):
     current_user = request.user
@@ -56,7 +68,7 @@ def profile(request, sacco_id):
     return render(request, "all/profile.html", content)
 
 
-def edit_profile(request):
+def edit_profile(request, sacco_id):
     # profile = request.user.profile
     if request.method == 'POST':
         form = EditProfile(request.POST, request.FILES)
@@ -69,3 +81,11 @@ def edit_profile(request):
     else:
         form = EditProfile()
     return render(request, 'all/editprofile.html', {"form": form})
+
+def delete_sacco(request, saccoID):
+    '''
+    View function that enables one delete a given sacco
+    '''
+    Sacco.objects.filter(pk=saccoID).delete()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
