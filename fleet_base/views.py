@@ -85,8 +85,13 @@ def login(request):
 		if user is not None:
 			user_login(request,user)
 
-			messages.success(request, 'Success! You have succesfully logged in!')
-			return render(request,'home/home.html')
+			if user.roles == 'owner':
+
+				messages.success(request, 'Success! Owner has succesfully logged in!')
+				return render(request,'home/home.html')
+			else:
+				messages.success(request, 'Success! Sacco has succesfully logged in!')
+				return render(request,'home/home.html')
 		else:
 			messages.error(request, 'wrong username or password combination. try again!')
 			return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

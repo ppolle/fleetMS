@@ -22,9 +22,15 @@
          <li>
             <a  href="{% url 'logout' %}">Logout</a>
           </li>
+          {% if user.roles == 'sacco' %}
            <li>
             <a  href="">{{user.sacco.name.capitalize}}</a>
-          </li>            
+          </li>
+          {%else%}
+           <li>
+            <a  href="">{{user.first_name.capitalize}} {{user.last_name.capitalize}}</a>
+          </li>  
+          {% endif %}          
         
           {% else %}
          <li>
