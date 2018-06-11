@@ -15,11 +15,8 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-from django.contrib.auth import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'', include('fleet_base.urls')),
-    url(r'^logout/$', views.logout, {"next_page": '/'}),
-
 ]

@@ -23,14 +23,6 @@ def select(request):
 	'''
 	return render(request,'authentication/choice.html')
 
-def logout(request):
-	'''
-	View function to handle loggin out users
-	'''
-	user_logout(request)
-	messages.error(request, 'Successfully logged-Out. Please come back again!')
-	return redirect('home')
-
 def ownerSignup(request):
 	'''
 	View function that will manage user signup
@@ -41,23 +33,18 @@ def ownerSignup(request):
 			user = form.save(commit = False)
 			user.roles = 'owner'
 			user.save()
-			# user.refresh_from_db()
-			# user.owner.nat_id = form.cleaned_data.get('national_id')
-			# user.owner.sacco = form.cleaned_data.get('sacco')
-			
-
+				
 			owner= Owner.objects.create(user=user)
 			owner.refresh_from_db()
 			owner.nat_id = form.cleaned_data.get('national_id')
 			owner.sacco = form.cleaned_data.get('sacco')
 			owner.save()
 			
-			# user.save()
 			raw_password = form.cleaned_data.get('password1')
 			user = authenticate(username = user.username,password = raw_password)
-			login(request,user)
+			user_login(request,user)
 			messages.success(request, 'Success! Signup was a success!')
-			return redirect ('home')
+			return render(request,'home/home.html')
 	else:
 		form = OwnerSignUpForm()
 		return render(request,'authentication/owner_signup.html',{"form":form})
@@ -106,8 +93,16 @@ def login(request):
 	else:
 		messages.error(request, 'You did not input any username or password. Try Again!')
 		return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
 def loginViews(request):
 	'''
 	View function to render login page
 	'''
 	return render(request,'authentication/login.html')
+def logout(request):
+	'''
+	View function to handle loggin out users
+	'''
+	user_logout(request)
+	messages.error(request, 'Successfully logged-Out. Please come back again!')
+	return redirect('home')
