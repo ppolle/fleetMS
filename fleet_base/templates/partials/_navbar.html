@@ -20,17 +20,18 @@
         
         {% if user.is_authenticated %}
          <li>
-            <a  href="/logout">Logout</a>
+            <a  href="{% url 'logout' %}">Logout</a>
           </li>
            <li>
             <a  href="">{{user}}</a>
-          </li>
-
-                 
+          </li>            
         
           {% else %}
          <li>
             <a  href="{% url 'select' %}">Signup</a>
+          </li>
+          <li>
+            <a  href="{% url 'loginViews' %}">Login</a>
           </li>
 
           {% endif %}

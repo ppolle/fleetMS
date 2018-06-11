@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.http  import HttpResponse,Http404,HttpResponseRedirect,JsonResponse
-from django.contrib.auth import login, authenticate,logout
+from django.contrib.auth import login as user_login, authenticate,logout as user_logout
 from django.contrib.auth.forms import UserCreationForm
 from .forms import OwnerSignUpForm,SaccoSignUpForm
 from sacco.models import Sacco
@@ -27,8 +27,8 @@ def logout(request):
 	'''
 	View function to handle loggin out users
 	'''
-	logout(request)
-	messages.success(request, 'Successfully logged-Out. Please come back again!')
+	user_logout(request)
+	messages.error(request, 'Successfully logged-Out. Please come back again!')
 	return redirect('home')
 
 def ownerSignup(request):
@@ -78,21 +78,36 @@ def saccoSignup(request):
 
 			user.save()
 
-			# user.refresh_from_db()
-			# sacco = Sacco.objects.create(user = user)
-			# sacco.refresh_from_db()
-
-
-			# sacco.name = form.cleaded_data.get('name')
-			# sacco.registration_no =  forms.cleaned_data.get('registration_no')
-			# sacco.save()
-
 			raw_password = form.cleaned_data.get('password1')
 			user = authenticate(username = user.username,password = raw_password)
-			login(request,user)
+			user_login(request,user)
 			messages.success(request, 'Success! You have succesfullly created a new sacco!')
 			return render(request,'home/home.html')
 	else:
 		form = SaccoSignUpForm()
 		return render(request,'authentication/sacco_signup.html',{"form":form})
 
+def login(request):
+	'''
+	View function that will manage user authentication
+	'''
+	if request.GET.get('username') and request.GET.get("password"):
+		username = request.GET.get("username")
+		password = request.GET.get("password")
+		user = authenticate(request, username=username, password=password)
+		if user is not None:
+			user_login(request,user)
+
+			messages.success(request, 'Success! You have succesfully logged in!')
+			return render(request,'home/home.html')
+		else:
+			messages.error(request, 'wrong username or password combination. try again!')
+			return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+	else:
+		messages.error(request, 'You did not input any username or password. Try Again!')
+		return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+def loginViews(request):
+	'''
+	View function to render login page
+	'''
+	return render(request,'authentication/login.html')
