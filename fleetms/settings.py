@@ -83,7 +83,7 @@ WSGI_APPLICATION = 'fleetms.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'fleetms',
+        'NAME': 'fleet',
         'USER': 'abdullahinur',
         'PASSWORD': 'totpot90210'
     }
