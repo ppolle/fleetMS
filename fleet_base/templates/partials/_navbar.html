@@ -13,11 +13,11 @@
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-    
-    
+
+
       <ul class="nav navbar-nav navbar-right">
-          
-        
+
+
         {% if user.is_authenticated %}
          <li>
             <a  href="{% url 'logout' %}">Logout</a>
@@ -29,9 +29,9 @@
           {%else%}
            <li>
             <a  href="">{{user.first_name.capitalize}} {{user.last_name.capitalize}}</a>
-          </li>  
-          {% endif %}          
-        
+          </li>
+          {% endif %}
+
           {% else %}
          <li>
             <a  href="{% url 'select' %}">Signup</a>
