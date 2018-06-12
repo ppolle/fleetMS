@@ -14,7 +14,6 @@ class OwnerSignUpForm(UserCreationForm):
 	last_name = forms.CharField(max_length=30, required=False)
 	email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
 	national_id = forms.IntegerField()
-	# roles = forms.HiddenInput(initial = 'woe')
 	sacco =forms.ModelChoiceField(widget=forms.Select(attrs={'class': 'form-control'}),queryset = Sacco.objects.all(),required= False)
 	
 	class Meta:

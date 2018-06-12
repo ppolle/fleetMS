@@ -1,0 +1,26 @@
+{%extends 'all/base.html'%} 
+{% load bootstrap3 %}
+{% load staticfiles %}
+{% block content %} 
+{{block.super}}
+<h1 style="text-align: center;">Register your sacco here</h1>
+<div class="form" style="text-align: center; margin-top: 5vh; width: 15vw; margin:auto;">
+    <form method="post">
+        {% csrf_token %} 
+        {% for field in user_form %}
+        <p>
+            {{ field.label_tag }}
+            <br> 
+            {{ field }} 
+            {% if field.help_text %}
+            <small style="display: none">{{ field.help_text }}</small>
+            {% endif %} 
+            {% for error in field.errors %}
+            <p style="color: red">{{ error }}</p>
+            {% endfor %}
+        </p>
+        {% endfor %} 
+        <button type="submit" style="border: solid 2px black; border-radius: 10px; margin-top: 5px;">SUBMIT</button>
+    </form>
+</div>
+{% endblock %}

@@ -18,5 +18,11 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+<<<<<<< HEAD
     url(r'', include('fleet_base.urls')),
+=======
+    url(r'', include('sacco.urls')),
+    url(r'^home/', include('fleet_base.urls')),
+
+>>>>>>> b3252b3a7052dc5a0a3a600ae428e7ab2852b3b0
 ]
