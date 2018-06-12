@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'sacco',
+
 ]
 
 MIDDLEWARE = [
@@ -84,8 +85,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'fleetms',
-        'USER': 'peter',
-        'PASSWORD': 'iamBOSS12'
+        'USER': 'wanjiku',
+        'PASSWORD': 'flask1234'
 
     }
 }
