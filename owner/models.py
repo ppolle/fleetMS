@@ -22,6 +22,7 @@ class Owner(models.Model):
     def __str__(self):
         return self.user
 
+
 class Vehicle(models.Model):
     number_plate = models.CharField(max_length=200)
     capacity = models.IntegerField()
