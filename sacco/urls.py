@@ -3,6 +3,8 @@ from . import views
 from django.conf import settings
 from django.conf.urls.static import static
 
+app_name='sacco'
+
 urlpatterns = [
     url(r'^$', views.dashboard, name='sacco_home'),
     url(r'^new/supervisor/$', views.superlist, name='supervisor'),
@@ -11,7 +13,7 @@ urlpatterns = [
     
     
     url(r'^profile/(?P<profile_id>[-\w]+)/$', views.profile, name='profile'),
-    url(r'^editSacco/$', views.edit_profile, name='edit'),
+    url(r'^editSacco/(\d+)', views.edit_profile, name='edit'),
     url(r'^delete_sacco/(\d+)', views.delete_sacco, name='deleteSacco'),
         
 ]
