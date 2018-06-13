@@ -7,8 +7,6 @@ from sacco.models import Sacco
 
 
 class Supervisor(models.Model):
-    first_name = models.CharField(max_length=30, unique=True)
-    last_name = models.CharField(max_length=30, unique=True)
     id_number = models.IntegerField(unique=True)
     date_of_birth = models.DateField(null=True)
     profile_picture = models.ImageField(
