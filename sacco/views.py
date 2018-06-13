@@ -71,15 +71,13 @@ def profile(request, sacco_id):
 def edit_profile(request, sacco_id):
     # profile = request.user.profile
     if request.method == 'POST':
-        form = EditProfile(request.POST, request.FILES)
+        form = EditProfile(request.POST, request.FILES,instace = Sacco.objects.get(pk = sacco_id))
         if form.is_valid():
             current_user = request.user
-            profile = form.save(commit=False)
-            profile.user = request.user
-            profile.save()
+            form.save()
             return redirect('profile', current_user.id)
     else:
-        form = EditProfile()
+        form = EditProfile(instance = Sacco.objects.get(pk = sacco_id))
     return render(request, 'all/editprofile.html', {"form": form})
 
 def delete_sacco(request, saccoID):

@@ -1,4 +1,5 @@
 from django.shortcuts import render,redirect
+from django.urls import reverse
 from django.http  import HttpResponse,Http404,HttpResponseRedirect,JsonResponse
 from django.contrib.auth import login as user_login, authenticate,logout as user_logout
 from django.contrib.auth.forms import UserCreationForm
@@ -69,10 +70,12 @@ def saccoSignup(request):
 			user = authenticate(username = user.username,password = raw_password)
 			user_login(request,user)
 			messages.success(request, 'Success! You have succesfullly created a new sacco!')
-			return render(request,'home/home.html')
+			print(user.sacco.id)
+			# return render(request,'home/home.html')
+			return redirect('sacco:edit',user.sacco.id)
 	else:
 		form = SaccoSignUpForm()
-		return render(request,'authentication/sacco_signup.html',{"form":form})
+	return render(request,'authentication/sacco_signup.html',{"form":form})
 
 def login(request):
 	'''
