@@ -1,14 +1,16 @@
 {%extends 'all/base.html'%} {% block content %} {{block.super}}
 
 <h1 style="text-align: center">SACCO DASHBOARD</h1>
-<!-- Side navigation -->
-<div class="sidenav">
-    <a href="#">About Sacco</a>
-    <a href="{% url 'sacco:createSupervisor' %}">Add Supervisor</a>
-    <a href="{% url 'sacco:edit' user.sacco.id %}">Edit Sacco</a>
-    <a href="#">Delete Sacco</a>
-</div>
-
+<section>
+    <!-- Side navigation -->
+    <div class="sidenav">
+        <a href="#">About Sacco</a>
+        <a href="{% url 'sacco:createSupervisor' %}">Add Supervisor</a>
+        <a href="{% url 'sacco:edit' user.sacco.id %}">Edit Sacco</a>
+        <a href="#">Delete Sacco</a>
+    </div>
+</section>
+<section>
 <!-- Page content -->
 <div class="container">
     <div class="Supervisors">
@@ -26,8 +28,12 @@
                 <tr>
                     <td>{{supervisor.full_name}}</td>
                     <td>{{supervisor.id_number}}</td>
-                    <td><a href="{% url 'sacco:editSupervisor' supervisor.id %}" class="btn btn-sm btn-success">Edit</a></td>
-                    <td><a href="{% url 'sacco:deleteSupervisor' supervisor.id %}" class="btn btn-sm btn-danger">Delete</a></td>
+                    <td>
+                        <a href="{% url 'sacco:editSupervisor' supervisor.id %}" class="btn btn-sm btn-success">Edit</a>
+                    </td>
+                    <td>
+                        <a href="{% url 'sacco:deleteSupervisor' supervisor.id %}" class="btn btn-sm btn-danger">Delete</a>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>
@@ -35,5 +41,8 @@
 
     </div>
 </div>
+
+</section>
+
 
 {% endblock %}
