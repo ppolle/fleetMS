@@ -21,7 +21,7 @@
                 </div>
                 {% if user.id == profile.id %}
                 <div>
-                    <a href="{% url 'sacco:edit' %}">
+                    <a href="{% url 'sacco:edit' user.sacco.id %}">
                         <i class="fa fa-cog fa-spin"></i>
                         Edit Profile
                     </a>
@@ -39,7 +39,7 @@
                     </h5>
                 </div>
                 <div>
-                    <a href="{% url 'edit'%}">
+                    <a href="{% url 'sacco:edit' user.sacco.id%}">
                         <button type="button" class="btn btn-outline-primary btn-lg">Edit Your Profile</button>
                     </a>
                 </div>

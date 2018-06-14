@@ -14,6 +14,7 @@ import os
 
 import dj_database_url
 from decouple import config
+from django.contrib.messages import constants as messages
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -63,7 +64,7 @@ ROOT_URLCONF = 'fleetms.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, "templates")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -86,8 +87,13 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'fleetms',
+<<<<<<< HEAD
         'USER': 'wanjiku',
         'PASSWORD': 'flask1234',
+=======
+        'USER': 'peter',
+        'PASSWORD': 'iamBOSS12'
+>>>>>>> ff668d1e6588fd05086f8b561ed33949806bda4d
     }
 }
 DATABASES['default'].update(db_from_env)
@@ -110,6 +116,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+MESSAGE_TAGS = {
+    messages.DEBUG: 'alert-info',
+    messages.INFO: 'alert-info',
+    messages.SUCCESS: 'alert-success',
+    messages.WARNING: 'alert-warning',
+    messages.ERROR: 'alert-danger',
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/

@@ -68,4 +68,3 @@ class Vehicle(models.Model):
     
         def update_vehicle(self, id):
             pass
-

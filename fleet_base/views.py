@@ -17,13 +17,13 @@ def home(request):
 	'''
 	Function to render the home page
 	'''
-	return render(request, 'home/home.html')
+	return render(request, 'fleet_base/home/home.html')
 
 def select(request):
 	'''
 	View function to select the apppropriate signup page
 	'''
-	return render(request,'authentication/choice.html')
+	return render(request,'fleet_base/authentication/choice.html')
 
 def ownerSignup(request):
 	'''
@@ -43,15 +43,15 @@ def ownerSignup(request):
 			owner.sacco = form.cleaned_data.get('sacco')
 			owner.save()
 
-			raw_password = form.cleaned_data.get('password1')
-			user = authenticate(username = user.username,password = raw_password)
-			user_login(request,user)
-			messages.success(request, 'Success! Signup was a success!')
-			return render(request,'home/home.html')
+			# raw_password = form.cleaned_data.get('password1')
+			# user = authenticate(username = user.username,password = raw_password)
+			# user_login(request,user)
+			messages.success(request, 'Success Signup! Login to access you account')
+			return render(request,'fleet_base/authentication/login.html')
 
 	else:
 		form = OwnerSignUpForm()
-		return render(request,'authentication/owner_signup.html',{"form":form})
+		return render(request,'fleet_base/authentication/owner_signup.html',{"form":form})
 
 def saccoSignup(request):
 	'''
@@ -73,10 +73,10 @@ def saccoSignup(request):
 			user = authenticate(username = user.username,password = raw_password)
 			user_login(request,user)
 			messages.success(request, 'Success! You have succesfullly created a new sacco!')
-			return redirect('sacco:sacco_home')
+			return redirect('sacco:edit', user.sacco.id)
 	else:
 		form = SaccoSignUpForm()
-	return render(request,'authentication/sacco_signup.html',{"form":form})
+	return render(request,'fleet_base/authentication/sacco_signup.html',{"form":form})
 
 def supSignup(request):
 	'''
@@ -87,6 +87,7 @@ def supSignup(request):
 
 		if form.is_valid():
 			if Super_list.objects.filter(id_number = form.cleaned_data.get('id_number')).exists():
+				super_list = Super_list.objects.get(id_number = form.cleaned_data.get('id_number'))
 				user = form.save(commit = False)
 				user.roles = 'supervisor'
 				user.sacco_base = Super_list
@@ -96,20 +97,21 @@ def supSignup(request):
 				supervisor.refresh_from_db()
 				supervisor.id_number = form.cleaned_data.get('id_number')
 				supervisor.date_of_birth = form.cleaned_data.get('birth_date')
+				supervisor.sacco_base = super_list.sacco
 				supervisor.save()
 
 				raw_password = form.cleaned_data.get('password1')
 				user = authenticate(username = user.username,password = raw_password)
 				user_login(request,user)
 				messages.success(request,f'Success! Welcome to you new dahsboard {user.first_name}')
-				return render(request,'home/home.html')
+				return render(request,'fleet_base/home/home.html')
 
 			else:
 				messages.error(request,'Error! Make sure your respective sacco has already registered you on the platform!')
 				return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 	else:
 		form = SupervisorSignupForm()
-		return render(request,'authentication/supervisor_signup.html',{"form":form})
+		return render(request,'fleet_base/authentication/supervisor_signup.html',{"form":form})
 
 def login(request):
 	'''
@@ -125,7 +127,7 @@ def login(request):
 			if user.roles == 'owner':
 
 				messages.success(request, f'Welcome back {request.user.first_name} {request.user.last_name}!')
-				return render(request,'home/home.html')
+				return redirect('fleet:index')
 			else:
 				messages.success(request, f'Success! {request.user.sacco.name} has succesfully logged in!')
 				return redirect('sacco:sacco_home')
@@ -140,11 +142,11 @@ def loginViews(request):
 	'''
 	View function to render login page
 	'''
-	return render(request,'authentication/login.html')
+	return render(request,'fleet_base/authentication/login.html')
 def logout(request):
 	'''
 	View function to handle loggin out users
 	'''
 	user_logout(request)
 	messages.error(request, 'Successfully logged-Out. Please come back again!')
-	return redirect('index')
+	return redirect('fleet:index')

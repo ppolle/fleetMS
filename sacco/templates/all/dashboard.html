@@ -1,6 +1,4 @@
-{%extends 'all/base.html'%} 
-{% block content %}
-{{block.super}} 
+{%extends 'all/base.html'%} {% block content %} {{block.super}}
 
 <h1 style="text-align: center">SACCO DASHBOARD</h1>
 <!-- Side navigation -->
@@ -13,6 +11,7 @@
 
 <!-- Page content -->
 <div class="container">
+    {% include "partials/_messages.html" %}
     <div class="Supervisors">
         <h4>SUPERVISOR LIST</h4>
         <table class="table table-hover">
@@ -31,10 +30,15 @@
                     <td><a href="{% url 'sacco:editSupervisor' supervisor.id %}" class="btn btn-sm btn-success">Edit</a></td>
                     <td><a href="{% url 'sacco:deleteSupervisor' supervisor.id %}" class="btn btn-sm btn-danger">Delete</a></td>
                 </tr>
+                {% empty %}
+                <div class="emptytable">
+                    <h3>There are no registered Supervisors just yet. <a href="{% url 'sacco:createSupervisor' %}">Click here to add</a> a supervisor</h3>
+
+                </div>
                 {% endfor %}
             </tbody>
         </table>
-        
+
     </div>
 </div>
 
