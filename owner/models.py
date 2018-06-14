@@ -77,6 +77,7 @@ class Owner(models.Model):
 
 
 
+<<<<<<< HEAD
     def __str__(self):
         return self.user
 
@@ -87,3 +88,5 @@ class Vehicle(models.Model):
 
     def __str__(self):
         return self.number_plate
+=======
+>>>>>>> 06beeb00b4e59d4a98787c6798c090a52e111795
