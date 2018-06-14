@@ -3,9 +3,10 @@ from django.urls import reverse
 from django.http  import HttpResponse,Http404,HttpResponseRedirect,JsonResponse
 from django.contrib.auth import login as user_login, authenticate,logout as user_logout
 from django.contrib.auth.forms import UserCreationForm
-from .forms import OwnerSignUpForm,SaccoSignUpForm
-from sacco.models import Sacco
+from .forms import OwnerSignUpForm,SaccoSignUpForm,SupervisorSignupForm
+from sacco.models import Sacco,Super_list
 from owner.models import Owner
+from supervisor.models import Supervisor
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
@@ -30,22 +31,24 @@ def ownerSignup(request):
 	'''
 	if request.method == 'POST':
 		form = OwnerSignUpForm(request.POST)
+
 		if form.is_valid():
 			user = form.save(commit = False)
 			user.roles = 'owner'
 			user.save()
-				
+
 			owner= Owner.objects.create(user=user)
 			owner.refresh_from_db()
 			owner.nat_id = form.cleaned_data.get('national_id')
 			owner.sacco = form.cleaned_data.get('sacco')
 			owner.save()
-			
+
 			raw_password = form.cleaned_data.get('password1')
 			user = authenticate(username = user.username,password = raw_password)
 			user_login(request,user)
 			messages.success(request, 'Success! Signup was a success!')
 			return render(request,'home/home.html')
+
 	else:
 		form = OwnerSignUpForm()
 		return render(request,'authentication/owner_signup.html',{"form":form})
@@ -70,12 +73,43 @@ def saccoSignup(request):
 			user = authenticate(username = user.username,password = raw_password)
 			user_login(request,user)
 			messages.success(request, 'Success! You have succesfullly created a new sacco!')
-			print(user.sacco.id)
-			# return render(request,'home/home.html')
-			return redirect('sacco:edit',user.sacco.id)
+			return redirect('sacco:sacco_home')
 	else:
 		form = SaccoSignUpForm()
 	return render(request,'authentication/sacco_signup.html',{"form":form})
+
+def supSignup(request):
+	'''
+	View function that will manage supervisor signup
+	'''
+	if request.method == 'POST':
+		form = SupervisorSignupForm(request.POST)
+
+		if form.is_valid():
+			if Super_list.objects.filter(id_number = form.cleaned_data.get('id_number')).exists():
+				user = form.save(commit = False)
+				user.roles = 'supervisor'
+				user.sacco_base = Super_list
+				user.save()
+
+				supervisor = Supervisor.objects.create(user= user)
+				supervisor.refresh_from_db()
+				supervisor.id_number = form.cleaned_data.get('id_number')
+				supervisor.date_of_birth = form.cleaned_data.get('birth_date')
+				supervisor.save()
+
+				raw_password = form.cleaned_data.get('password1')
+				user = authenticate(username = user.username,password = raw_password)
+				user_login(request,user)
+				messages.success(request,f'Success! Welcome to you new dahsboard {user.first_name}')
+				return render(request,'home/home.html')
+
+			else:
+				messages.error(request,'Error! Make sure your respective sacco has already registered you on the platform!')
+				return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+	else:
+		form = SupervisorSignupForm()
+		return render(request,'authentication/supervisor_signup.html',{"form":form})
 
 def login(request):
 	'''
@@ -90,11 +124,11 @@ def login(request):
 
 			if user.roles == 'owner':
 
-				messages.success(request, 'Success! Owner has succesfully logged in!')
+				messages.success(request, f'Welcome back {request.user.first_name} {request.user.last_name}!')
 				return render(request,'home/home.html')
 			else:
-				messages.success(request, 'Success! Sacco has succesfully logged in!')
-				return render(request,'home/home.html')
+				messages.success(request, f'Success! {request.user.sacco.name} has succesfully logged in!')
+				return redirect('sacco:sacco_home')
 		else:
 			messages.error(request, 'wrong username or password combination. try again!')
 			return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
@@ -113,4 +147,4 @@ def logout(request):
 	'''
 	user_logout(request)
 	messages.error(request, 'Successfully logged-Out. Please come back again!')
-	return redirect('home')
+	return redirect('index')

@@ -15,8 +15,7 @@ class Sacco(models.Model):
     office_telephone = models.CharField(max_length=200, blank=True)
     office_email = models.EmailField(max_length=254, blank=True)
     logo = models.ImageField(upload_to='sacco_logo/', blank=True)
-    details = models.CharField(max_length=1000,blank=True)
-
+    details = models.CharField(max_length=1000, blank=True)
 
     def __str__(self):
         return self.name
@@ -42,4 +41,3 @@ class Super_list(models.Model):
 
     def delete_supervisor(self):
         self.delete()
-

@@ -48,3 +48,24 @@ class SaccoSignUpForm(UserCreationForm):
 		self.fields['password1'].widget.attrs['class'] ='form-control'
 		self.fields['password2'].widget.attrs['class'] ='form-control'	
 	
+class SupervisorSignupForm(UserCreationForm):
+	'''
+	Form class to create a supervisor signup form
+	'''
+	id_number = forms.IntegerField()
+	birth_date = forms.DateField()
+	
+	class Meta:
+		model = get_user_model()
+		fields = ('username','first_name','last_name','id_number','birth_date','email','password1','password2',)
+
+	def __init__(self,*args, **kwargs):
+		super(SupervisorSignupForm, self).__init__(*args, **kwargs)
+		self.fields['username'].widget.attrs['class'] ='form-control'
+		self.fields['first_name'].widget.attrs['class'] ='form-control'
+		self.fields['last_name'].widget.attrs['class'] ='form-control'
+		self.fields['birth_date'].widget.attrs['class'] ='form-control'
+		self.fields['id_number'].widget.attrs['class'] ='form-control'
+		self.fields['email'].widget.attrs['class'] ='form-control'
+		self.fields['password1'].widget.attrs['class'] ='form-control'
+		self.fields['password2'].widget.attrs['class'] ='form-control'	

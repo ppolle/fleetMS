@@ -4,7 +4,7 @@
     <!-- Supervisor form -->
     <div class="col-md-8 col-lg-8 col-md-offset-2">
 
-        <form action="{% url 'supervisor' %}" method="post">
+        <form action="{% url 'sacco:createSupervisor' %}" method="post">
 
             {% csrf_token %} 
             {% bootstrap_form form %}
