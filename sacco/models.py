@@ -41,4 +41,3 @@ class Super_list(models.Model):
 
     def delete_supervisor(self):
         self.delete()
-

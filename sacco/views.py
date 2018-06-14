@@ -38,7 +38,7 @@ def edit_superlist(request, supervisor_id):
         form = EditSupervisor(request.POST, instance=supervisor)
         if form.is_valid():
             form.save()
-            return redirect('supervisorDisplay')
+            return redirect('sacco_home')
     else:
         form = EditSupervisor(instance=supervisor)
     return render(request, 'all/editsupervisor.html', {"form": form, "supervisor":supervisor})
