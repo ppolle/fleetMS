@@ -47,7 +47,7 @@ def ownerSignup(request):
 			user = authenticate(username = user.username,password = raw_password)
 			user_login(request,user)
 			messages.success(request, 'Success! Signup was a success!')
-			return render(request,'home/home.html')
+			return redirect('fleet:index')
 
 	else:
 		form = OwnerSignUpForm()
@@ -73,7 +73,7 @@ def saccoSignup(request):
 			user = authenticate(username = user.username,password = raw_password)
 			user_login(request,user)
 			messages.success(request, 'Success! You have succesfullly created a new sacco!')
-			return redirect('sacco:sacco_home')
+			return redirect('sacco:edit', user.sacco.id)
 	else:
 		form = SaccoSignUpForm()
 	return render(request,'authentication/sacco_signup.html',{"form":form})
@@ -125,7 +125,7 @@ def login(request):
 			if user.roles == 'owner':
 
 				messages.success(request, f'Welcome back {request.user.first_name} {request.user.last_name}!')
-				return render(request,'home/home.html')
+				return redirect('fleet:index')
 			else:
 				messages.success(request, f'Success! {request.user.sacco.name} has succesfully logged in!')
 				return redirect('sacco:sacco_home')
@@ -147,4 +147,4 @@ def logout(request):
 	'''
 	user_logout(request)
 	messages.error(request, 'Successfully logged-Out. Please come back again!')
-	return redirect('index')
+	return redirect('fleet:index')
