@@ -1,52 +1,36 @@
 {%extends 'sacco/all/base.html'%} 
-{% load static %} 
+{% load static %}
 {% block content %}
 
 <div class="container">
-    {% if profile.avatar %}
     <div class="row">
-        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-            <img src="{{profile.avatar.url | safe}}" class="img-responsive" alt="user profile picture">
+
+        <div class="col-md-5">
+            {% if profile.logo %}
+            <img src="{{profile.logo.url}}" alt="Sacco Logo">
+            {% endif %}
         </div>
-        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+        <div class="col-md-7">
             <div>
-                <div>
-                    <p>{{profile.name}}</p>
-                </div>
-                <div>
-                    <p>{{profile.generalLocation}}</p>
-                </div>
-                <div>
-                    <p>{{profile.email}}</p>
-                </div>
-                {% if user.id == profile.id %}
-                <div>
-                    <a href="{% url 'sacco:edit' user.sacco.id %}">
-                        <i class="fa fa-cog fa-spin"></i>
-                        Edit Profile
-                    </a>
-                </div>
-                {% endif %}
-
+                 <h3>SACCO NAME: {{profile.name|upper}}</h3>
+            </div>
+            <div>
+                <p>SACCO REGISTRATION NUMBER: {{profile.registration_no}}</p>
+            </div>
+            <div>
+                <p>SACCO OFFICE LOCATION: {{profile.office_location}}</p>
+            </div>
+            <div>
+                <p>TELEPHONE NUMBER: {{profile.office_telephone}}</p>
+            </div>
+            <div>
+                <p>EMAIL ADDRESS: {{profile.office_email}}</p>
+            </div>
+            <div>
+                <p>SACCO DETAILS: {{profile.details}}</p>
             </div>
         </div>
-        {% else %}
-        <div class="row">
-            <div class="col-md-9">
-                <div>
-                    <h5>
-                        <strong>{{profile.user}}</strong>
-                    </h5>
-                </div>
-                <div>
-                    <a href="{% url 'sacco:edit' user.sacco.id%}">
-                        <button type="button" class="btn btn-outline-primary btn-lg">Edit Your Profile</button>
-                    </a>
-                </div>
-            </div>
 
-        </div>
     </div>
-    {% endif %}
 </div>
 {% endblock %}

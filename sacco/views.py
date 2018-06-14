@@ -62,23 +62,12 @@ def delete_supervisor(request, supervisorID):
 
 # Sacco section
 
-def profile(request, sacco_id):
-    current_user = request.user
-    profiles = Sacco.objects.filter(user__id__iexact=sacco_id)
-    profile = Sacco.objects.get(user=sacco_id)
-    all_profile = Sacco.objects.all()
-    content = {
-        "profiles": profiles,
-        "profile": profile,
-        "user": current_user,
-        "profile_id": sacco_id,
-        "all_profile": all_profile
-    }
-    return render(request, "sacco/all/profile.html", content)
+def profile(request):
+    profile = Sacco.objects.get(user=request.user)
+    return render(request, "sacco/all/profile.html", {"profile": profile})
 
 
 def edit_profile(request, sacco_id):
-    # profile = request.user.profile
     if request.method == 'POST':
         form = EditProfile(request.POST, request.FILES,instance = Sacco.objects.get(pk = sacco_id))
         if form.is_valid():
