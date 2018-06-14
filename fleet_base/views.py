@@ -1,5 +1,4 @@
-<< << << < HEAD
-== == == =
+
 from django.contrib import messages
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as user_login
@@ -17,10 +16,6 @@ from supervisor.models import Supervisor
 from supervisor.views import supervisor
 
 from .forms import OwnerSignUpForm, SaccoSignUpForm, SupervisorSignupForm
-
->>>>>> > 9ee485f6bdda389b742dae6e373c3d4ee6e279f9
-
-
 
 # Create your views here.
 
@@ -105,22 +100,23 @@ def supSignup(request):
 
         if form.is_valid():
             if Super_list.objects.filter(id_number=form.cleaned_data.get('id_number')).exists():
-                user = form.save(commit=False)
-                user.roles = 'supervisor'
-                user.sacco_base = Super_list
-                user.save()
+                supervisor = form.save(commit=False)
+                supervisor.roles = 'supervisor'
+                supervisor.sacco_base = Super_list
+                supervisor.save()
 
-                supervisor = Supervisor.objects.create(user=user)
+                supervisor = Supervisor.objects.create(supervisor=supervisor)
                 supervisor.refresh_from_db()
                 supervisor.id_number = form.cleaned_data.get('id_number')
                 supervisor.date_of_birth = form.cleaned_data.get('birth_date')
                 supervisor.save()
 
                 raw_password = form.cleaned_data.get('password1')
-                user = authenticate(username=user.username,
+                user = authenticate(username=supervisor.username,
                                     password=raw_password)
                 user_login(request, user)
-                messages.success(request, f'Success! Welcome to you new dahsboard {user.first_name}')
+                messages.success(
+                    request, 'Success Welcome to your new dahsboard')
                 return render(request, 'home/home.html')
 
             else:
@@ -145,10 +141,12 @@ def login(request):
 
             if user.roles == 'owner':
 
-                messages.success(request, f'Welcome back {request.user.first_name} {request.user.last_name}!')
+                messages.success(
+                    request, 'Welcome back {request.user.first_name} {request.user.last_name}!')
                 return redirect('fleet:index')
             else:
-                messages.success(request, f'Success! {request.user.sacco.name} has succesfully logged in!')
+                messages.success(
+                    request, 'Success! {request.user.sacco.name} has succesfully logged in!')
                 return redirect('sacco:sacco_home')
         else:
             messages.error(
