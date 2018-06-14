@@ -1,6 +1,4 @@
-{%extends 'all/base.html'%} 
-{% block content %}
-{{block.super}} 
+{%extends 'all/base.html'%} {% block content %} {{block.super}}
 
 <h1 style="text-align: center">SACCO DASHBOARD</h1>
 <!-- Side navigation -->
@@ -28,13 +26,17 @@
                 <tr>
                     <td>{{supervisor.full_name}}</td>
                     <td>{{supervisor.id_number}}</td>
-                    <td><a href="{% url 'editSupervisor' supervisor.id %}" class="btn btn-sm btn-success">Edit</a></td>
-                    <td><a href="{% url 'deleteSupervisor' supervisor.id %}" class="btn btn-sm btn-danger">Delete</a></td>
+                    <td>
+                        <a href="{% url 'editSupervisor' supervisor.id %}" class="btn btn-sm btn-success">Edit</a>
+                    </td>
+                    <td>
+                        <a href="{% url 'deleteSupervisor' supervisor.id %}" class="btn btn-sm btn-danger">Delete</a>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
-        
+
     </div>
 </div>
 

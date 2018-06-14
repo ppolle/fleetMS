@@ -20,4 +20,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^sacco/', include('sacco.urls')),
     url(r'', include('fleet_base.urls')),
+    
 ]
