@@ -73,8 +73,7 @@ def saccoSignup(request):
 			user = authenticate(username = user.username,password = raw_password)
 			user_login(request,user)
 			messages.success(request, 'Success! You have succesfullly created a new sacco!')
-			# return render(request,'home/home.html')
-			return redirect('sacco:edit',user.sacco.id)
+			return redirect('sacco:sacco_home')
 	else:
 		form = SaccoSignUpForm()
 	return render(request,'authentication/sacco_signup.html',{"form":form})
@@ -90,6 +89,7 @@ def supSignup(request):
 			if Super_list.objects.filter(id_number = form.cleaned_data.get('id_number')).exists():
 				user = form.save(commit = False)
 				user.roles = 'supervisor'
+				user.sacco_base = Super_list
 				user.save()
 
 				supervisor = Supervisor.objects.create(user= user)
@@ -101,8 +101,8 @@ def supSignup(request):
 				raw_password = form.cleaned_data.get('password1')
 				user = authenticate(username = user.username,password = raw_password)
 				user_login(request,user)
-				messages.success(request,'Success! Welcome to you new dahsboard {user.first_name}')
-				return render(request,'home')
+				messages.success(request,f'Success! Welcome to you new dahsboard {user.first_name}')
+				return render(request,'home/home.html')
 
 			else:
 				messages.error(request,'Error! Make sure your respective sacco has already registered you on the platform!')
@@ -124,10 +124,10 @@ def login(request):
 
 			if user.roles == 'owner':
 
-				messages.success(request, 'Success! Owner has succesfully logged in!')
+				messages.success(request, f'Welcome back {request.user.first_name} {request.user.last_name}!')
 				return render(request,'home/home.html')
 			else:
-				messages.success(request, 'Success! Sacco has succesfully logged in!')
+				messages.success(request, f'Success! {request.user.sacco.name} has succesfully logged in!')
 				return render(request,'home/home.html')
 		else:
 			messages.error(request, 'wrong username or password combination. try again!')
