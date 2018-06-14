@@ -35,8 +35,9 @@ ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'fleet_base',
-    'owner',
-    'supervisor',
+    'owner.apps.OwnerConfig',
+    'sacco.apps.SaccoConfig',
+    'supervisor.apps.SupervisorConfig',
     'bootstrap3',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -44,8 +45,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'sacco',
-
 ]
 
 MIDDLEWARE = [
@@ -63,7 +62,7 @@ ROOT_URLCONF = 'fleetms.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, "templates")],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -87,7 +86,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'fleetms',
         'USER': 'abdullahinur',
-        'PASSWORD': 'totpot90210',
+        'PASSWORD': 'totpot90210'
     }
 }
 DATABASES['default'].update(db_from_env)
@@ -123,6 +122,8 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+LOGIN_REDIRECT_URL = '/'
 
 
 # Static files (CSS, JavaScript, Images)
