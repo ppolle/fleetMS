@@ -21,9 +21,8 @@ def superlist(request):
     if request.method == 'POST':
         form = Super_listForm(request.POST)
         if form.is_valid():
-            supervisor = form.save(commit=False)
-            supervisor.save()
-            return redirect('sacco_home')
+            form.save()
+            return redirect('sacco:sacco_home')
     else:
         form = Super_listForm()
     return render(request, 'all/supervisor.html', {"form": form})
@@ -37,7 +36,7 @@ def edit_superlist(request, supervisor_id):
         form = EditSupervisor(request.POST, instance=supervisor)
         if form.is_valid():
             form.save()
-            return redirect('sacco_home')
+            return redirect('sacco:sacco_home')
     else:
         form = EditSupervisor(instance=supervisor)
     return render(request, 'all/editsupervisor.html', {"form": form, "supervisor":supervisor})

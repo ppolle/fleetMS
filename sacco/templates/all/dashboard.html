@@ -28,8 +28,8 @@
                 <tr>
                     <td>{{supervisor.full_name}}</td>
                     <td>{{supervisor.id_number}}</td>
-                    <td><a href="{% url 'editSupervisor' supervisor.id %}" class="btn btn-sm btn-success">Edit</a></td>
-                    <td><a href="{% url 'deleteSupervisor' supervisor.id %}" class="btn btn-sm btn-danger">Delete</a></td>
+                    <td><a href="{% url 'sacco:editSupervisor' supervisor.id %}" class="btn btn-sm btn-success">Edit</a></td>
+                    <td><a href="{% url 'sacco:deleteSupervisor' supervisor.id %}" class="btn btn-sm btn-danger">Delete</a></td>
                 </tr>
                 {% endfor %}
             </tbody>
