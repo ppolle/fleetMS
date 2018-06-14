@@ -1,4 +1,4 @@
-{% load bootstrap3 %} 
+{% load bootstrap3 %}
 {% load static%}
 <!DOCTYPE html>
 <html>
@@ -6,13 +6,13 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     {% if title %}
     <title>Sacco {{title}}</title>
     {% else %}
     <title> Sacco </title>
-    {% endif %} 
-    {% block styles %} 
+    {% endif %}
+    {% block styles %}
     {% bootstrap_css %}
     <link rel="stylesheet" href="{% static 'css/saccodashboard.css'%}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
@@ -22,9 +22,10 @@
 </head>
 
 <body>
-    {% include "partials/_navbar.html" %} 
-    {% block content %} 
-    {%endblock%} 
+    {% include "partials/_navbar.html" %}
+    {% include 'partials/messages.html' %}
+    {% block content %}
+    {%endblock%}
     {% block scripts %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     {% bootstrap_javascript %} {% endblock %}
