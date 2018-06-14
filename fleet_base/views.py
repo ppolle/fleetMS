@@ -17,13 +17,13 @@ def home(request):
 	'''
 	Function to render the home page
 	'''
-	return render(request, 'home/home.html')
+	return render(request, 'fleet_base/home/home.html')
 
 def select(request):
 	'''
 	View function to select the apppropriate signup page
 	'''
-	return render(request,'authentication/choice.html')
+	return render(request,'fleet_base/authentication/choice.html')
 
 def ownerSignup(request):
 	'''
@@ -43,15 +43,15 @@ def ownerSignup(request):
 			owner.sacco = form.cleaned_data.get('sacco')
 			owner.save()
 
-			raw_password = form.cleaned_data.get('password1')
-			user = authenticate(username = user.username,password = raw_password)
-			user_login(request,user)
-			messages.success(request, 'Success! Signup was a success!')
-			return redirect('fleet:index')
+			# raw_password = form.cleaned_data.get('password1')
+			# user = authenticate(username = user.username,password = raw_password)
+			# user_login(request,user)
+			messages.success(request, 'Success Signup! Login to access you account')
+			return render(request,'fleet_base/authentication/login.html')
 
 	else:
 		form = OwnerSignUpForm()
-		return render(request,'authentication/owner_signup.html',{"form":form})
+		return render(request,'fleet_base/authentication/owner_signup.html',{"form":form})
 
 def saccoSignup(request):
 	'''
@@ -76,7 +76,7 @@ def saccoSignup(request):
 			return redirect('sacco:edit', user.sacco.id)
 	else:
 		form = SaccoSignUpForm()
-	return render(request,'authentication/sacco_signup.html',{"form":form})
+	return render(request,'fleet_base/authentication/sacco_signup.html',{"form":form})
 
 def supSignup(request):
 	'''
@@ -104,14 +104,14 @@ def supSignup(request):
 				user = authenticate(username = user.username,password = raw_password)
 				user_login(request,user)
 				messages.success(request,f'Success! Welcome to you new dahsboard {user.first_name}')
-				return render(request,'home/home.html')
+				return render(request,'fleet_base/home/home.html')
 
 			else:
 				messages.error(request,'Error! Make sure your respective sacco has already registered you on the platform!')
 				return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 	else:
 		form = SupervisorSignupForm()
-		return render(request,'authentication/supervisor_signup.html',{"form":form})
+		return render(request,'fleet_base/authentication/supervisor_signup.html',{"form":form})
 
 def login(request):
 	'''
@@ -142,7 +142,7 @@ def loginViews(request):
 	'''
 	View function to render login page
 	'''
-	return render(request,'authentication/login.html')
+	return render(request,'fleet_base/authentication/login.html')
 def logout(request):
 	'''
 	View function to handle loggin out users
