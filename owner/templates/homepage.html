@@ -1,26 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  {% block title %}<title>Home</title>{% endblock %}
-</head>
-
-<body>
-	<p> Welcome back {{user}} </p>
-  {% block sidebar %}{% endblock %}
-  {% block content %}{% endblock %}
-</body>
-</html>
-
-{% extends "base.html" %}
-
+{%extends 'all/base.html'%} 
 {% block content %}
-<h1>Owner dashboard: Home</h1>
+{{block.super}} 
 
-  <p>Welcome to <em>your dashboard</em>, here you can manage the number of vehicles you have</p>
+<h1 style="text-align: center">OWNER DASHBOARD</h1>
+<!-- Side navigation -->
+<div class="sidenav">
+    
+    <a href="{% url 'sacco:createSupervisor' %}">Add Vehicle</a>
+    <a href="{% url 'sacco:edit' user.sacco.id %}">Edit Sacco</a>
+    <a href="#">Delete Sacco</a>
+</div>
 
-  <!-- add vehicle -->
-  <!-- delete vehicle -->
-
-
+<!-- Page content -->
+<div class="container">
+    {% include "partials/_messages.html" %}
+    <div class="Supervisors">
+        <h4>VEHICLE LIST</h4>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>ID Number</th>
+                    <th>Option</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for supervisor in supervisor %}
+                <tr>
+                    <td>{{supervisor.full_name}}</td>
+                    <td>{{supervisor.id_number}}</td>
+                    <td><a href="{% url 'sacco:editSupervisor' supervisor.id %}" class="btn btn-sm btn-success">Edit</a></td>
+                    <td><a href="{% url 'sacco:deleteSupervisor' supervisor.id %}" class="btn btn-sm btn-danger">Delete</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+    </div>
+</div>
 
 {% endblock %}
