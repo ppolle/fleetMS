@@ -36,6 +36,7 @@ ALLOWED_HOSTS = ['*']
 INSTALLED_APPS = [
     'fleet_base',
     'owner',
+    'supervisor',
     'bootstrap3',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -85,9 +86,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'fleetms',
-        'USER': 'wanjiku',
-        'PASSWORD': 'flask1234'
-
+        'USER': 'peter',
+        'PASSWORD': 'iamBOSS12',
     }
 }
 DATABASES['default'].update(db_from_env)
@@ -123,6 +123,8 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+
 
 
 # Static files (CSS, JavaScript, Images)
