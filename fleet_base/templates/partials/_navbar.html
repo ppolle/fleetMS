@@ -8,7 +8,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="{% url 'home' %}">Fleet MS</a>
+      <a class="navbar-brand" href="{% url 'fleet:index' %}">Fleet MS</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -20,7 +20,7 @@
 
         {% if user.is_authenticated %}
          <li>
-            <a  href="{% url 'logout' %}">Logout</a>
+            <a  href="{% url 'fleet:logout' %}">Logout</a>
           </li>
           {% if user.roles == 'sacco' %}
            <li>
@@ -34,10 +34,10 @@
 
           {% else %}
          <li>
-            <a  href="{% url 'select' %}">Signup</a>
+            <a  href="{% url 'fleet:select' %}">Signup</a>
           </li>
           <li>
-            <a  href="{% url 'loginViews' %}">Login</a>
+            <a  href="{% url 'fleet:loginViews' %}">Login</a>
           </li>
 
           {% endif %}

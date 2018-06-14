@@ -1,8 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<a class="btn btn-primary" href="{% url 'supervisor' %}">Supervisor</a>
-{% if user.is_authenticated %}
+{% include 'partials/_messages.html' %}
 <h1>Hello World</h1>
 {% endif %}
 {% endblock %}

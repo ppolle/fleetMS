@@ -6,13 +6,14 @@
 <!-- Side navigation -->
 <div class="sidenav">
     <a href="#">About Sacco</a>
-    <a href="{% url 'supervisor' %}">Add Supervisor</a>
-    <a href="{% url 'edit' %}">Edit Sacco</a>
+    <a href="{% url 'sacco:createSupervisor' %}">Add Supervisor</a>
+    <a href="{% url 'sacco:edit' user.sacco.id %}">Edit Sacco</a>
     <a href="#">Delete Sacco</a>
 </div>
 
 <!-- Page content -->
 <div class="container">
+    {% include "partials/_messages.html" %}
     <div class="Supervisors">
         <h4>SUPERVISOR LIST</h4>
         <table class="table table-hover">
@@ -28,8 +29,8 @@
                 <tr>
                     <td>{{supervisor.full_name}}</td>
                     <td>{{supervisor.id_number}}</td>
-                    <td><a href="{% url 'editSupervisor' supervisor.id %}" class="btn btn-sm btn-success">Edit</a></td>
-                    <td><a href="{% url 'deleteSupervisor' supervisor.id %}" class="btn btn-sm btn-danger">Delete</a></td>
+                    <td><a href="{% url 'sacco:editSupervisor' supervisor.id %}" class="btn btn-sm btn-success">Edit</a></td>
+                    <td><a href="{% url 'sacco:deleteSupervisor' supervisor.id %}" class="btn btn-sm btn-danger">Delete</a></td>
                 </tr>
                 {% endfor %}
             </tbody>

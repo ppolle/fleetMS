@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'sacco',
+
 ]
 
 MIDDLEWARE = [
@@ -62,7 +63,7 @@ ROOT_URLCONF = 'fleetms.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, "templates")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -85,8 +86,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'fleetms',
-        'USER': 'abdullahinur',
-        'PASSWORD': 'totpot90210',
+        'USER': 'peter',
+        'PASSWORD': 'iamBOSS12',
     }
 }
 DATABASES['default'].update(db_from_env)
@@ -123,7 +124,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-LOGIN_REDIRECT_URL = '/'
+
 
 
 # Static files (CSS, JavaScript, Images)

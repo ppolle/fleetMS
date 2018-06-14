@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% block title %}<title>Home</title>{% endblock %}
+</head>
+
+<body>
+	<p> Welcome back {{user}} </p>
+  {% block sidebar %}{% endblock %}
+  {% block content %}{% endblock %}
+</body>
+</html>
+
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h1>Owner dashboard: Home</h1>
+
+  <p>Welcome to <em>your dashboard</em>, here you can manage the number of vehicles you have</p>
+
+
+
+{% endblock %}
