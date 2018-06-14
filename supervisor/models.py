@@ -9,6 +9,8 @@ from sacco.models import Sacco
 class Supervisor(models.Model):
     id_number = models.IntegerField(unique=True)
     date_of_birth = models.DateField(null=True)
+    mobile_phone_number = models.CharField(max_length=13, blank=True)
+    email = models.EmailField(max_length=13, blank=True)
     profile_picture = models.ImageField(
         upload_to='profile_pictures/supervisor', default='/static/img/placeholder.png')
     sacco_base = models.ForeignKey(

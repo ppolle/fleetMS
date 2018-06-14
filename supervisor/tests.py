@@ -2,6 +2,8 @@ from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.urls import resolve
 
+from sacco.models import Sacco
+
 # Create your tests here.
 from .models import Supervisor
 from .views import home, new_supervisor, supervisor
@@ -12,8 +14,8 @@ from .views import home, new_supervisor, supervisor
 class SupervisorViewTests(TestCase):
     # Test to make sure '/' url path returns home view
     def setUp(self):
-        self.supervisor = Supervisor.objects.create(first_name='alvin', last_name='chipmink', id_number='12345678', date_of_birth='12/09/1989',
-                                                    mobile_phone_number='0712345678', email='test@test.com', profile_picture='tets.png', details='test description')
+        self.supervisor = Supervisor.objects.create(first_name='alvin', last_name='chipmink', id_number='12345678', date_of_birth='1989-09-12',
+                                                    mobile_phone_number='0712345678', email='test@test.com', profile_picture='tets.png', sacco_base='test sacco')
         url = reverse('home')
         self.response = self.client.get(url)
 
