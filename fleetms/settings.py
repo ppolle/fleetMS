@@ -35,9 +35,9 @@ ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'fleet_base',
-    'owner.apps.OwnerConfig',
-    'sacco.apps.SaccoConfig',
-    'supervisor.apps.SupervisorConfig',
+    'owner',
+    'sacco',
+    'supervisor',
     'bootstrap3',
     'django.contrib.admin',
     'django.contrib.auth',
