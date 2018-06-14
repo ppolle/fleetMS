@@ -1,6 +1,8 @@
 from django.conf.urls import url
 from django.contrib.auth import views as auth_views
 
+from supervisor.views import supervisor
+
 from . import views
 
 urlpatterns = [
@@ -12,4 +14,5 @@ urlpatterns = [
     url(r'^user-logout/$', views.logout, name='logout'),
     url(r'^login/$', views.login, name='login'),
     url(r'^loginViews/$', views.loginViews, name='loginViews'),
+    url(r'^loginViews/$', views.supervisor, name='supervisor')
 ]

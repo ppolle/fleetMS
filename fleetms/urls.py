@@ -18,6 +18,7 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'', include('supervisor.urls')),
     url(r'', include('fleet_base.urls')),
     url(r'', include('sacco.urls')),
 
