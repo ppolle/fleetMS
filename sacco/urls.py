@@ -7,7 +7,7 @@ app_name='sacco'
 
 urlpatterns = [
     url(r'^$', views.dashboard, name='sacco_home'),
-    url(r'^new/supervisor/$', views.superlist, name='supervisor'),
+    url(r'^new/supervisor/$', views.superlist, name='createSupervisor'),
     url(r'^editSupervisor/(\d+)', views.edit_superlist, name='editSupervisor'),
     url(r'^delete_supervisor/(\d+)', views.delete_supervisor, name='deleteSupervisor'),
     url(r'^profile/(?P<profile_id>[-\w]+)/$', views.profile, name='profile'),

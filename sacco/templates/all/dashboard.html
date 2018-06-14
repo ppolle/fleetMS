@@ -6,8 +6,8 @@
 <!-- Side navigation -->
 <div class="sidenav">
     <a href="#">About Sacco</a>
-    <a href="{% url 'supervisor' %}">Add Supervisor</a>
-    <a href="">Edit Sacco</a>
+    <a href="{% url 'sacco:createSupervisor' %}">Add Supervisor</a>
+    <a href="{% url 'sacco:edit' user.sacco.id %}">Edit Sacco</a>
     <a href="#">Delete Sacco</a>
 </div>
 

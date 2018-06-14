@@ -22,7 +22,6 @@ def superlist(request):
         form = Super_listForm(request.POST)
         if form.is_valid():
             supervisor = form.save(commit=False)
-            # supervisor.user = current_user
             supervisor.save()
             return redirect('sacco_home')
     else:

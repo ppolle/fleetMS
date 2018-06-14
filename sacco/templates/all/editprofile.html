@@ -7,7 +7,7 @@
 <div class="container">
     <!-- Edit Sacco form -->
     <div class="col-md-8 col-lg-8 col-md-offset-2">
-        <form action="{% url 'edit' user.sacco.id %}" method="post" enctype="multipart/form-data">
+        <form action="{% url 'sacco:edit' user.sacco.id %}" method="post" enctype="multipart/form-data">
             {% csrf_token %} 
             {% bootstrap_form form %}
             <input type="submit" class="btn btn-success btn-lg">

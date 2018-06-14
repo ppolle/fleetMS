@@ -66,7 +66,7 @@ class Owner(models.Model):
     telephone = models.IntegerField(unique=True, null=True)
     profile_pic = models.ImageField(upload_to='ownerProfile/', blank=True)
     sacco = models.ForeignKey(Sacco)
-    vehicle = models.ForeignKey(Vehicle)
+   
 
     def __str__(self):
         """Summary

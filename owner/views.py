@@ -4,18 +4,10 @@ from .models import Owner
 # Create your views here.
 
 def home(request):
-
     return render(request, 'homepage.html',{})
 
 
 def profile(request):
-	
-
-
-	return render(request, 'profile.html')
-     
-   
-    
-
-   
-        
+    return render(request, 'profile.html')
+def search(request):
+    pass

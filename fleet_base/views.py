@@ -31,24 +31,24 @@ def ownerSignup(request):
 	'''
 	if request.method == 'POST':
 		form = OwnerSignUpForm(request.POST)
-		
+
 		if form.is_valid():
 			user = form.save(commit = False)
 			user.roles = 'owner'
 			user.save()
-				
+
 			owner= Owner.objects.create(user=user)
 			owner.refresh_from_db()
 			owner.nat_id = form.cleaned_data.get('national_id')
 			owner.sacco = form.cleaned_data.get('sacco')
 			owner.save()
-			
+
 			raw_password = form.cleaned_data.get('password1')
 			user = authenticate(username = user.username,password = raw_password)
 			user_login(request,user)
 			messages.success(request, 'Success! Signup was a success!')
 			return render(request,'home/home.html')
-			
+
 	else:
 		form = OwnerSignUpForm()
 		return render(request,'authentication/owner_signup.html',{"form":form})
@@ -84,7 +84,7 @@ def supSignup(request):
 	'''
 	if request.method == 'POST':
 		form = SupervisorSignupForm(request.POST)
-		
+
 		if form.is_valid():
 			if Super_list.objects.filter(id_number = form.cleaned_data.get('id_number')).exists():
 				user = form.save(commit = False)
@@ -106,7 +106,7 @@ def supSignup(request):
 
 			else:
 				messages.error(request,'Error! Make sure your respective sacco has already registered you on the platform!')
-				return HttpResponseRedirect(request.META.get('HTTP_REFERER'))		
+				return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 	else:
 		form = SupervisorSignupForm()
 		return render(request,'authentication/supervisor_signup.html',{"form":form})
@@ -128,7 +128,7 @@ def login(request):
 				return render(request,'home/home.html')
 			else:
 				messages.success(request, f'Success! {request.user.sacco.name} has succesfully logged in!')
-				return render(request,'home/home.html')
+				return redirect('sacco:sacco_home')
 		else:
 			messages.error(request, 'wrong username or password combination. try again!')
 			return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
@@ -147,4 +147,4 @@ def logout(request):
 	'''
 	user_logout(request)
 	messages.error(request, 'Successfully logged-Out. Please come back again!')
-	return redirect('home')
+	return redirect('index')

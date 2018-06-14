@@ -21,5 +21,6 @@ urlpatterns = [
     url(r'^', include('fleet_base.urls')),
     url(r'^sacco/', include('sacco.urls')),
     url(r'^supervisor/', include('supervisor.urls')),
+    url(r'^owner/', include('owner.urls')),
 
 ]
