@@ -9,7 +9,7 @@ def dashboard(request):
     '''
     View function to display all that a user will be interacting with fromm the onset of the app.
     '''
-    supervisor = Super_list.objects.all()
+    supervisor = Super_list.objects.filter(sacco = Sacco.objects.get(pk=request.user.sacco.id))
     return render(request, 'all/dashboard.html', {"supervisor": supervisor})
 
 # Supervisor section
@@ -21,7 +21,9 @@ def superlist(request):
     if request.method == 'POST':
         form = Super_listForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save(commit = False)
+            user.sacco = Sacco.objects.get(user = request.user)
+            user.save()
             return redirect('sacco:sacco_home')
     else:
         form = Super_listForm()
