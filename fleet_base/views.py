@@ -37,17 +37,22 @@ def ownerSignup(request):
 			user.roles = 'owner'
 			user.save()
 
-			owner= Owner.objects.create(user=user)
-			owner.refresh_from_db()
-			owner.nat_id = form.cleaned_data.get('national_id')
-			owner.sacco = form.cleaned_data.get('sacco')
-			owner.save()
+			# owner= Owner.objects.create(user=user)
+			# owner.refresh_from_db()
+			# owner.nat_id = form.cleaned_data.get('national_id')
+			# owner.sacco = form.cleaned_data.get('sacco')
+			# owner.save()
+			user.refresh_from_db()
+			user.owner.nat_id = form.cleaned_data.get('national_id')
+			user.owner.sacco = form.cleaned_data.get('sacco')
 
-			# raw_password = form.cleaned_data.get('password1')
-			# user = authenticate(username = user.username,password = raw_password)
-			# user_login(request,user)
-			messages.success(request, 'Success Signup! Login to access you account')
-			return render(request,'fleet_base/authentication/login.html')
+			user.save()
+
+			raw_password = form.cleaned_data.get('password1')
+			user = authenticate(username = user.username,password = raw_password)
+			user_login(request,user)
+			messages.success(request, 'Success Signup created a new Owner')
+			return redirect('fleet:index')
 
 	else:
 		form = OwnerSignUpForm()

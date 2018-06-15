@@ -32,7 +32,10 @@ class Sacco(models.Model):
 
     @receiver(post_save,sender=settings.AUTH_USER_MODEL)
     def save_sacco(sender,instance,**kwargs):
-        instance.sacco.save()
+        if instance.roles == 'sacco':
+            instance.sacco.save()
+        else:
+            instance.owner.save()
 
     def delete_sacco(self):
         self.delete()
