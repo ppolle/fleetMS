@@ -1,0 +1,28 @@
+{% extends "registration/base-login.html" %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Login</title>
+</head>
+
+<body style="text-align: center;">
+    <form method="POST">
+        {% csrf_token %}
+        <p>
+            <label>Username</label>
+            <input type="text" name="username">
+        </p>
+        <p>
+            <label>Password</label>
+            <input style="color: black;" type="password" name="password">
+        </p>
+        <button type="submit">Login</button>
+    </form>
+</body>
+
+</html>
+{% endblock %}
