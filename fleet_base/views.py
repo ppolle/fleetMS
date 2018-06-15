@@ -60,10 +60,11 @@ def saccoSignup(request):
 	if request.method == 'POST':
 		form = SaccoSignUpForm(request.POST)
 		if form.is_valid():
-			user = form.save()
+			user = form.save(commit = False)
+			user.roles = 'sacco'
+			user.save()
 
 			user.refresh_from_db()
-			user.roles = 'sacco'
 			user.sacco.name = form.cleaned_data.get('name')
 			user.sacco.registration_no = form.cleaned_data.get('registration_no')
 
