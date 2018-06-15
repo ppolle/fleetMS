@@ -37,11 +37,6 @@ def ownerSignup(request):
 			user.roles = 'owner'
 			user.save()
 
-			# owner= Owner.objects.create(user=user)
-			# owner.refresh_from_db()
-			# owner.nat_id = form.cleaned_data.get('national_id')
-			# owner.sacco = form.cleaned_data.get('sacco')
-			# owner.save()
 			user.refresh_from_db()
 			user.owner.nat_id = form.cleaned_data.get('national_id')
 			user.owner.sacco = form.cleaned_data.get('sacco')
@@ -96,15 +91,20 @@ def supSignup(request):
 				super_list = Super_list.objects.get(id_number = form.cleaned_data.get('id_number'))
 				user = form.save(commit = False)
 				user.roles = 'supervisor'
-				user.sacco_base = Super_list
+				user.sacco_base = super_list.sacco
 				user.save()
 
-				supervisor = Supervisor.objects.create(user= user)
-				supervisor.refresh_from_db()
-				supervisor.id_number = form.cleaned_data.get('id_number')
-				supervisor.date_of_birth = form.cleaned_data.get('birth_date')
-				supervisor.sacco_base = super_list.sacco
-				supervisor.save()
+				user.refresh_from_db()
+				user.supervisor.id_number = form.cleaned_data.get('id_number')
+				user.supervisor.date_of_birth = form.cleaned_data.get('birth_date')
+				user.save()
+
+				# supervisor = Supervisor.objects.create(user= user)
+				# supervisor.refresh_from_db()
+				# supervisor.id_number = form.cleaned_data.get('id_number')
+				# supervisor.date_of_birth = form.cleaned_data.get('birth_date')
+				# supervisor.sacco_base = super_list.sacco
+				# supervisor.save()
 
 				raw_password = form.cleaned_data.get('password1')
 				user = authenticate(username = user.username,password = raw_password)

@@ -3,6 +3,7 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 import owner
+# from supervisor.models import Supervisor
 
 # Create your models here.
 
@@ -26,8 +27,11 @@ class Sacco(models.Model):
         if created:
             if instance.roles == 'sacco':
                 Sacco.objects.create(user=instance)
-            else:
+            elif instance.roles == 'owner':
                 owner.models.Owner.objects.create(user=instance)
+            else:
+                pass
+
 
 
     @receiver(post_save,sender=settings.AUTH_USER_MODEL)
