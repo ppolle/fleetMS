@@ -1,9 +1,9 @@
-{%extends 'all/base.html'%} {% block content %} {{block.super}}
+{%extends 'sacco/all/base.html'%} {% block content %} {{block.super}}
 
 <h1 style="text-align: center">SACCO DASHBOARD</h1>
 <!-- Side navigation -->
 <div class="sidenav">
-    <a href="#">About Sacco</a>
+    <a href="{% url 'sacco:profile' %}">About Sacco</a>
     <a href="{% url 'sacco:createSupervisor' %}">Add Supervisor</a>
     <a href="{% url 'sacco:edit' user.sacco.id %}">Edit Sacco</a>
     <a href="#">Delete Sacco</a>
