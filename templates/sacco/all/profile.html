@@ -1,0 +1,36 @@
+{%extends 'sacco/all/base.html'%} 
+{% load static %}
+{% block content %}
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-5">
+            {% if profile.logo %}
+            <img src="{{profile.logo.url}}" alt="Sacco Logo">
+            {% endif %}
+        </div>
+        <div class="col-md-7">
+            <div>
+                 <h3>SACCO NAME: {{profile.name|upper}}</h3>
+            </div>
+            <div>
+                <p>SACCO REGISTRATION NUMBER: {{profile.registration_no}}</p>
+            </div>
+            <div>
+                <p>SACCO OFFICE LOCATION: {{profile.office_location}}</p>
+            </div>
+            <div>
+                <p>TELEPHONE NUMBER: {{profile.office_telephone}}</p>
+            </div>
+            <div>
+                <p>EMAIL ADDRESS: {{profile.office_email}}</p>
+            </div>
+            <div>
+                <p>SACCO DETAILS: {{profile.details}}</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
