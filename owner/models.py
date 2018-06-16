@@ -60,13 +60,12 @@ class Owner(models.Model):
     """
 
     nat_id = models.IntegerField(unique=True, default=00000000)
-    email = models.EmailField()
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     telephone = models.IntegerField(unique=True, null=True)
     profile_pic = models.ImageField(upload_to='ownerProfile/', blank=True)
-    sacco = models.ForeignKey(Sacco)
-   
+    sacco = models.ForeignKey(Sacco,null = True)
+
 
     def __str__(self):
         """Summary
@@ -75,16 +74,3 @@ class Owner(models.Model):
             TYPE: Description
         """
         return self.user
-
-
-
-    def __str__(self):
-        return self.user
-
-
-class Vehicle(models.Model):
-    number_plate = models.CharField(max_length=200)
-    capacity = models.IntegerField()
-
-    def __str__(self):
-        return self.number_plate

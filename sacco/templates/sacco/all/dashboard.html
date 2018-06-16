@@ -25,24 +25,22 @@
                 </tr>
             </thead>
             <tbody>
-                {% for supervisor in supervisor %}
-                <tr>
-                    <td>{{supervisor.full_name}}</td>
-                    <td>{{supervisor.id_number}}</td>
-                    <td>
-                        <a href="{% url 'sacco:editSupervisor' supervisor.id %}" class="btn btn-sm btn-success">Edit</a>
-                    </td>
-                    <td>
-                        <a href="{% url 'sacco:deleteSupervisor' supervisor.id %}" class="btn btn-sm btn-danger">Delete</a>
-                    </td>
-                </tr>
-                {% empty %}
-                <div class="emptytable">
-                    <h3>There are no registered Supervisors just yet.
-                        <a href="{% url 'sacco:createSupervisor' %}">Click here to add</a> a supervisor</h3>
+                {% if supervisor %}
+                    {% for supervisor in supervisor %}
+                    <tr>
+                        <td>{{supervisor.full_name}}</td>
+                        <td>{{supervisor.id_number}}</td>
+                        <td><a href="{% url 'sacco:editSupervisor' supervisor.id %}" class="btn btn-sm btn-success">Edit</a></td>
+                        <td><a href="{% url 'sacco:deleteSupervisor' supervisor.id %}" class="btn btn-sm btn-danger">Delete</a></td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                    <div class="emptytable">
+                        <h3>There are no registered Supervisors just yet. <a href="{% url 'sacco:createSupervisor' %}">Click here to add</a> a supervisor</h3>
 
-                </div>
-                {% endfor %}
+                    </div>
+                {% endif %}
+                
             </tbody>
         </table>
 
