@@ -17,7 +17,7 @@ class Owner(models.Model):
 
 
     nat_id = models.IntegerField(unique=True, null=True)    
-    user = models.OneToOneField(
+    owneruser = models.OneToOneField(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     telephone = models.IntegerField(unique=True, null=True)
     profile_pic = models.ImageField(upload_to='ownerProfile/', blank=True)

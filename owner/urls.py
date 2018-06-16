@@ -9,9 +9,8 @@ urlpatterns=[
         
     url('^$', views.home, name = 'home'),
     url(r'^profile', views.profile, name='profile'),
-    url(r'^search/', views.search, name='search'),
+    url(r'^new/vehicle/$', views.vehicle, name='createVehicle'),
 
-    
 ]
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
