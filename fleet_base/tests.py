@@ -23,6 +23,6 @@ class UserTestCase(TestCase):
         self.assertEquals(view.func, home)
 
     def test_home_view_contains_link_to_sacco_details_page(self):
-        user_url = reverse('home', kwargs={
-            'pk': self.id})
+        user_url = reverse('select', kwargs={
+            'user_id': self.id})
         self.assertContains(self.response, 'href="{0}"'.format(user_url))
