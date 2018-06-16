@@ -6,7 +6,6 @@ from .models import Owner
 def home(request):
     return render(request, 'homepage.html',{})
 
-
 def profile(request):
     return render(request, 'profile.html')
 def search(request):

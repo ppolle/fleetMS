@@ -57,6 +57,7 @@ def saccoSignup(request):
 	'''
 	View function that will manage sacco signup
 	'''
+
 	if request.method == 'POST':
 		form = SaccoSignUpForm(request.POST)
 		if form.is_valid():
