@@ -87,34 +87,35 @@ def supSignup(request):
 		form = SupervisorSignupForm(request.POST)
 
 		if form.is_valid():
-			# if Super_list.objects.filter(id_number = form.cleaned_data.get('id_number')).exists():
-			super_list = Super_list.objects.get(id_number = form.cleaned_data.get('id_number'))
-			user = form.save(commit = False)
-			user.roles = 'supervisor'
-			user.sacco_base = super_list.sacco
-			user.save()
+			if Super_list.objects.filter(id_number = form.cleaned_data.get('id_number')).exists():
+				super_list = Super_list.objects.get(id_number = form.cleaned_data.get('id_number'))
+				user = form.save(commit = False)
+				user.roles = 'supervisor'
+				user.sacco_base = super_list.sacco
+				user.save()
 
-			user.refresh_from_db()
-			user.supervisor.id_number = form.cleaned_data.get('id_number')
-			user.supervisor.date_of_birth = form.cleaned_data.get('birth_date')
-			user.save()
+				user.refresh_from_db()
+				user.supervisor.id_number = form.cleaned_data.get('id_number')
+				user.supervisor.date_of_birth = form.cleaned_data.get('birth_date')
+				user.save()
 
-			# supervisor = Supervisor.objects.create(user= user)
-			# supervisor.refresh_from_db()
-			# supervisor.id_number = form.cleaned_data.get('id_number')
-			# supervisor.date_of_birth = form.cleaned_data.get('birth_date')
-			# supervisor.sacco_base = super_list.sacco
-			# supervisor.save()
+				# supervisor = Supervisor.objects.create(user= user)
+				# supervisor.refresh_from_db()
+				# supervisor.id_number = form.cleaned_data.get('id_number')
+				# supervisor.date_of_birth = form.cleaned_data.get('birth_date')
+				# supervisor.sacco_base = super_list.sacco
+				# supervisor.save()
 
-			raw_password = form.cleaned_data.get('password1')
-			user = authenticate(username = user.username,password = raw_password)
-			user_login(request,user)
-			messages.success(request,f'Success! Welcome to you new dahsboard {user.first_name}')
-			return redirect('fleet:index')
+				raw_password = form.cleaned_data.get('password1')
+				user = authenticate(username = user.username,password = raw_password)
+				user_login(request,user)
+				messages.success(request,f'Success! Welcome to you new dahsboard {user.first_name}')
+				return render(request,'fleet_base/home/home.html')
+				# return redirect('fleet:index')
 
-			# else:
-			# 	messages.error(request,'Error! Make sure your respective sacco has already registered you on the platform!')
-			# 	return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+			else:
+				messages.error(request,'Error! Make sure your respective sacco has already registered you on the platform!')
+				return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 	else:
 		form = SupervisorSignupForm()
 		return render(request,'fleet_base/authentication/supervisor_signup.html',{"form":form})
