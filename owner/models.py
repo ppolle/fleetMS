@@ -16,12 +16,12 @@ from sacco.models import Sacco
 class Owner(models.Model):
 
 
-    nat_id = models.IntegerField(unique=True, default=00000000)    
+    nat_id = models.IntegerField(unique=True, null=True)    
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     telephone = models.IntegerField(unique=True, null=True)
     profile_pic = models.ImageField(upload_to='ownerProfile/', blank=True)
-    sacco = models.ForeignKey(Sacco)
+    sacco = models.ForeignKey(Sacco, null=True)
    
 
 
@@ -43,9 +43,9 @@ class Vehicle(models.Model):
         number_plate (TYPE): Description
     """
     
-    number_plate = models.CharField(max_length=200)
-    capacity = models.IntegerField()
-    owner = models.ForeignKey(Owner)
+    number_plate = models.CharField(max_length=200, null=True)
+    capacity = models.IntegerField(null=True)
+    owner = models.ForeignKey(Owner, null=True)
 
     def __str(self):
         """Summary
@@ -55,16 +55,16 @@ class Vehicle(models.Model):
         """
         return self.number_plate
 
-        @classmethod
-        def my_vehicles(cls):
-            vehicles = cls.objects.all()
-            return vehicles
-    
-        def delete_vehilces(self):
-            self.remove()
-    
-        def save_vehilces(self):
-            self.save()    
-    
-        def update_vehicle(self, id):
-            pass
+    @classmethod
+    def my_vehicles(cls):
+        vehicles = cls.objects.all()
+        return vehicles
+
+    def delete_vehilces(self):
+        self.remove()
+
+    def save_vehilces(self):
+        self.save()    
+
+    def update_vehicle(self, id):
+        pass
