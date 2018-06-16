@@ -1,39 +1,35 @@
 {%extends 'sacco/all/base.html'%} 
 {% load static %} 
 {% block content %}
-
-<div class="container">
+<div class="sidenav" style="height: 100vh; width: 40vw; background: grey;">
+    {% if profile.logo %}
+    <img src="{{profile.logo.url}}" alt="Sacco Logo" style="margin-top: 5vh; padding-left: 3vw; padding-right: 3vw; width: 10vw;"> {% else %}
+    <h1 style="color: white; font-size: 10vh; padding: 3vw;">NO LOGO UPLOADED</h1>
+    {% endif %}
+</div>
+<div class="container" style="width:60vw; float:right; display: inline block; padding-left: 5vw;">
     <div class="row">
-        
-        <div class="col-md-5">
-            {% if profile.logo %}
-            <img src="{{profile.logo.url}}" alt="Sacco Logo">    
-            {% endif %}
-        </div>
         <div class="col-md-7">
             <div>
-                 <h3>SACCO NAME: {{profile.name|upper}}</h3>
+                <h3>SACCO NAME: {{profile.name|upper}}</h3>
             </div>
             <div>
-                <p>SACCO REGISTRATION NUMBER: {{profile.registration_no}}</p>
-            </div>
-            <div> 
-                <p>SACCO OFFICE LOCATION: {{profile.office_location}}</p>
+                <h4>SACCO REGISTRATION NUMBER: {{profile.registration_no}}</h4>
             </div>
             <div>
-                <p>TELEPHONE NUMBER: {{profile.office_telephone}}</p>
+                <h4>SACCO OFFICE LOCATION: {{profile.office_location}}</h4>
             </div>
             <div>
-                <p>EMAIL ADDRESS: {{profile.office_email}}</p>
+                <h4>TELEPHONE NUMBER: {{profile.office_telephone}}</h4>
             </div>
             <div>
-                <p>SACCO DETAILS: {{profile.details}}</p>
+                <h4>EMAIL ADDRESS: {{profile.office_email}}</h4>
+            </div>
+            <div>
+                <h4>SACCO DETAILS: {{profile.details}}</h4>
             </div>
         </div>
-    
+
     </div>
 </div>
 {% endblock %}
-
-
-
