@@ -2,6 +2,7 @@ from django.conf import settings
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+import supervisor
 import owner
 
 # Create your models here.
@@ -26,16 +27,21 @@ class Sacco(models.Model):
         if created:
             if instance.roles == 'sacco':
                 Sacco.objects.create(user=instance)
-            else:
+            elif instance.roles == 'owner':
                 owner.models.Owner.objects.create(user=instance)
+            else:
+                supervisor.models.Supervisor.create(user=instance)
+
 
 
     @receiver(post_save,sender=settings.AUTH_USER_MODEL)
     def save_sacco(sender,instance,**kwargs):
         if instance.roles == 'sacco':
             instance.sacco.save()
-        else:
+        elif instance.roles == 'owner':
             instance.owner.save()
+        else:
+            instance.supervisor.save()
 
     def delete_sacco(self):
         self.delete()
