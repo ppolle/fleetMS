@@ -55,6 +55,9 @@ def ownerSignup(request):
 			user_login(request,user)
 			messages.success(request, 'Success Signup created a new Owner')
 			return redirect('fleet:index')
+		else:
+			messages.error(request,f'Error having the form as valid')
+			return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 	else:
 		form = OwnerSignUpForm()
@@ -82,6 +85,9 @@ def saccoSignup(request):
 			user_login(request,user)
 			messages.success(request, 'Success! You have succesfullly created a new sacco!')
 			return redirect('sacco:edit', user.sacco.id)
+		else:
+			messages.error(request,f'Error having the form as valid')
+			return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 	else:
 		form = SaccoSignUpForm()
 	return render(request,'fleet_base/authentication/sacco_signup.html',{"form":form})
@@ -103,26 +109,20 @@ def supSignup(request):
 
 				user.refresh_from_db()
 				user.supervisor.id_number = form.cleaned_data.get('id_number')
-				user.supervisor.date_of_birth = form.cleaned_data.get('birth_date')
 				user.save()
-
-				# supervisor = Supervisor.objects.create(user= user)
-				# supervisor.refresh_from_db()
-				# supervisor.id_number = form.cleaned_data.get('id_number')
-				# supervisor.date_of_birth = form.cleaned_data.get('birth_date')
-				# supervisor.sacco_base = super_list.sacco
-				# supervisor.save()
-
+		
 				raw_password = form.cleaned_data.get('password1')
 				user = authenticate(username = user.username,password = raw_password)
 				user_login(request,user)
 				messages.success(request,f'Success! Welcome to you new dahsboard {user.first_name}')
-				return render(request,'fleet_base/home/home.html')
-				# return redirect('fleet:index')
-
+				return redirect('fleet:index')
 			else:
 				messages.error(request,'Error! Make sure your respective sacco has already registered you on the platform!')
 				return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+		else:
+			messages.error(request,f'Error having the form as valid')
+			return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+	
 	else:
 		form = SupervisorSignupForm()
 		return render(request,'fleet_base/authentication/supervisor_signup.html',{"form":form})
@@ -142,6 +142,9 @@ def login(request):
 
                 messages.success(request, f'Welcome back {request.user.first_name} {request.user.last_name}!')
                 return redirect('fleet:index')
+            elif user.roles == 'supervisor':
+            	messages.success(request, f'Welcome back {request.user.first_name} to your supervisor dashboard!')
+            	return redirect('fleet:index')
             else:
                 messages.success(request, f'Success! {request.user.sacco.name} has succesfully logged in!')
                 return redirect('sacco:sacco_home')

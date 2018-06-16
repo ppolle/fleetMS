@@ -1,20 +1,39 @@
 from django.db import models
 from owner.models import Vehicle
 from sacco.models import Sacco
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.conf import settings
 
 # Create your models here.
 
 
 class Supervisor(models.Model):
-    id_number = models.IntegerField(unique=True)
-    date_of_birth = models.DateField(null=True)
-    mobile_phone_number = models.CharField(max_length=13, blank=True)
+    id_number = models.IntegerField(null=True, unique=True)
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    mobile_phone_number = models.IntegerField(null=True)
     profile_picture = models.ImageField(
         upload_to='profile_pictures/supervisor', default='/static/img/placeholder.png')
-    sacco_base = models.ForeignKey(Sacco, related_name='sacco_base')
+    sacco_base = models.ForeignKey(Sacco, related_name='sacco_base',null = True)
 
     def __str__(self):
         return self.first_name
+
+    # @receiver(post_save, sender=settings.AUTH_USER_MODEL)
+    # def update_supervisor(sender, instance, created, **kwargs):
+    #     if created:
+    #         if instance.roles == 'supervisor':
+    #             Supervisor.objects.create(user=instance)
+            
+    #         else:
+    #             pass
+    # @receiver(post_save,sender=settings.AUTH_USER_MODEL)
+    # def save_supervisor(sender,instance,**kwargs):
+    #     if instance.roles == 'supervisor':
+    #         instance.supervisor.save()
+    #     else:
+    #         pass
 
 
 class Crew(models.Model):
