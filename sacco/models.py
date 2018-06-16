@@ -30,7 +30,7 @@ class Sacco(models.Model):
             elif instance.roles == 'owner':
                 owner.models.Owner.objects.create(user=instance)
             else:
-                supervisor.models.Supervisor.create(user=instance)
+                supervisor.models.Supervisor.objects.create(user=instance)
 
 
 
