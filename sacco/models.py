@@ -2,8 +2,8 @@ from django.conf import settings
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+import supervisor
 import owner
-# from supervisor.models import Supervisor
 
 # Create your models here.
 
@@ -30,7 +30,7 @@ class Sacco(models.Model):
             elif instance.roles == 'owner':
                 owner.models.Owner.objects.create(user=instance)
             else:
-                pass
+                supervisor.models.Supervisor.create(user=instance)
 
 
 
@@ -38,8 +38,10 @@ class Sacco(models.Model):
     def save_sacco(sender,instance,**kwargs):
         if instance.roles == 'sacco':
             instance.sacco.save()
-        else:
+        elif instance.roles == 'owner':
             instance.owner.save()
+        else:
+            instance.supervisor.save()
 
     def delete_sacco(self):
         self.delete()
