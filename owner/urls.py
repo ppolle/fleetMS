@@ -10,6 +10,10 @@ urlpatterns=[
     url('^$', views.home, name = 'home'),
     url(r'^profile', views.profile, name='profile'),
     url(r'^new/vehicle/$', views.vehicle, name='createVehicle'),
+    url(r'^editVehicle/(\d+)', views.editVehicle, name='editVehicle'),
+    url(r'^deleteVehicle/(\d+)',
+        views.deleteVehicle, name='deleteVehicle'),
+    url(r'^editProfile/(\d+)', views.editProfile, name='editProfile'),
 
 ]
 if settings.DEBUG:

@@ -1,0 +1,15 @@
+{% extends 'owner/all/base.html' %} 
+{% load staticfiles%} {% load bootstrap3 %}
+<!-- Content block -->
+{% block content %} {{block.super}}
+<div class="container">
+    <!-- Edit Profile -->
+    <div class="col-md-8 col-lg-8 col-md-offset-2">
+        <form action="{% url 'owner:editProfile' user.owner.id %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %} {% bootstrap_form form %}
+            <input type="submit" class="btn btn-success btn-lg">
+        </form>
+    </div>
+</div>
+
+{% endblock %}

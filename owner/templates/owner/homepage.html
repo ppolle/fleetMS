@@ -1,12 +1,11 @@
-{%extends 'sacco/all/base.html'%} {% block content %} {{block.super}}
+{%extends 'owner/all/base.html'%} {% block content %} {{block.super}}
 
 <h1 style="text-align: center">SACCO DASHBOARD</h1>
 <!-- Side navigation -->
 <div class="sidenav" style="width: 17vw;">
-    <a href="#">About Sacco</a>
-    <a href="#">Add Supervisor</a>
-    <a href="#">Edit Sacco</a>
-    <a href="#">Delete Sacco</a>
+    <a href="{% url 'owner:profile' %}">About Owner</a>
+    <a href="{% url 'owner:createVehicle' %}">Add Vehicle</a>
+    <a href="{% url 'owner:editProfile' user.owner.id %}">Edit Owner Profile</a>
 </div>
 
 <!-- Page content -->
@@ -29,10 +28,10 @@
                     <td>{{vehicle.number_plate}}</td>
                     <td>{{vehicle.capacity}}</td>
                     <td>
-                        <a href="#" class="btn btn-sm btn-success">Edit</a>
+                        <a href="{% url 'owner:editVehicle' vehicle.id %}" class="btn btn-sm btn-success">Edit</a>
                     </td>
                     <td>
-                        <a href="#" class="btn btn-sm btn-danger">Delete</a>
+                        <a href="{% url 'owner:deleteVehicle' vehicle.id %}" class="btn btn-sm btn-danger">Delete</a>
                     </td>
                 </tr>
                 {% endfor %} 
