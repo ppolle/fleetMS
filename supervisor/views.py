@@ -40,5 +40,16 @@ def createDriver(request):
 		return render(request, 'supervisor/crew/createDriver.html')
 
 
-def new_supervisor(request):
-    return render(request, 'supervisor/new_supervisor.html')
+def editDriver(request,driverId):
+	'''
+	Edit driver instance
+	'''
+	if request.Post == 'POST':
+		form = DriverForm(request.POST,instance = Driver.objects.get(id = driverId))
+		if form.is_valid():
+			form.save()
+			messages.success(request,'Success! Driver Crew member succesfully edited!')
+			return redirect('sup:dashboard')
+	else:
+		form = DriverForm(instance = Driver.objects.get(id = driverId))
+		return render(request, 'supervisor/crew/editDriver.html')
