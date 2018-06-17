@@ -61,3 +61,11 @@ def allDrivers(request):
 	'''
 	drivers = Driver.objects.filter(sacco = request.user.sacco)
 	return render(request,'supervisor/crew/allDrivers.html',{"drivers":drivers})
+
+def deleteDriver(request,driverId):
+	'''
+	Delete a driver instance
+	'''
+	Driver.objects.filter(pk = driverId).delete()
+	messages.info(request,'Succesfully delete a driver')
+	return redirect('sup:allDrivers')

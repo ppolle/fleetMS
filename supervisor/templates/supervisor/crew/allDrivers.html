@@ -11,7 +11,7 @@
 			{% include 'fleet_base/partials/_messages.html' %}
 		    <div class="text-center">
 		        View All Drivers
-		         {% if driver%}
+		         {% if drivers%}
 		         <div class="well">
 		         	<table class="table table-bordered">
 		         		<thead>
@@ -23,17 +23,17 @@
 		                </thead>
 		                <tbody>
 
-                        {% for driver in drivers %}
-                        <tr>
-                            <td>{{driver.fullname}}</td>
-                            <td>{{driver.id_number}}</td>
-                            <td><a href="{% url 'sup:editDriver' driver.id %}" class="btn btn-sm btn-success">Edit</a></td>
-                            <td><a href="{% url 'sup:deleteDriver' driver.id %}" class="btn btn-sm btn-danger">Delete</a></td>
-                        </tr>
-                        {% endfor %}
+	                        {% for driver in drivers %}
+	                        <tr>
+	                            <td>{{driver.fullname}}</td>
+	                            <td>{{driver.id_number}}</td>
+	                            <td><a href="{% url 'sup:editDriver' driver.id %}" class="btn btn-sm btn-success">Edit</a></td>
+	                            <td><a href="{% url 'sup:deleteDriver' driver.id %}" class="btn btn-sm btn-danger">Delete</a></td>
+	                        </tr>
+	                        {% endfor %}
 
 
-                </tbody>
+                		</tbody>
 					  
 					</table>
 		         </div>
