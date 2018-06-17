@@ -54,7 +54,7 @@ def ownerSignup(request):
 			user = authenticate(username = user.username,password = raw_password)
 			user_login(request,user)
 			messages.success(request, 'Success Signup created a new Owner')
-			return redirect('fleet:index')
+			return redirect('owner:editProfile')
 		else:
 			messages.error(request,f'Error having the form as valid')
 			return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
@@ -104,7 +104,7 @@ def supSignup(request):
 				super_list = Super_list.objects.get(id_number = form.cleaned_data.get('id_number'))
 				user = form.save(commit = False)
 				user.roles = 'supervisor'
-				user.sacco_base = super_list.sacco
+				user.sacco_base = super_list.sacco_id
 				user.save()
 
 				user.refresh_from_db()
@@ -115,7 +115,7 @@ def supSignup(request):
 				user = authenticate(username = user.username,password = raw_password)
 				user_login(request,user)
 				messages.success(request,f'Success! Welcome to you new dahsboard {user.first_name}')
-				return redirect('fleet:index')
+				return redirect('sup:editSupervisor')
 			else:
 				messages.error(request,'Error! Make sure your respective sacco has already registered you on the platform!')
 				return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
@@ -141,10 +141,10 @@ def login(request):
             if user.roles == 'owner':
 
                 messages.success(request, f'Welcome back {request.user.first_name} {request.user.last_name}!')
-                return redirect('fleet:index')
+                return redirect('owner:home')
             elif user.roles == 'supervisor':
             	messages.success(request, f'Welcome back {request.user.first_name} to your supervisor dashboard!')
-            	return redirect('fleet:index')
+            	return redirect('sup:dashboard')
             else:
                 messages.success(request, f'Success! {request.user.sacco.name} has succesfully logged in!')
                 return redirect('sacco:sacco_home')

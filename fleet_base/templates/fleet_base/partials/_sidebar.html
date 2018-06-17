@@ -1,0 +1,32 @@
+<div class="list-group">
+ 
+  <a href="{%url 'sup:dashboard' %}" class="list-group-item ">
+    Dashboard
+  </a>
+  <a href="{%url 'sup:editSupervisor' %}" class="list-group-item ">
+    Edit profile
+  </a>
+
+  <div class="dropdown">
+      <a href="#" class="list-group-item dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Drivers<span class="caret"></span></a>  
+      <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <li><a href="{% url 'sup:createDriver' %}">Create Driver</a></li>
+        <li><a href="{% url 'sup:allDrivers' %}">All Drivers</a></li>
+   
+       
+      </div>
+  </div>
+  
+   <div class="dropdown">
+      <a href="#" class="list-group-item dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Conductors <span class="caret"></span></a>  
+      <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <li><a href="{% url 'sup:createConductor' %}">Create Conductor</a></li>
+        <li><a href="{% url 'sup:allConductors' %}">All Conductors</a></li>
+    
+        
+        
+      </div>
+  </div>
+
+  
+</div>

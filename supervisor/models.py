@@ -23,7 +23,7 @@ class Supervisor(models.Model):
 class Driver(models.Model):
     fullname = models.CharField(max_length=100)
     id_number = models.IntegerField(unique=True)
-    sacco = models.ForeignKey(Sacco)
+    sacco = models.ForeignKey(Sacco,null= True)
     profile_picture = models.ImageField(
         upload_to='profile_pictures/driver', default='/static/img/placeholder.png')
 
@@ -33,7 +33,7 @@ class Driver(models.Model):
 class Conductor(models.Model):
     fullname = models.CharField(max_length = 100)
     id_number = models.CharField(max_length =100)
-    sacco = models.ForeignKey(Sacco)
+    sacco = models.ForeignKey(Sacco,null = True)
     profile_picture = models.ImageField(upload_to = 'profile_pictures/conductor',default='/static/img/placeholder.png')
 
     def __str__(self):

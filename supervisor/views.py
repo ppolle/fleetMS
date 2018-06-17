@@ -17,6 +17,7 @@ def editSupervisor(request):
 		if form.is_valid():
 			form.save()
 			messages.success(request, f'Success! Your edit has been successful!')
+			return redirect('sup:dashboard')
 	
 	else:
 		form = SupervisorForm(instance = Supervisor.objects.get(id = request.user.supervisor.id))
@@ -31,7 +32,8 @@ def createDriver(request):
 		form = DriverForm(request.POST)
 		if form.is_valid():
 			driver = form.save(commit = False)
-			driver.sacco = request.user.sacco
+			# driver.sacco = request.user.sacco.sacco_base
+			driver.save()
 			messages.success(request,'Success! Driver Crew member succesfully created!')
 			return redirect('sup:allDrivers')
 	else:
@@ -51,13 +53,14 @@ def editDriver(request,driverId):
 			return redirect('sup:allDrivers')
 	else:
 		form = DriverForm(instance = Driver.objects.get(id = driverId))
-		return render(request, 'supervisor/crew/editDriver.html',{"form":form})
+		driver = Driver.objects.get(pk = driverId)
+		return render(request, 'supervisor/crew/editDriver.html',{"form":form,"driver":driver})
 
 def allDrivers(request):
 	'''
 	View all Driver instances
 	'''
-	drivers = Driver.objects.filter(sacco = request.user.sacco)
+	drivers = Driver.objects.all()
 	return render(request,'supervisor/crew/allDrivers.html',{"drivers":drivers})
 
 def deleteDriver(request,driverId):
@@ -76,7 +79,8 @@ def createConductor(request):
 		form = ConductorForm(request.POST)
 		if form.is_valid():
 			conductor = form.save(commit = False)
-			conductor.sacco = request.user.sacco
+			# conductor.sacco = request.user.sacco
+			conductor.save()
 			messages.success(request,'Success! Created a conductor crew member')
 			return redirect('sup:dashboard')
 
@@ -95,15 +99,16 @@ def editConductor(request,conductorId):
 			messages.success(request,'Succesfully edited a conductor instance')
 			return redirect('sup:dashboard')
 	else:
-		form = ConductorForm(instance = Conductore.objects.get(pk = conductorId))
-		return render(request,'supervisor/crew/editConductor.html',{"form":form})
+		form = ConductorForm(instance = Conductor.objects.get(pk = conductorId))
+		cond = Conductor.objects.get(pk = conductorId)
+		return render(request,'supervisor/crew/editConductor.html',{"form":form,"cond":cond})
 
 def allConductors(request):
 	'''
 	View all conductor instances
 	'''
-	conductors = Conductor.objects.filter(sacco = request.user.sacco)
-	return render(request,'supervisor/crew/allConductors.html',{"conductors":conductor})
+	conductors = Conductor.objects.all()
+	return render(request,'supervisor/crew/allConductors.html',{"conductors":conductors})
 
 def deleteConductor(request,conductorId):
 	'''
