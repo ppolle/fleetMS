@@ -73,7 +73,7 @@ def edit_profile(request, sacco_id):
         if form.is_valid():
             current_user = request.user
             form.save()
-            return redirect('sacco:profile', current_user.sacco.id)
+            return redirect('sacco:profile')
     else:
         form = EditProfile(instance = Sacco.objects.get(pk = sacco_id))
     return render(request, 'sacco/all/editprofile.html', {"form": form})
