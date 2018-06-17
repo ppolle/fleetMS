@@ -4,7 +4,7 @@ from django.shortcuts import render
 
 
 def home(request):
-    return render(request, 'home/home.html')
+    return render(request, 'supervisor/dashboard/index.html')
 
 
 def supervisor(request):

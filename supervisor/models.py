@@ -20,22 +20,6 @@ class Supervisor(models.Model):
     def __str__(self):
         return self.first_name
 
-    # @receiver(post_save, sender=settings.AUTH_USER_MODEL)
-    # def update_supervisor(sender, instance, created, **kwargs):
-    #     if created:
-    #         if instance.roles == 'supervisor':
-    #             Supervisor.objects.create(user=instance)
-            
-    #         else:
-    #             pass
-    # @receiver(post_save,sender=settings.AUTH_USER_MODEL)
-    # def save_supervisor(sender,instance,**kwargs):
-    #     if instance.roles == 'supervisor':
-    #         instance.supervisor.save()
-    #     else:
-    #         pass
-
-
 class Crew(models.Model):
     first_name = models.CharField(max_length=30, unique=True)
     last_name = models.CharField(max_length=30, unique=True)
