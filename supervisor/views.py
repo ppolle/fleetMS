@@ -32,7 +32,8 @@ def createDriver(request):
 	if request.Post == 'POST':
 		form = DriverForm(request.POST)
 		if form.is_valid():
-			form.save()
+			driver = form.save(commit = False)
+			driver.sacco = request.user.sacco
 			messages.success(request,'Success! Driver Crew member succesfully created!')
 			return redirect('sup:dashboard')
 	else:
