@@ -74,7 +74,7 @@ def edit_profile(request, sacco_id):
             form.save()
             return redirect('sacco:profile')
     else:
-        form = EditProfile(instance = Sacco.objects.get(pk = sacco_id))
+        form = SaccoForm(instance = Sacco.objects.get(pk = sacco_id))
     return render(request, 'sacco/all/editprofile.html', {"form": form})
 
 def delete_sacco(request, saccoID):

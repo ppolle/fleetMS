@@ -28,6 +28,7 @@ class Driver(models.Model):
 
     def __str__(self):
         return self.fullname
+        
 class Conductor(models.Model):
     fullname = models.CharField(max_length = 100)
     id_number = models.CharField(max_length =100)
@@ -35,7 +36,7 @@ class Conductor(models.Model):
 
     def __str__(self):
         return self.fullname
-        
+
 class Issue(models.Model):
     subject = models.CharField(max_length=255)
     last_updated = models.DateTimeField(auto_now_add=True)
