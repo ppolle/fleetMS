@@ -106,3 +106,11 @@ def allConductors(request):
 	'''
 	conductors = Conductor.objects.filter(sacco = request.user.sacco)
 	return render(request,'supervisor/crew/allConductors.html',{"conductors":conductor})
+
+def deleteConductor(request,conductorId):
+	'''
+	Delete a conductor instance
+	'''
+	Conductor.objects.filter(pk = conductorId).delete()
+	messages.error(request,'Succesfully deleted a conductor')
+	return redirect('sup:dashboard')
