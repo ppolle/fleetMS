@@ -55,7 +55,7 @@ def delete_supervisor(request, supervisorID):
     '''
     
     Super_list.objects.filter(pk=supervisorID).delete()
-    messages.success(
+    messages.error(
         request, f'Supervisor deleted!')
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
@@ -71,7 +71,6 @@ def edit_profile(request, sacco_id):
     if request.method == 'POST':
         form = EditProfile(request.POST, request.FILES,instance = Sacco.objects.get(pk = sacco_id))
         if form.is_valid():
-            current_user = request.user
             form.save()
             return redirect('sacco:profile')
     else:

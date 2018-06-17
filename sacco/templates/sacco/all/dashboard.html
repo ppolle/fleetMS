@@ -1,8 +1,10 @@
-{%extends 'sacco/all/base.html'%} {% block content %} {{block.super}}
+{%extends 'sacco/all/base.html'%}
+{% block content %}
+{{block.super}}
 
 <h1 style="text-align: center">SACCO DASHBOARD</h1>
 <!-- Side navigation -->
-<div class="sidenav">
+<div class="sidenav" style="width: 17vw;">
     <a href="{% url 'sacco:profile' %}">About Sacco</a>
     <a href="{% url 'sacco:createSupervisor' %}">Add Supervisor</a>
     <a href="{% url 'sacco:edit' user.sacco.id %}">Edit Sacco</a>
@@ -10,8 +12,8 @@
 </div>
 
 <!-- Page content -->
-<div class="container">
-    {% include "fleet_base/partials/_messages.html" %}
+<div class="container" style="width: 83vw; margin-left: 17vw;">
+    {% include 'sacco/partials/messages.html' %}
     <div class="Supervisors">
         <h4>SUPERVISOR LIST</h4>
         {% if supervisor %}

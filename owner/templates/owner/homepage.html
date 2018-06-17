@@ -1,40 +1,51 @@
-{%extends 'all/base.html'%} 
-{% block content %}
-{{block.super}} 
+{%extends 'owner/all/base.html'%} {% block content %} {{block.super}}
 
-<h1 style="text-align: center">OWNER DASHBOARD</h1>
+<h1 style="text-align: center">SACCO DASHBOARD</h1>
 <!-- Side navigation -->
-<div class="sidenav">
-    
-    <a href="{% url 'owner:editVehicle' vehicle.id %}">Edit Vehicle</a>
-    <a href="{% url 'owner:deleteVehicle' vehicle.id %}">Delete Vehicle</a>
-    
+<div class="sidenav" style="width: 17vw;">
+    <a href="{% url 'owner:profile' %}">About Owner</a>
+    <a href="{% url 'owner:createVehicle' %}">Add Vehicle</a>
+    <a href="{% url 'owner:editProfile' user.owner.id %}">Edit Owner Profile</a>
 </div>
 
 <!-- Page content -->
-<div class="container">
-    
+<div class="container" style="width: 83vw; margin-left: 17vw;">
+    {% include 'sacco/partials/messages.html' %}
+    <div class="Supervisors">
         <h4>VEHICLE LIST</h4>
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>Number Plate</th>
-                    <th>Capacity</th>
-                    
+                    <th>NUMBER PLATE</th>
+                    <th>CAPACITY</th>
+                    <th>OPTION</th>
                 </tr>
             </thead>
             <tbody>
+           
                 {% for vehicle in vehicle %}
                 <tr>
                     <td>{{vehicle.number_plate}}</td>
                     <td>{{vehicle.capacity}}</td>
-                    <td><a href="{% url 'owner:editVehicle' vehicle.id %}" class="btn btn-sm btn-success">Edit</a></td>
-                    <td><a href="{% url 'owner:deleteVehicle' vehicle.id %}" class="btn btn-sm btn-danger">Delete</a></td>
+                    <td>
+                        <a href="{% url 'owner:editVehicle' vehicle.id %}" class="btn btn-sm btn-success">Edit</a>
+                    </td>
+                    <td>
+                        <a href="{% url 'owner:deleteVehicle' vehicle.id %}" class="btn btn-sm btn-danger">Delete</a>
+                    </td>
                 </tr>
-                {% endfor %}
+                {% endfor %} 
+                
+                <div class="emptytable">
+                    <h3>There are no registered vehicles just yet.
+                        <a href="{% url 'owner:createVehicle' %}">Click here to add</a> a vehicle</h3>
+
+                </div>
+              
+
             </tbody>
         </table>
-        
+
     </div>
 </div>
 
