@@ -20,19 +20,22 @@ class Supervisor(models.Model):
     def __str__(self):
         return self.first_name
 
-class Crew(models.Model):
-    first_name = models.CharField(max_length=30, unique=True)
-    last_name = models.CharField(max_length=30, unique=True)
+class Driver(models.Model):
+    fullname = models.CharField(max_length=100)
     id_number = models.IntegerField(unique=True)
-    date_of_birth = models.DateField(null=True)
-    vehicle_base = models.OneToOneField(Vehicle, related_name='vehicle_base')
     profile_picture = models.ImageField(
-        upload_to='profile_pictures/crew', default='/static/img/placeholder.png')
+        upload_to='profile_pictures/driver', default='/static/img/placeholder.png')
 
     def __str__(self):
-        return self.first_name
+        return self.fullname
+class Conductor(models.Model):
+    fullname = models.CharField(max_length = 100)
+    id_number = models.CharField(max_length =100)
+    profile_picture = models.ImageField(upload_to = 'profile_pictures/conductor',default='/static/img/placeholder.png')
 
-
+    def __str__(self):
+        return self.fullname
+        
 class Issue(models.Model):
     subject = models.CharField(max_length=255)
     last_updated = models.DateTimeField(auto_now_add=True)
