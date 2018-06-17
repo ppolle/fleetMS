@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.contrib import messages
-from .forms import SupervisorForm,DriverForm
+from .forms import SupervisorForm,DriverForm,ConductorForm
 from .models import Supervisor,Driver,Conductor
 # Create your views here.
 
@@ -35,10 +35,10 @@ def createDriver(request):
 			driver = form.save(commit = False)
 			driver.sacco = request.user.sacco
 			messages.success(request,'Success! Driver Crew member succesfully created!')
-			return redirect('sup:dashboard')
+			return redirect('sup:allDrivers')
 	else:
 		form = DriverForm()
-		return render(request, 'supervisor/crew/createDriver.html')
+		return render(request, 'supervisor/crew/createDriver.html',{"form":form})
 
 
 def editDriver(request,driverId):
@@ -50,10 +50,10 @@ def editDriver(request,driverId):
 		if form.is_valid():
 			form.save()
 			messages.success(request,'Success! Driver Crew member succesfully edited!')
-			return redirect('sup:dashboard')
+			return redirect('sup:allDrivers')
 	else:
 		form = DriverForm(instance = Driver.objects.get(id = driverId))
-		return render(request, 'supervisor/crew/editDriver.html')
+		return render(request, 'supervisor/crew/editDriver.html',{"form":form})
 
 def allDrivers(request):
 	'''
@@ -69,3 +69,33 @@ def deleteDriver(request,driverId):
 	Driver.objects.filter(pk = driverId).delete()
 	messages.info(request,'Succesfully delete a driver')
 	return redirect('sup:allDrivers')
+
+def createConductor(request):
+	'''
+	Create conductor instance
+	'''
+	if request.Post == 'POST':
+		form = ConductorForm(request.POST)
+		if form.is_valid():
+			conductor = form.save(commit = False)
+			conductor.sacco = request.user.sacco
+			messages.success(request,'Success! Created a conductor crew member')
+			return redirect('sup:dashboard')
+
+	else:
+		form = ConductorForm()
+		return render(request,'supervisor/crew/createConductor.html',{"form":form})
+
+def editConductor(request,conductorId):
+	'''
+	Edit conductor instance
+	'''
+	if request.POST == 'POST':
+		form = ConductorForm(request.POST,instance = Conductore.objects.get(pk = conductorId))
+		if form.is_valid():
+			form.save()
+			messages.success(request,'Succesfully edited a conductor instance')
+			return redirect('sup:dashboard')
+	else:
+		form = ConductorForm(instance = Conductore.objects.get(pk = conductorId))
+		return render(request,'supervisor/crew/editConductor.html',{"form":form})

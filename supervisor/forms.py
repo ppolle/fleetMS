@@ -10,3 +10,8 @@ class DriverForm(forms.ModelForm):
 	class Meta:
 		model = Driver
 		fields = ('fullname','id_number','profile_picture')
+
+class ConductorForm(forms.ModelForm):
+	class Meta:
+		model = Conductor
+		fields = ('fullname','id_number','profile_picture')
