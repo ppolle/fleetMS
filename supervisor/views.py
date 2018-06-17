@@ -54,3 +54,10 @@ def editDriver(request,driverId):
 	else:
 		form = DriverForm(instance = Driver.objects.get(id = driverId))
 		return render(request, 'supervisor/crew/editDriver.html')
+
+def allDrivers(request):
+	'''
+	View all Driver instances
+	'''
+	drivers = Driver.objects.filter(sacco = request.user.sacco)
+	return render(request,'supervisor/crew/allDrivers.html',{"drivers":drivers})

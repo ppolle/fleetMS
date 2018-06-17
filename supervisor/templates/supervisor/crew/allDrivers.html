@@ -1,0 +1,49 @@
+{%extends 'fleet_base/base.html'%} 
+{% load static %}
+{% block content %}
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-4">
+			
+		</div>
+		<div class="col-md-4">
+			{% include 'fleet_base/partials/_messages.html' %}
+		    <div class="text-center">
+		        View All Drivers
+		         {% if driver%}
+		         <div class="well">
+		         	<table class="table table-bordered">
+		         		<thead>
+		                    <tr>
+		                        <th>Full Name</th>
+		                        <th>ID Number</th>
+		                        <th>Option</th>
+		                    </tr>
+		                </thead>
+		                <tbody>
+
+                        {% for driver in drivers %}
+                        <tr>
+                            <td>{{driver.fullname}}</td>
+                            <td>{{driver.id_number}}</td>
+                            <td><a href="{% url 'sup:editDriver' driver.id %}" class="btn btn-sm btn-success">Edit</a></td>
+                            <td><a href="{% url 'sup:deleteDriver' driver.id %}" class="btn btn-sm btn-danger">Delete</a></td>
+                        </tr>
+                        {% endfor %}
+
+
+                </tbody>
+					  
+					</table>
+		         </div>
+
+		         {%else%}
+		         <p>You currently do not have any drivers registered. Create One <a href="{% url 'sup:createDriver' %}">here</a></p>
+		         {%endif%}
+		    </div>
+	    </div>
+    </div>
+  
+</div>
+{% endblock %}

@@ -8,5 +8,5 @@ url(r'^$', views.home, name='dashboard'),
 url(r'^editSupervisor$',views.editSupervisor,name = 'editSupervisor'),
 url(r'^createDriver$',views.createDriver,name = 'createDriver'),
 url(r'^editDriver/(\d+)',views.editDriver,name = 'editDriver'),
-url(r'^drivers/',views.allDrivers,name = 'allDrivers')
+url(r'^drivers/',views.allDrivers,name = 'allDrivers'),
 ]
