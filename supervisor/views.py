@@ -99,3 +99,10 @@ def editConductor(request,conductorId):
 	else:
 		form = ConductorForm(instance = Conductore.objects.get(pk = conductorId))
 		return render(request,'supervisor/crew/editConductor.html',{"form":form})
+
+def allConductors(request):
+	'''
+	View all conductor instances
+	'''
+	conductors = Conductor.objects.filter(sacco = request.user.sacco)
+	return render(request,'supervisor/crew/allConductors.html',{"conductors":conductor})
