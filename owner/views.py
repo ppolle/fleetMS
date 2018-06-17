@@ -25,7 +25,7 @@ def vehicle(request):
         if form.is_valid():
             vehicle = form.save(commit=False)
             vehicle.owner = request.user.owner
-            # user.vehicle = Vehicle.objects.all().filter(owner.user=request.user)
+            vehicle.sacco = request.user.owner.sacco
             vehicle.save()
             messages.success(
                 request, f'Congratulations! You have succesfully Added a new Vehicle!')

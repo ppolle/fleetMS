@@ -17,9 +17,7 @@ def editSupervisor(request):
 		if form.is_valid():
 			form.save()
 			messages.success(request, f'Success! Your edit has been successful!')
-			return redirect('sup:dashboard')
-
-
+	
 	else:
 		form = SupervisorForm(instance = Supervisor.objects.get(id = request.user.supervisor.id))
 		return render(request,'supervisor/dashboard/edit.html',{"form":form})
@@ -29,7 +27,7 @@ def createDriver(request):
 	'''
 	Create Driver crew member
 	'''
-	if request.Post == 'POST':
+	if request.method == 'POST':
 		form = DriverForm(request.POST)
 		if form.is_valid():
 			driver = form.save(commit = False)
@@ -45,7 +43,7 @@ def editDriver(request,driverId):
 	'''
 	Edit driver instance
 	'''
-	if request.Post == 'POST':
+	if request.method == 'POST':
 		form = DriverForm(request.POST,instance = Driver.objects.get(id = driverId))
 		if form.is_valid():
 			form.save()
@@ -74,7 +72,7 @@ def createConductor(request):
 	'''
 	Create conductor instance
 	'''
-	if request.Post == 'POST':
+	if request.method == 'POST':
 		form = ConductorForm(request.POST)
 		if form.is_valid():
 			conductor = form.save(commit = False)
@@ -90,7 +88,7 @@ def editConductor(request,conductorId):
 	'''
 	Edit conductor instance
 	'''
-	if request.POST == 'POST':
+	if request.method == 'POST':
 		form = ConductorForm(request.POST,instance = Conductore.objects.get(pk = conductorId))
 		if form.is_valid():
 			form.save()

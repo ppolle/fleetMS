@@ -46,6 +46,7 @@ class Vehicle(models.Model):
     number_plate = models.CharField(max_length=200, null=True)
     capacity = models.IntegerField(null=True)
     owner = models.ForeignKey(Owner, null=True)
+    sacco = models.ForeignKey(Sacco, null=True)
 
     def __str(self):
         """Summary
