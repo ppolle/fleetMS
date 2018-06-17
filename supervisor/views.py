@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from django.contrib import messages
-from .forms import SupervisorForm
+from .forms import SupervisorForm,DriverForm
+from .models import Supervisor,Driver,Conductor
 # Create your views here.
 
 
@@ -12,7 +13,7 @@ def editSupervisor(request):
 	Edit a created supervisor
 	'''
 	if request.method == 'POST':
-		form = SupervisorForm(request.POST)
+		form = SupervisorForm(request.POST,instance = Supervisor.objects.get(id = request.user.supervisor.id))
 		if form.is_valid():
 			form.save()
 			messages.success(request, f'Success! Your edit has been successful!')
@@ -20,12 +21,23 @@ def editSupervisor(request):
 
 
 	else:
-		form = SupervisorForm()
+		form = SupervisorForm(instance = Supervisor.objects.get(id = request.user.supervisor.id))
 		return render(request,'supervisor/dashboard/edit.html',{"form":form})
 
 
-def supervisor(request):
-    return render(request, 'supervisor/supervisor.html')
+def createDriver(request):
+	'''
+	Create Driver crew member
+	'''
+	if request.Post == 'POST':
+		form = DriverForm(request.POST)
+		if form.is_valid():
+			form.save()
+			messages.success(request,'Success! Driver Crew member succesfully created!')
+			return redirect('sup:dashboard')
+	else:
+		form = DriverForm()
+		return render(request, 'supervisor/crew/createDriver.html')
 
 
 def new_supervisor(request):
