@@ -22,7 +22,16 @@ def home(request):
     '''
     Function to render the home page
     '''
-    return render(request, 'fleet_base/home/home.html')
+    if request.user.is_authenticated:
+    	if request.user.roles == 'supervisor':
+    		return redirect('sup:dashboard')
+
+    	elif request.user.roles == 'owner':
+    		return redirect('owner:home')
+    	else:
+    		return redirect('sacco:sacco_home')
+    else:
+    	return render(request, 'fleet_base/home/home.html')
 
 
 def select(request):
