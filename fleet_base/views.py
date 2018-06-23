@@ -101,27 +101,31 @@ def supSignup(request):
 
 		if form.is_valid():
 			if Super_list.objects.filter(id_number = form.cleaned_data.get('id_number')).exists():
-				super_list = Super_list.objects.get(id_number = form.cleaned_data.get('id_number')).sacco
-				user = form.save(commit = False)
-				user.roles = 'supervisor'
-				
-				user.save()
+				if Supervisor.objects.filter(id_number = form.cleaned_data.get('id_number')).exists():
+					messages.error(request,'Sorry! But a supervisor with that id number is already registered!')
+					return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+				else:
+					super_list = Super_list.objects.get(id_number = form.cleaned_data.get('id_number')).sacco
+					user = form.save(commit = False)
+					user.roles = 'supervisor'
+					
+					user.save()
 
-				user.refresh_from_db()
-				user.supervisor.sacco_base = super_list
-				user.supervisor.id_number = form.cleaned_data.get('id_number')
-				user.save()
-		
-				raw_password = form.cleaned_data.get('password1')
-				user = authenticate(username = user.username,password = raw_password)
-				user_login(request,user)
-				messages.success(request,f'Success! Welcome to you new dahsboard {user.first_name}')
-				return redirect('sup:editSupervisor')
+					user.refresh_from_db()
+					user.supervisor.sacco_base = super_list
+					user.supervisor.id_number = form.cleaned_data.get('id_number')
+					user.save()
+			
+					raw_password = form.cleaned_data.get('password1')
+					user = authenticate(username = user.username,password = raw_password)
+					user_login(request,user)
+					messages.success(request,f'Success! Welcome to you new dahsboard {user.first_name}')
+					return redirect('sup:editSupervisor')
 			else:
 				messages.error(request,'Error! Make sure your respective sacco has already registered you on the platform!')
 				return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 		else:
-			messages.error(request,f'Error having the form as valid')
+			messages.error(request,f'Please make sure all fields have been filled validly')
 			return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 	
 	else:
