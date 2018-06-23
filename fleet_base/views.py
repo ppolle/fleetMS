@@ -101,13 +101,14 @@ def supSignup(request):
 
 		if form.is_valid():
 			if Super_list.objects.filter(id_number = form.cleaned_data.get('id_number')).exists():
-				super_list = Super_list.objects.get(id_number = form.cleaned_data.get('id_number'))
+				super_list = Super_list.objects.get(id_number = form.cleaned_data.get('id_number')).sacco
 				user = form.save(commit = False)
 				user.roles = 'supervisor'
-				user.sacco_base = super_list.sacco_id
+				
 				user.save()
 
 				user.refresh_from_db()
+				user.supervisor.sacco_base = super_list
 				user.supervisor.id_number = form.cleaned_data.get('id_number')
 				user.save()
 		
