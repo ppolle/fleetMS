@@ -32,7 +32,7 @@ def createDriver(request):
 		form = DriverForm(request.POST)
 		if form.is_valid():
 			driver = form.save(commit = False)
-			# driver.sacco = request.user.sacco.sacco_base
+			driver.sacco = request.user.supervisor.sacco_base
 			driver.save()
 			messages.success(request,'Success! Driver Crew member succesfully created!')
 			return redirect('sup:allDrivers')
@@ -79,10 +79,10 @@ def createConductor(request):
 		form = ConductorForm(request.POST)
 		if form.is_valid():
 			conductor = form.save(commit = False)
-			# conductor.sacco = request.user.sacco
+			conductor.sacco = request.user.supervisor.sacco_base
 			conductor.save()
 			messages.success(request,'Success! Created a conductor crew member')
-			return redirect('sup:dashboard')
+			return redirect('sup:allDrivers')
 
 	else:
 		form = ConductorForm()
@@ -93,11 +93,11 @@ def editConductor(request,conductorId):
 	Edit conductor instance
 	'''
 	if request.method == 'POST':
-		form = ConductorForm(request.POST,instance = Conductore.objects.get(pk = conductorId))
+		form = ConductorForm(request.POST,instance = Conductor.objects.get(pk = conductorId))
 		if form.is_valid():
 			form.save()
 			messages.success(request,'Succesfully edited a conductor instance')
-			return redirect('sup:dashboard')
+			return redirect('sup:allConductors')
 	else:
 		form = ConductorForm(instance = Conductor.objects.get(pk = conductorId))
 		cond = Conductor.objects.get(pk = conductorId)
