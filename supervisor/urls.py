@@ -7,6 +7,7 @@ urlpatterns = [
 url(r'^$', views.home, name='dashboard'),
 url(r'^profile$',views.profile,name='profile'),
 url(r'^editSupervisor/$',views.editSupervisor,name = 'editSupervisor'),
+url(r'^allMatatus/$',views.allMatatus,name = 'allMatatus'),
 
 url(r'^createDriver/$',views.createDriver,name = 'createDriver'),
 url(r'^editDriver/(\d+)',views.editDriver,name = 'editDriver'),

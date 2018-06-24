@@ -131,3 +131,11 @@ def profile(request):
 	'''
 	profile = Supervisor.objects.get(user = request.user)
 	return render(request,'supervisor/dashboard/profile.html',{"profile":profile})
+
+def allMatatus(request):
+	'''
+	This view will retrieve instances of all matatus
+	'''
+	matatus = Vehicle.objects.filter(sacco = request.user.supervisor.sacco_base)
+	return render(request,'supervisor/dashboard/allMatatus.html',{"matatus":matatus})
+

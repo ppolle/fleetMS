@@ -11,7 +11,7 @@
 		<div class="col-md-8">
 			{% include 'fleet_base/partials/_messages.html' %}
 		    	<div class="">
-			        Matatus
+			        All Matatus
 			         {% if matatus%}
 			         
 			         	<table class="table table-bordered">
@@ -39,51 +39,12 @@
 						  
 						</table>
 						
-							{% if matatus.count > 5 %}
-							<a href="{% url 'sup:allMatatus' %}" class="pull-right">View All Matatus</a>
-							{%endif%}
-							<br>
 			         	
 
 			         {%else%}
 			         <p>No matatus are registered in this sacco</p>
 			         {%endif%}
 
-			         Owners
-			         {% if owners%}
-			         
-			         	<table class="table table-bordered">
-			         		<thead>
-			                    <tr>
-			                        <th>Full Name</th>
-			                        <th>ID Number</th>
-			                        <th>Telephone</th>
-			                        <th></th>
-			                    </tr>
-			                </thead>
-			                <tbody>
-
-		                        {% for owner in owners %}
-		                        <tr>
-		                            <td>{{owner.user.first_name.capitalize}} {{owner.user.last_name.capitalize}}</td>
-		                            <td>{{owner.nat_id}}</td>
-		                            <td>{{owner.telephone}}</td>
-		                            <td><a href="" class="btn btn-sm btn-success btn-block">View</a></td>
-		                        </tr>
-		                        {% endfor %}
-
-
-	                		</tbody>
-						  
-						</table>
-						{% if owners.count > 5 %}
-						<a href="" class="pull-right">View All Owners</a>
-						{%endif%}
-			         
-
-			         {%else%}
-			         <p>NO Owner currently registered in this sacco</p>
-			         {%endif%}
 		    </div>
 	    </div>
     </div>
