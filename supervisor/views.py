@@ -146,3 +146,10 @@ def allOwners(request):
 	owners = Owner.objects.filter(sacco = request.user.supervisor.sacco_base)
 	return render(request,'supervisor/dashboard/allOwners.html',{"owners":owners})
 
+def singleMatatu(request,matId):
+	'''
+	This view will retrieve a single matatu instance
+	'''
+	matatu = Vehicle.objects.get(id = matId)
+	return render(request,'supervisor/dashboard/singleMatatu.html',{"matatu":matatu})
+

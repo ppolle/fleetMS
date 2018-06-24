@@ -9,6 +9,7 @@ url(r'^profile$',views.profile,name='profile'),
 url(r'^editSupervisor/$',views.editSupervisor,name = 'editSupervisor'),
 url(r'^allMatatus/$',views.allMatatus,name = 'allMatatus'),
 url(r'^allOwners/$',views.allOwners,name = 'allOwners'),
+url(r'^singleMatatu/(\d+)',views.singleMatatu,name = 'singleMatatu'),
 
 url(r'^createDriver/$',views.createDriver,name = 'createDriver'),
 url(r'^editDriver/(\d+)',views.editDriver,name = 'editDriver'),

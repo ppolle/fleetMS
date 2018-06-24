@@ -30,7 +30,7 @@
 		                            <td>{{matatu.number_plate}}</td>
 		                            <td>{{matatu.capacity}}</td>
 		                            <td>{{matatu.owner.user.first_name.capitalize}} {{matatu.owner.user.first_name.capitalize}}</td>
-		                            <td><a href="" class="btn btn-sm btn-success btn-block">View</a></td>
+		                            <td><a href="{% url 'sup:singleMatatu' matatu.id %}" class="btn btn-sm btn-success btn-block">View</a></td>
 		                        </tr>
 		                        {% endfor %}
 
@@ -76,7 +76,7 @@
 	                		</tbody>
 						  
 						</table>
-						{% if owners.count == 1 %}
+						{% if owners.count > 5 %}
 						<a href="{% url 'sup:allOwners' %}" class="pull-right">View All Owners</a>
 						{%endif%}
 			         
