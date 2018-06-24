@@ -10,8 +10,72 @@
 		</div>
 		<div class="col-md-8">
 			{% include 'fleet_base/partials/_messages.html' %}
-		    <div class="text-center">
-		        Supervisor dashboard
+		    	<div class="">
+			        Matatus
+			         {% if matatus%}
+			         <div class="well">
+			         	<table class="table table-bordered">
+			         		<thead>
+			                    <tr>
+			                        <th>Number Plate</th>
+			                        <th>Capacity</th>
+			                        <th>Owner</th>
+			                        <th></th>
+			                    </tr>
+			                </thead>
+			                <tbody>
+
+		                        {% for matatu in matatus %}
+		                        <tr>
+		                            <td>{{matatu.number_plate}}</td>
+		                            <td>{{matatu.capacity}}</td>
+		                            <td>{{matatu.owner.user.first_name.capitalize}} {{matatu.owner.user.first_name.capitalize}}</td>
+		                            <td><a href="" class="btn btn-sm btn-danger">Delete</a></td>
+		                        </tr>
+		                        {% endfor %}
+
+
+	                		</tbody>
+						  
+						</table>
+			         </div>
+
+			         {%else%}
+			         <p>No matatus are registered in this sacco</p>
+			         {%endif%}
+
+			         Owners
+			         {% if owners%}
+			         <div class="well">
+			         	<table class="table table-bordered">
+			         		<thead>
+			                    <tr>
+			                        <th>Full Name</th>
+			                        <th>ID Number</th>
+			                        <th>Telephone</th>
+			                        <th></th>
+			                    </tr>
+			                </thead>
+			                <tbody>
+
+		                        {% for owner in owners %}
+		                        <tr>
+		                            <td>{{owner.user.first_name.capitalize}} {{owner.user.last_name.capitalize}}</td>
+		                            <td>{{owner.nat_id}}</td>
+		                            <td>{{owner.telephone}}</td>
+		                            <td><a href="" class="btn btn-sm btn-success">View</a></td>
+		                        </tr>
+		                        {% endfor %}
+
+
+	                		</tbody>
+						  
+						</table>
+			         </div>
+
+			         {%else%}
+			         <p>NO Owner currently registered in this sacco</p>
+			         {%endif%}
 		    </div>
 	    </div>
     </div>

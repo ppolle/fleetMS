@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.contrib import messages
 from .forms import SupervisorForm,DriverForm,ConductorForm
 from .models import Supervisor,Driver,Conductor
+from owner.models import Vehicle,Owner
 
 # Create your views here.
 
@@ -10,7 +11,9 @@ def home(request):
 	'''
 	this view shows the dashboard view
 	'''
-	return render(request, 'supervisor/dashboard/index.html')
+	matatus =  Vehicle.objects.filter(sacco = request.user.supervisor.sacco_base)
+	owners = Owner.objects.filter(sacco = request.user.supervisor.sacco_base)
+	return render(request, 'supervisor/dashboard/index.html',{"matatus":matatus,"owners":owners})
 
 def editSupervisor(request):
 	'''
