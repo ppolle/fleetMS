@@ -150,6 +150,8 @@ def singleMatatu(request,matId):
 	'''
 	This view will retrieve a single matatu instance
 	'''
+	drivers = Driver.objects.filter(sacco = request.user.supervisor.sacco_base)
+	conductors = Conductor.objects.filter(sacco = request.user.supervisor.sacco_base)
 	matatu = Vehicle.objects.get(id = matId)
-	return render(request,'supervisor/dashboard/singleMatatu.html',{"matatu":matatu})
+	return render(request,'supervisor/dashboard/singleMatatu.html',{"matatu":matatu,"drivers":drivers,"conductors":conductors})
 

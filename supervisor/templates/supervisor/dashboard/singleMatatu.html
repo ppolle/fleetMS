@@ -16,6 +16,35 @@
 		    		<strong>Matatu capacity</strong>:{{matatu.capacity}}<br>
 		    		<strong>Matatu owner</strong>: {{matatu.owner.user.first_name.capitalize}} {{matatu.owner.user.last_name.capitalize}}
 
+		    		<form  action="{% url 'fleet:login' %}">
+				         
+				          	<div class="form-group">
+				          		<label  class="control-label">Driver</label>
+					          	<select class="form-control" name = "driver">
+						          	  <option value="" selected>---------</option>
+						          	  {% for driver in drivers %}
+									  <option value="{{driver.id}}">{{driver.fullname.capitalize}}</option>
+									  {%endfor%}
+									 
+								</select>
+							</div>
+
+							<div class="form-group">
+				          		<label  class="control-label">Conductor</label>
+					          	<select class="form-control" name = "conductor">
+						          	  <option value="" selected>---------</option>
+						          	  {% for cond in conductors %}
+									  <option value="{{cond.id}}">{{cond.fullname.capitalize}}</option>
+									  {%endfor%}
+									 
+								</select>
+							</div>
+				          <div class="form-group">
+				          	<button type="submit" class="btn btn-default">Assign</button>
+				          </div>
+
+		          	</form>
+
 		  		</div>
     </div>
   
