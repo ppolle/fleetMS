@@ -17,11 +17,11 @@ def editSupervisor(request):
 	Edit a created supervisor
 	'''
 	if request.method == 'POST':
-		form = SupervisorForm(request.POST,instance = Supervisor.objects.get(id = request.user.supervisor.id))
+		form = SupervisorForm(request.POST,request.FILES,instance = Supervisor.objects.get(id = request.user.supervisor.id))
 		if form.is_valid():
 			form.save()
 			messages.success(request, f'Success! Your edit has been successful!')
-			return redirect('sup:dashboard')
+			return redirect('sup:profile')
 	
 	else:
 		form = SupervisorForm(instance = Supervisor.objects.get(id = request.user.supervisor.id))
