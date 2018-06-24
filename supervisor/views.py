@@ -60,7 +60,7 @@ def allDrivers(request):
 	'''
 	View all Driver instances
 	'''
-	drivers = Driver.objects.all()
+	drivers = Driver.objects.filter(sacco = request.user.supervisor.sacco_base)
 	return render(request,'supervisor/crew/allDrivers.html',{"drivers":drivers})
 
 def deleteDriver(request,driverId):
@@ -107,7 +107,7 @@ def allConductors(request):
 	'''
 	View all conductor instances
 	'''
-	conductors = Conductor.objects.all()
+	conductors = Conductor.objects.filter(sacco = request.user.supervisor.sacco_base)
 	return render(request,'supervisor/crew/allConductors.html',{"conductors":conductors})
 
 def deleteConductor(request,conductorId):
