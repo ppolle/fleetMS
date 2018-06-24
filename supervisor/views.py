@@ -139,3 +139,10 @@ def allMatatus(request):
 	matatus = Vehicle.objects.filter(sacco = request.user.supervisor.sacco_base)
 	return render(request,'supervisor/dashboard/allMatatus.html',{"matatus":matatus})
 
+def allOwners(request):
+	'''
+	This view will retrieve instances of all matatu owners
+	'''
+	owners = Owner.objects.filter(sacco = request.user.supervisor.sacco_base)
+	return render(request,'supervisor/dashboard/allOwners.html',{"owners":owners})
+

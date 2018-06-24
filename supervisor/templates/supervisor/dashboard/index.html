@@ -76,8 +76,8 @@
 	                		</tbody>
 						  
 						</table>
-						{% if owners.count > 5 %}
-						<a href="" class="pull-right">View All Owners</a>
+						{% if owners.count == 1 %}
+						<a href="{% url 'sup:allOwners' %}" class="pull-right">View All Owners</a>
 						{%endif%}
 			         
 
