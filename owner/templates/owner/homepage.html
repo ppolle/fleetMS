@@ -13,6 +13,7 @@
     {% include 'sacco/partials/messages.html' %}
     <div class="Supervisors">
         <h4>VEHICLE LIST</h4>
+        {% if vehicle %}
         <table class="table table-hover">
             <thead>
                 <tr>
@@ -36,17 +37,21 @@
                 </tr>
                 {% endfor %} 
                 
-                <div class="emptytable">
-                    <h3>There are no registered vehicles just yet.
-                        <a href="{% url 'owner:createVehicle' %}">Click here to add</a> a vehicle</h3>
-
-                </div>
+               
               
 
             </tbody>
         </table>
+        {% else %}
+        <div class="emptytable">
+            <h3>There are no registered vehicles just yet.
+            <a href="{% url 'owner:createVehicle' %}">Click here to add</a> a vehicle</h3>
+
+        </div>
+                {%endif%}
 
     </div>
 </div>
 
 {% endblock %}
+                

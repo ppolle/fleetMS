@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.contrib import messages
 from .forms import SupervisorForm,DriverForm,ConductorForm
 from .models import Supervisor,Driver,Conductor
+
 # Create your views here.
 
 
