@@ -5,6 +5,7 @@ app_name = 'sup'
 
 urlpatterns = [
 url(r'^$', views.home, name='dashboard'),
+url(r'^profile$',views.profile,name='profile'),
 url(r'^editSupervisor/$',views.editSupervisor,name = 'editSupervisor'),
 
 url(r'^createDriver/$',views.createDriver,name = 'createDriver'),

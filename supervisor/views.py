@@ -7,7 +7,10 @@ from .models import Supervisor,Driver,Conductor
 
 
 def home(request):
-    return render(request, 'supervisor/dashboard/index.html')
+	'''
+	this view shows the dashboard view
+	'''
+	return render(request, 'supervisor/dashboard/index.html')
 
 def editSupervisor(request):
 	'''
@@ -118,3 +121,10 @@ def deleteConductor(request,conductorId):
 	Conductor.objects.filter(pk = conductorId).delete()
 	messages.error(request,'Succesfully deleted a conductor')
 	return redirect('sup:dashboard')
+
+def profile(request):
+	'''
+	This view will render a supervisor profile instance
+	'''
+	profile = Supervisor.objects.get(user = request.user)
+	return render(request,'supervisor/dashboard/profile.html',{"profile":profile})

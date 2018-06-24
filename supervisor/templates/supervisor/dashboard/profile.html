@@ -2,8 +2,8 @@
 {% load static %} 
 {% block content %}
 <div class="sidenav" style="height: 100vh; width: 40vw; background: grey;">
-  {% if profile.profile_pic %}
-  <img src="{{profile.profile_pic.url}}" alt="Owner Image" style="margin-top: 5vh; padding-left: 3vw; padding-right: 3vw; width: 10vw;"> {% else %}
+  {% if profile.profile_picture %}
+  <img src="{{profile.profile_picture.url}}" alt="Owner Image" style="margin-top: 5vh; padding-left: 3vw; padding-right: 3vw; width: 10vw;"> {% else %}
   <h1 style="color: white; font-size: 10vh; padding: 3vw;">No Image uploaded</h1>
   {% endif %}
 </div>
@@ -11,16 +11,16 @@
   <div class="row">
     <div class="col-md-7">
       <div>
-        <h3>Owner Name: {{profile.user.first_name.capitalize}} {{profile.user.last_name.capitalize}}</h3>
+        <h3>Supervisor: {{profile.user.first_name.capitalize}} {{profile.user.last_name.capitalize}}</h3>
       </div>
       <div>
-        <h4>National Id: {{profile.nat_id}}</h4>
+        <h4>National Id: {{profile.id_number}}</h4>
       </div>
       <div>
         <h4>Telephone: {{profile.telephone}}</h4>
       </div>
       <div>
-        <h4>Sacco: {{profile.sacco}}</h4>
+        <h4>Sacco: {{profile.sacco_base}}</h4>
       </div>
     </div>
   </div>
