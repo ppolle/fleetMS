@@ -11,8 +11,8 @@ def home(request):
 	'''
 	this view shows the dashboard view
 	'''
-	matatus =  Vehicle.objects.filter(sacco = request.user.supervisor.sacco_base)
-	owners = Owner.objects.filter(sacco = request.user.supervisor.sacco_base)
+	matatus =  Vehicle.objects.filter(sacco = request.user.supervisor.sacco_base)[:5]
+	owners = Owner.objects.filter(sacco = request.user.supervisor.sacco_base)[:5]
 	return render(request, 'supervisor/dashboard/index.html',{"matatus":matatus,"owners":owners})
 
 def editSupervisor(request):
