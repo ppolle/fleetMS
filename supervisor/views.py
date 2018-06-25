@@ -3,10 +3,11 @@ from django.contrib import messages
 from .forms import SupervisorForm,DriverForm,ConductorForm
 from .models import Supervisor,Driver,Conductor,AssignCrew
 from owner.models import Vehicle,Owner
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
-
+@login_required(login_url='/loginViews/')
 def home(request):
 	'''
 	this view shows the dashboard view
@@ -15,6 +16,7 @@ def home(request):
 	owners = Owner.objects.filter(sacco = request.user.supervisor.sacco_base)[:5]
 	return render(request, 'supervisor/dashboard/index.html',{"matatus":matatus,"owners":owners})
 
+@login_required(login_url='/loginViews/')
 def editSupervisor(request):
 	'''
 	Edit a created supervisor
@@ -30,7 +32,7 @@ def editSupervisor(request):
 		form = SupervisorForm(instance = Supervisor.objects.get(id = request.user.supervisor.id))
 		return render(request,'supervisor/dashboard/edit.html',{"form":form})
 
-
+@login_required(login_url='/loginViews/')
 def createDriver(request):
 	'''
 	Create Driver crew member
@@ -47,7 +49,7 @@ def createDriver(request):
 		form = DriverForm()
 		return render(request, 'supervisor/crew/createDriver.html',{"form":form})
 
-
+@login_required(login_url='/loginViews/')
 def editDriver(request,driverId):
 	'''
 	Edit driver instance
@@ -63,6 +65,7 @@ def editDriver(request,driverId):
 		driver = Driver.objects.get(pk = driverId)
 		return render(request, 'supervisor/crew/editDriver.html',{"form":form,"driver":driver})
 
+@login_required(login_url='/loginViews/')
 def allDrivers(request):
 	'''
 	View all Driver instances
@@ -70,6 +73,7 @@ def allDrivers(request):
 	drivers = Driver.objects.filter(sacco = request.user.supervisor.sacco_base)
 	return render(request,'supervisor/crew/allDrivers.html',{"drivers":drivers})
 
+@login_required(login_url='/loginViews/')
 def deleteDriver(request,driverId):
 	'''
 	Delete a driver instance
@@ -78,6 +82,7 @@ def deleteDriver(request,driverId):
 	messages.info(request,'Succesfully delete a driver')
 	return redirect('sup:allDrivers')
 
+@login_required(login_url='/loginViews/')
 def createConductor(request):
 	'''
 	Create conductor instance
@@ -95,6 +100,7 @@ def createConductor(request):
 		form = ConductorForm()
 		return render(request,'supervisor/crew/createConductor.html',{"form":form})
 
+@login_required(login_url='/loginViews/')
 def editConductor(request,conductorId):
 	'''
 	Edit conductor instance
@@ -110,6 +116,7 @@ def editConductor(request,conductorId):
 		cond = Conductor.objects.get(pk = conductorId)
 		return render(request,'supervisor/crew/editConductor.html',{"form":form,"cond":cond})
 
+@login_required(login_url='/loginViews/')
 def allConductors(request):
 	'''
 	View all conductor instances
@@ -117,6 +124,7 @@ def allConductors(request):
 	conductors = Conductor.objects.filter(sacco = request.user.supervisor.sacco_base)
 	return render(request,'supervisor/crew/allConductors.html',{"conductors":conductors})
 
+@login_required(login_url='/loginViews/')
 def deleteConductor(request,conductorId):
 	'''
 	Delete a conductor instance
@@ -125,6 +133,7 @@ def deleteConductor(request,conductorId):
 	messages.error(request,'Succesfully deleted a conductor')
 	return redirect('sup:allConductors')
 
+@login_required(login_url='/loginViews/')
 def profile(request):
 	'''
 	This view will render a supervisor profile instance
@@ -132,6 +141,7 @@ def profile(request):
 	profile = Supervisor.objects.get(user = request.user)
 	return render(request,'supervisor/dashboard/profile.html',{"profile":profile})
 
+@login_required(login_url='/loginViews/')
 def allMatatus(request):
 	'''
 	This view will retrieve instances of all matatus
@@ -139,6 +149,7 @@ def allMatatus(request):
 	matatus = Vehicle.objects.filter(sacco = request.user.supervisor.sacco_base)
 	return render(request,'supervisor/dashboard/allMatatus.html',{"matatus":matatus})
 
+@login_required(login_url='/loginViews/')
 def allOwners(request):
 	'''
 	This view will retrieve instances of all matatu owners
@@ -146,6 +157,7 @@ def allOwners(request):
 	owners = Owner.objects.filter(sacco = request.user.supervisor.sacco_base)
 	return render(request,'supervisor/dashboard/allOwners.html',{"owners":owners})
 
+@login_required(login_url='/loginViews/')
 def singleMatatu(request,matId):
 	'''
 	This view will retrieve a single matatu instance
@@ -156,6 +168,7 @@ def singleMatatu(request,matId):
 	crew = AssignCrew.objects.filter(vehicle_id = matId)
 	return render(request,'supervisor/dashboard/singleMatatu.html',{"matatu":matatu,"drivers":drivers,"conductors":conductors,"crew":crew})
 
+@login_required(login_url='/loginViews/')
 def assignCrew(request,matId):
 	'''
 	This view will create or update an instance of a matatu crew in the assign cre table
@@ -178,6 +191,8 @@ def assignCrew(request,matId):
 		else:
 			messages.error(request, 'You have to select both the driver and conductor fields to succesfully assign a crew!')
 			return redirect(request.META.get('HTTP_REFERER'))
+
+@login_required(login_url='/loginViews/')
 def deleteCrew(request,matId):
 	'''
 	This view will delete a crew instance in the assign crew table
@@ -185,5 +200,3 @@ def deleteCrew(request,matId):
 	AssignCrew.objects.filter(vehicle_id = matId).delete()
 	messages.success(request,'You have succesfully deleted the crew from this matatu')
 	return redirect(request.META.get('HTTP_REFERER'))
-
-

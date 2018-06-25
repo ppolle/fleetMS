@@ -4,18 +4,20 @@ from .models import Owner, Vehicle
 from .forms import VehicleForm, EditProfile
 from django.contrib import messages
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
+@login_required(login_url='/loginViews/')
 def home(request):
     vehicle = Vehicle.objects.filter(owner = request.user.owner)
     return render(request, 'owner/homepage.html', {"vehicle": vehicle})
 
-
+@login_required(login_url='/loginViews/')
 def profile(request):
     profile = Owner.objects.get(user=request.user)
     return render(request, 'owner/profile.html', {"profile": profile})
 
-
+@login_required(login_url='/loginViews/')
 def vehicle(request):
     '''
     View function to add a new vehicle
@@ -35,6 +37,7 @@ def vehicle(request):
     return render(request, 'owner/vehicle.html', {"form": form})
 
 
+@login_required(login_url='/loginViews/')
 def editVehicle(request, owner_id):
     '''
     View function to edit an instance of a supervisor already created
@@ -52,6 +55,7 @@ def editVehicle(request, owner_id):
     return render(request, 'owner/editVehicle.html', {"form": form, "vehicle": vehicle})
 
 
+@login_required(login_url='/loginViews/')
 def deleteVehicle(request, owner_id):
     '''
     View function that enables one delete a given supervisor in a sacco
@@ -62,7 +66,7 @@ def deleteVehicle(request, owner_id):
         request, f'Vehicle deleted!')
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
-
+@login_required(login_url='/loginViews/')
 def editProfile(request, owner_id):
     if request.method == 'POST':
         form = EditProfile(request.POST, request.FILES,
