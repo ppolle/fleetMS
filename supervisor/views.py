@@ -153,7 +153,8 @@ def singleMatatu(request,matId):
 	drivers = Driver.objects.filter(sacco = request.user.supervisor.sacco_base)
 	conductors = Conductor.objects.filter(sacco = request.user.supervisor.sacco_base)
 	matatu = Vehicle.objects.get(id = matId)
-	return render(request,'supervisor/dashboard/singleMatatu.html',{"matatu":matatu,"drivers":drivers,"conductors":conductors})
+	crew = AssignCrew.objects.filter(vehicle_id = matId)
+	return render(request,'supervisor/dashboard/singleMatatu.html',{"matatu":matatu,"drivers":drivers,"conductors":conductors,"crew":crew})
 
 def assignCrew(request,matId):
 	'''
