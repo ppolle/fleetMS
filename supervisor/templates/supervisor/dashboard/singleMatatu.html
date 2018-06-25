@@ -16,14 +16,15 @@
 		    		<strong>Matatu capacity</strong>:{{matatu.capacity}}<br>
 		    		<strong>Matatu owner</strong>: {{matatu.owner.user.first_name.capitalize}} {{matatu.owner.user.last_name.capitalize}}<br>
 		    		{% if crew %}
-		    		{% for crew in crew %}
-		    		<strong>Assigned crew</strong><br>
-		    		Driver: {{crew.driver_id.fullname}}<br>
-		    		Conductor: {{crew.conductor_id.fullname}}<br>
-		    		<a class="btn btn-success" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Re-Assign Crew</a>
-		    		{% endfor %}
+			    		{% for crew in crew %}
+			    		<strong>Assigned crew</strong><br>
+			    		Driver: {{crew.driver_id.fullname}}<br>
+			    		Conductor: {{crew.conductor_id.fullname}}<br>
+			    		<a class="btn btn-success btn-sm" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Re-Assign Crew</a>
+			    		<a href="{% url 'sup:deleteCrew' matatu.id %}" class="btn btn-sm btn-danger">Delete Crew</a>
+			    		{% endfor %}
 		    		{% else %}
-		    		<a class="btn btn-success" class="btn btn-success" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Assign Crew</a>
+		    			<a class="btn btn-success" class="btn btn-success" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Assign Crew</a>
 		    		{% endif %}
 		    		<div class="collapse" id="collapseExample">
 			    		<form  action="{% url 'sup:assignCrew' matatu.id %}">

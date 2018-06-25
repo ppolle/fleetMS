@@ -178,5 +178,12 @@ def assignCrew(request,matId):
 		else:
 			messages.error(request, 'You have to select both the driver and conductor fields to succesfully assign a crew!')
 			return redirect(request.META.get('HTTP_REFERER'))
-	
+def deleteCrew(request,matId):
+	'''
+	This view will delete a crew instance in the assign crew table
+	'''
+	AssignCrew.objects.filter(vehicle_id = matId).delete()
+	messages.success(request,'You have succesfully deleted the crew from this matatu')
+	return redirect(request.META.get('HTTP_REFERER'))
+
 
