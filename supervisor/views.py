@@ -89,7 +89,7 @@ def createConductor(request):
 			conductor.sacco = request.user.supervisor.sacco_base
 			conductor.save()
 			messages.success(request,'Success! Created a conductor crew member')
-			return redirect('sup:allDrivers')
+			return redirect('sup:allConductors')
 
 	else:
 		form = ConductorForm()
@@ -123,7 +123,7 @@ def deleteConductor(request,conductorId):
 	'''
 	Conductor.objects.filter(pk = conductorId).delete()
 	messages.error(request,'Succesfully deleted a conductor')
-	return redirect('sup:dashboard')
+	return redirect('sup:allConductors')
 
 def profile(request):
 	'''
@@ -161,10 +161,22 @@ def assignCrew(request,matId):
 	This view will create or update an instance of a matatu crew in the assign cre table
 	'''
 	if AssignCrew.objects.filter(vehicle_id = matId).exists():
-		AssignCrew.objects.filter(vehicle_id= matId).update(driver_id = request.GET.get("driver"), conductor_id = request.GET.get("conductor"))
+		if request.GET.get("driver"):
+			AssignCrew.objects.filter(vehicle_id = matId).update(driver_id = request.GET.get("driver"))
+		elif request.GET.get("conductor"):
+			AssignCrew.objects.filter(vehicle_id = matId).update(conductor_id = request.GET.get("conductor"))
+
+		messages.success(request,f'You have succesfully assigned a crew to the vehicle')
+		return redirect(request.META.get('HTTP_REFERER'))
+		
 	else:
-		AssignCrew(driver_id = Driver.objects.get(id = request.GET.get("driver")), conductor_id = Conductor.objects.get(id = request.GET.get("conductor")),vehicle_id = Vehicle.objects.get(id = matId)).save()
+		if request.GET.get("driver") and request.GET.get("conductor"):
+
+			AssignCrew(driver_id = Driver.objects.get(id = request.GET.get("driver")), conductor_id = Conductor.objects.get(id = request.GET.get("conductor")),vehicle_id = Vehicle.objects.get(id = matId)).save()
+			messages.success(request,f'You have succesfully assigned a crew to the vehicle')
+			return redirect(request.META.get('HTTP_REFERER'))
+		else:
+			messages.error(request, 'You have to select both the driver and conductor fields to succesfully assign a crew!')
+			return redirect(request.META.get('HTTP_REFERER'))
 	
-	messages.success(request,f'You have succesfully assigned a crew to the vehicle')
-	return redirect(request.META.get('HTTP_REFERER'))
 
