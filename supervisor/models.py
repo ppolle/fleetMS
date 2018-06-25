@@ -62,5 +62,5 @@ class Message(models.Model):
 
 class AssignCrew(models.Model):
     driver_id = models.ForeignKey(Driver)
-    consuctor_id = models.ForeignKey(Conductor)
+    conductor_id = models.ForeignKey(Conductor)
     vehicle_id = models.ForeignKey(Vehicle)

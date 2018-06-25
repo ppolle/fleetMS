@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.contrib import messages
 from .forms import SupervisorForm,DriverForm,ConductorForm
-from .models import Supervisor,Driver,Conductor
+from .models import Supervisor,Driver,Conductor,AssignCrew
 from owner.models import Vehicle,Owner
 
 # Create your views here.
@@ -154,4 +154,16 @@ def singleMatatu(request,matId):
 	conductors = Conductor.objects.filter(sacco = request.user.supervisor.sacco_base)
 	matatu = Vehicle.objects.get(id = matId)
 	return render(request,'supervisor/dashboard/singleMatatu.html',{"matatu":matatu,"drivers":drivers,"conductors":conductors})
+
+def assignCrew(request,matId):
+	'''
+	This view will create or update an instance of a matatu crew in the assign cre table
+	'''
+	if AssignCrew.objects.filter(vehicle_id = matId).exists():
+		AssignCrew.objects.filter(vehicle_id= matId).update(driver_id = request.GET.get("driver"), conductor_id = request.GET.get("conductor"))
+	else:
+		AssignCrew(driver_id = Driver.objects.get(id = request.GET.get("driver")), conductor_id = Conductor.objects.get(id = request.GET.get("conductor")),vehicle_id = Vehicle.objects.get(id = matId)).save()
+	
+	messages.success(request,f'You have succesfully assigned a crew to the vehicle')
+	return redirect(request.META.get('HTTP_REFERER'))
 

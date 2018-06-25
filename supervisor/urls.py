@@ -10,6 +10,7 @@ url(r'^editSupervisor/$',views.editSupervisor,name = 'editSupervisor'),
 url(r'^allMatatus/$',views.allMatatus,name = 'allMatatus'),
 url(r'^allOwners/$',views.allOwners,name = 'allOwners'),
 url(r'^singleMatatu/(\d+)',views.singleMatatu,name = 'singleMatatu'),
+url(r'^assignCrew/(\d+)',views.assignCrew,name = 'assignCrew'),
 
 url(r'^createDriver/$',views.createDriver,name = 'createDriver'),
 url(r'^editDriver/(\d+)',views.editDriver,name = 'editDriver'),
