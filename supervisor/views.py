@@ -12,8 +12,8 @@ def home(request):
 	'''
 	this view shows the dashboard view
 	'''
-	matatus =  Vehicle.objects.filter(sacco = request.user.supervisor.sacco_base)[:5]
-	owners = Owner.objects.filter(sacco = request.user.supervisor.sacco_base)[:5]
+	matatus =  Vehicle.objects.filter(sacco = request.user.supervisor.sacco_base)
+	owners = Owner.objects.filter(sacco = request.user.supervisor.sacco_base)
 	return render(request, 'supervisor/dashboard/index.html',{"matatus":matatus,"owners":owners})
 
 @login_required(login_url='/loginViews/')
@@ -215,3 +215,11 @@ def create_issue(request):
 	else:
 		form = IssueForm()
 	return render(request, 'supervisor/dashboard/issue.html', {'form' : form, 'issues':issues,})
+
+def singleOwner(request,ownerId):
+	'''
+	This view will retrieve an owner instance
+	'''
+	owner = Owner.objects.get(id = ownerId)
+	vehicles = Vehicle.objects.filter(owner = ownerId)
+	return render(request,'supervisor/dashboard/singleOwner.html',{"owner":owner,"vehicles":vehicles})
