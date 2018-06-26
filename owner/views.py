@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 from .models import Owner, Vehicle
+from supervisor.models import Issue
 from .forms import VehicleForm, EditProfile
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -10,7 +11,13 @@ from django.contrib.auth.decorators import login_required
 @login_required(login_url='/loginViews/')
 def home(request):
     vehicle = Vehicle.objects.filter(owner = request.user.owner)
-    return render(request, 'owner/homepage.html', {"vehicle": vehicle})
+    issues = []
+    all_issues = Issue.objects.all()
+    owner_vehicles = Vehicle.objects.filter(owner=request.user.owner)
+    issues.append([issue.vehicle for issue in all_issues if vehicle in owner_vehicles])
+    # for issue in issues:
+    #     issue = issue.number_plate
+    return render(request, 'owner/homepage.html', {"vehicle": vehicle, 'issues':issues})
 
 @login_required(login_url='/loginViews/')
 def profile(request):

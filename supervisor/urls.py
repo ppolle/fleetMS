@@ -22,4 +22,5 @@ url(r'^createConductor/$',views.createConductor,name = 'createConductor'),
 url(r'^editConductor/(\d+)$',views.editConductor,name = 'editConductor'),
 url(r'^conductors/$',views.allConductors,name = 'allConductors'),
 url(r'^deleteConductor/(\d+)$',views.deleteConductor,name = 'deleteConductor'),
+url(r'^issues/$', views.create_issue, name='issuessss')
 ]
