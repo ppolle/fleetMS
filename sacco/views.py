@@ -4,6 +4,7 @@ from .models import Sacco, Super_list
 from .forms import SaccoForm, Super_listForm, EditProfile, EditSupervisor
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from owner.models import Owner
 
 # Create your views here.
 
@@ -13,7 +14,8 @@ def dashboard(request):
     View function to display all that a user will be interacting with fromm the onset of the app.
     '''
     supervisor = Super_list.objects.filter(sacco = Sacco.objects.get(pk=request.user.sacco.id))
-    return render(request, 'sacco/all/dashboard.html', {"supervisor": supervisor})
+    owner = Owner.objects.filter(sacco = Sacco.objects.get(pk=request.user.sacco.id))
+    return render(request, 'sacco/all/dashboard.html', {"supervisor": supervisor, "owner": owner})
 
 # Supervisor section
 
