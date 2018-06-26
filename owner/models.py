@@ -50,7 +50,7 @@ class Vehicle(models.Model):
     owner = models.ForeignKey(Owner, null=True)
     sacco = models.ForeignKey(Sacco, null=True)
 
-    def __str(self):
+    def __str__(self):
         """Summary
         
         Returns:

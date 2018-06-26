@@ -5,7 +5,7 @@
 <div class="sidenav" style="width: 17vw;">
     <a href="{% url 'owner:profile' %}">About Owner</a>
     <a href="{% url 'owner:createVehicle' %}">Add Vehicle</a>
-    <a href="{% url 'owner:editProfile' user.owner.id %}">Edit Owner Profile</a>
+    <a href="{% url 'owner:editProfile' request.user.id %}">Edit Owner Profile</a>
 </div>
 
 <!-- Page content -->

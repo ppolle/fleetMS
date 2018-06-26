@@ -63,7 +63,7 @@ def ownerSignup(request):
 			user = authenticate(username = user.username,password = raw_password)
 			user_login(request,user)
 			messages.success(request, 'Success Signup created a new Owner')
-			return redirect('owner:editProfile')
+			return redirect('owner:editProfile', user.owner.id)
 		else:
 			messages.error(request,f'Error having the form as valid')
 			return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

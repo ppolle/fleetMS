@@ -1,0 +1,38 @@
+{%extends 'sacco/all/base.html'%} 
+{% load static %} 
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            {% if owner.profile_pic %}
+            <img src="{{owner.profile_pic.url}}" alt="owner">
+            {% else %}
+            <h1 style="color: white; font-size: 10vh; padding: 3vw;">NO IMAGE UPLOADED</h1>
+            {% endif %}
+        </div>
+        <div class="col-md-8">
+            {% for owner in owner %}
+            <div>
+                <h3>OWNER NAME: {{owner.user.first_name.capitalize}} {{owner.user.last_name.capitalize}}</h3>
+            </div>
+            <div>
+                <h3>NATIONAL ID: {{owner.nat_id}}</h3>
+            </div>
+            <div>
+                <h3>TELEPHONE NUMBER: {{owner.telephone}}</h3>
+            </div>
+            {% endfor %}
+            
+            <div>
+                <h3>CARS OWNED ARE: 
+                    {% for car_owned in car_owned %}
+                        {{car_owned.number_plate}}<br>
+                    {% endfor %}
+                </h3>
+            </div>
+            
+        </div>
+
+    </div>
+</div>
+{% endblock %}
