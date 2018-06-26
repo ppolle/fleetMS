@@ -2,8 +2,6 @@ from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.urls import resolve
 
-from sacco.models import Sacco
-
 # Create your tests here.
 from .models import Supervisor
 from .views import home, new_supervisor, supervisor

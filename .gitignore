@@ -3,4 +3,5 @@ __pycache__
 .env
 virtual/
 migrations/
+media/
 db.sqlite3

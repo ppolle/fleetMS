@@ -37,6 +37,7 @@ ALLOWED_HOSTS = ['*']
 INSTALLED_APPS = [
     'fleet_base',
     'owner',
+    'sacco',
     'supervisor',
     'bootstrap3',
     'django.contrib.admin',
@@ -45,8 +46,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'sacco',
-
 ]
 
 MIDDLEWARE = [
@@ -132,7 +131,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-
+LOGIN_REDIRECT_URL = '/'
 
 
 # Static files (CSS, JavaScript, Images)

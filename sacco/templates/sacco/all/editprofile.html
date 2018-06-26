@@ -10,7 +10,7 @@
         <form action="{% url 'sacco:edit' user.sacco.id %}" method="post" enctype="multipart/form-data">
             {% csrf_token %} 
             {% bootstrap_form form %}
-            <input type="submit" class="btn btn-success btn-lg">
+            <input type="submit" class="btn btn-success btn-sm btn-block">
         </form>
     </div>
 </div>

@@ -1,34 +1,43 @@
 from django.db import models
 from owner.models import Vehicle
 from sacco.models import Sacco
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.conf import settings
 
 # Create your models here.
 
 
 class Supervisor(models.Model):
-    id_number = models.IntegerField(unique=True)
-    date_of_birth = models.DateField(null=True)
-    mobile_phone_number = models.CharField(max_length=13, blank=True)
+    id_number = models.IntegerField(null=True, unique=True)
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    mobile_phone_number = models.IntegerField(null=True)
     profile_picture = models.ImageField(
         upload_to='profile_pictures/supervisor', default='/static/img/placeholder.png')
-    sacco_base = models.ForeignKey(Sacco, related_name='sacco_base')
+    sacco_base = models.ForeignKey(Sacco, related_name='sacco_base',null = True)
 
     def __str__(self):
         return self.first_name
 
-
-class Crew(models.Model):
-    first_name = models.CharField(max_length=30, unique=True)
-    last_name = models.CharField(max_length=30, unique=True)
+class Driver(models.Model):
+    fullname = models.CharField(max_length=100)
     id_number = models.IntegerField(unique=True)
-    date_of_birth = models.DateField(null=True)
-    vehicle_base = models.OneToOneField(Vehicle, related_name='vehicle_base')
+    sacco = models.ForeignKey(Sacco,null= True)
     profile_picture = models.ImageField(
-        upload_to='profile_pictures/crew', default='/static/img/placeholder.png')
+        upload_to='profile_pictures/driver', default='/static/img/placeholder.png')
 
     def __str__(self):
-        return self.first_name
+        return self.fullname
 
+class Conductor(models.Model):
+    fullname = models.CharField(max_length = 100)
+    id_number = models.CharField(max_length =100)
+    sacco = models.ForeignKey(Sacco,null = True)
+    profile_picture = models.ImageField(upload_to = 'profile_pictures/conductor',default='/static/img/placeholder.png')
+
+    def __str__(self):
+        return self.fullname
 
 class Issue(models.Model):
     subject = models.CharField(max_length=255)
@@ -50,3 +59,8 @@ class Message(models.Model):
 
     def __str__(self):
         return self.issue
+
+class AssignCrew(models.Model):
+    driver_id = models.ForeignKey(Driver)
+    conductor_id = models.ForeignKey(Conductor)
+    vehicle_id = models.ForeignKey(Vehicle)

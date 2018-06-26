@@ -7,3 +7,12 @@ class VehicleForm(forms.ModelForm):
         model = Vehicle
         fields = ('number_plate', 'capacity')
 
+
+class EditProfile(forms.ModelForm):
+    class Meta:
+        model = Owner
+        fields = ( 'nat_id', 'telephone',
+                  'profile_pic')
+
+
+   

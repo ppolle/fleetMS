@@ -1,0 +1,53 @@
+{%extends 'fleet_base/base.html'%} 
+{% load bootstrap3 %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-4">
+			{% include 'fleet_base/partials/_sidebar.html' %}
+		</div>
+		<div class="col-md-8">
+			{% include 'fleet_base/partials/_messages.html' %}
+		    	<div>
+			        All Matatus
+			         {% if matatus%}
+			         
+			         	<table class="table table-bordered">
+			         		<thead>
+			                    <tr>
+			                        <th>Number Plate</th>
+			                        <th>Capacity</th>
+			                        <th>Owner</th>
+			                        <th></th>
+			                    </tr>
+			                </thead>
+			                <tbody>
+
+		                        {% for matatu in matatus %}
+		                        <tr>
+		                            <td>{{matatu.number_plate}}</td>
+		                            <td>{{matatu.capacity}}</td>
+		                            <td>{{matatu.owner.user.first_name.capitalize}} {{matatu.owner.user.first_name.capitalize}}</td>
+		                            <td><a href="" class="btn btn-sm btn-success btn-block">View</a></td>
+		                        </tr>
+		                        {% endfor %}
+
+
+	                		</tbody>
+						  
+						</table>
+						
+			         	
+
+			         {%else%}
+			         <p>No matatus are registered in this sacco</p>
+			         {%endif%}
+
+		    </div>
+	    </div>
+    </div>
+  
+</div>
+{% endblock %}

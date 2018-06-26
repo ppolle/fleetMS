@@ -1,0 +1,25 @@
+{%extends 'fleet_base/base.html'%}
+{% load bootstrap3 %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-4">
+			{% include 'fleet_base/partials/_sidebar.html' %}
+		</div>
+		<div class="col-md-4">
+			{% include 'fleet_base/partials/_messages.html' %}
+		    <div class="text-center">
+		        Create Driver
+		         <form action="{% url 'sup:createDriver' %}" method="post" enctype="multipart/form-data">
+		            {% csrf_token %} 
+		            {% bootstrap_form form %}
+		            <input type="submit" class="btn btn-success btn-sm btn-block">
+		        </form>
+		    </div>
+	    </div>
+    </div>
+  
+</div>
+{% endblock %}

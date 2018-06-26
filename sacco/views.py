@@ -3,9 +3,11 @@ from django.http import HttpResponse, Http404, HttpResponseRedirect, JsonRespons
 from .models import Sacco, Super_list
 from .forms import SaccoForm, Super_listForm, EditProfile, EditSupervisor
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
+@login_required(login_url='/loginViews/')
 def dashboard(request):
     '''
     View function to display all that a user will be interacting with fromm the onset of the app.
@@ -15,6 +17,7 @@ def dashboard(request):
 
 # Supervisor section
 
+@login_required(login_url='/loginViews/')
 def superlist(request):
     '''
     View function to add a new supervisor
@@ -34,6 +37,7 @@ def superlist(request):
         form = Super_listForm()
     return render(request, 'sacco/all/supervisor.html', {"form": form})
 
+@login_required(login_url='/loginViews/')
 def edit_superlist(request, supervisor_id):
     '''
     View function to edit an instance of a supervisor already created
@@ -49,6 +53,7 @@ def edit_superlist(request, supervisor_id):
         form = EditSupervisor(instance=supervisor)
     return render(request, 'sacco/all/editsupervisor.html', {"form": form, "supervisor":supervisor})
 
+@login_required(login_url='/loginViews/')
 def delete_supervisor(request, supervisorID):
     '''
     View function that enables one delete a given supervisor in a sacco
@@ -61,12 +66,12 @@ def delete_supervisor(request, supervisorID):
 
 
 # Sacco section
-
+@login_required(login_url='/loginViews/')
 def profile(request):
     profile = Sacco.objects.get(user=request.user)
     return render(request, "sacco/all/profile.html", {"profile": profile})
 
-
+@login_required(login_url='/loginViews/')
 def edit_profile(request, sacco_id):
     if request.method == 'POST':
         form = EditProfile(request.POST, request.FILES,instance = Sacco.objects.get(pk = sacco_id))
@@ -74,9 +79,10 @@ def edit_profile(request, sacco_id):
             form.save()
             return redirect('sacco:profile')
     else:
-        form = EditProfile(instance = Sacco.objects.get(pk = sacco_id))
+        form = SaccoForm(instance = Sacco.objects.get(pk = sacco_id))
     return render(request, 'sacco/all/editprofile.html', {"form": form})
 
+@login_required(login_url='/loginViews/')
 def delete_sacco(request, saccoID):
     '''
     View function that enables one delete a given sacco
