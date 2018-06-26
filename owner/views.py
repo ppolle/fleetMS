@@ -22,15 +22,22 @@ def vehicle(request):
     View function to add a new vehicle
     '''
     if request.method == 'POST':
-        form = VehicleForm(request.POST)
-        if form.is_valid():
-            vehicle = form.save(commit=False)
-            vehicle.owner = request.user.owner
-            vehicle.sacco = request.user.owner.sacco
-            vehicle.save()
-            messages.success(
-                request, f'Congratulations! You have succesfully Added a new Vehicle!')
-            return redirect('owner:home')
+        if Vehicle.objects.filter(owner = request.user.owner.id).count()>= 4 :
+            messages.error(request,f'Error! You have registered the maxmimum number of vehicles')
+            return redirect("owner:home")
+        else:
+            
+            form = VehicleForm(request.POST)
+            if form.is_valid():
+                vehicle = form.save(commit=False)
+                vehicle.owner = request.user.owner
+
+                vehicle.sacco = request.user.owner.sacco
+                vehicle.save()
+                
+                messages.success(
+                    request, f'Congratulations! You have succesfully Added a new Vehicle!')
+                return redirect('owner:home')
     else:
         form = VehicleForm()
     return render(request, 'owner/vehicle.html', {"form": form})
