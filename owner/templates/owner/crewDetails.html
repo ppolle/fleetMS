@@ -1,0 +1,14 @@
+ {% for cond in conductors %}
+	                        <tr>
+	                            <td>{{cond.fullname}}</td>
+	                            <td>{{cond.id_number}}</td>
+	                        </tr>
+	                           {% endfor %}
+
+
+	                        {% for driver in drivers %}
+	                        <tr>
+	                            <td>{{driver.fullname}}</td>
+	                            <td>{{driver.id_number}}</td>
+	                        </tr>
+	                            {% endfor %}

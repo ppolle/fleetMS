@@ -83,3 +83,14 @@ def editProfile(request, owner_id):
     else:
         form = EditProfile(instance=Owner.objects.get(pk=owner_id))
     return render(request, 'owner/editProfile.html', {"form": form})
+
+
+
+@login_required(login_url='/loginViews/')
+def crewDetails(request, owner_id):
+    '''
+    View function that enables one delete a given supervisor in a sacco
+    '''
+    return render(request, 'owner/crewDetails.html', {})
+
+

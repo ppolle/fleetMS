@@ -19,24 +19,33 @@
                 <tr>
                     <th>NUMBER PLATE</th>
                     <th>CAPACITY</th>
-                    <th>OPTION</th>
+                    <th>OPTIONS</th>
+                    
+                    
+
                 </tr>
             </thead>
             <tbody>
            
                 {% for vehicle in vehicle %}
-                <tr>
+                
+                        
                     <td>{{vehicle.number_plate}}</td>
-                    <td>{{vehicle.capacity}}</td>
+                    <td>{{vehicle.capacity}}</td>                    
+                     
+
+
                     <td>
                         <a href="{% url 'owner:editVehicle' vehicle.id %}" class="btn btn-sm btn-success">Edit</a>
-                    </td>
-                    <td>
                         <a href="{% url 'owner:deleteVehicle' vehicle.id %}" class="btn btn-sm btn-danger">Delete</a>
+                        <a href="{% url 'owner:crewDetails' vehicle.id %}" class="btn btn-sm btn-info">View More Details</a>
                     </td>
+                   
                 </tr>
+                 
+              
                 {% endfor %} 
-                
+              
                
               
 
