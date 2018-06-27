@@ -20,6 +20,7 @@
 			                    <tr>
 			                        <th>Number Plate</th>
 			                        <th>Capacity</th>
+			                        <th>Status</th>
 			                        <th>Owner</th>
 			                        <th></th>
 			                    </tr>
@@ -30,6 +31,9 @@
 		                        <tr>
 		                            <td>{{matatu.number_plate}}</td>
 		                            <td>{{matatu.capacity}}</td>
+		                            
+		                            <td>{% if matatu.is_active == False %}<a href="" class="btn btn-danger btn-sm btn-block"> Inactive</a>{%else%}<a href="" class="btn btn-primary btn-sm btn-block">Active</a>{%endif%}</td>
+
 		                            <td>{{matatu.owner.user.first_name.capitalize}} {{matatu.owner.user.first_name.capitalize}}</td>
 		                            <td><a href="{% url 'sup:singleMatatu' matatu.id %}" class="btn btn-sm btn-success btn-block">View</a></td>
 		                        </tr>
