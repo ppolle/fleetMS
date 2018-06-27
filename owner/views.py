@@ -101,12 +101,12 @@ def crewDetails(request, vehicleId):
     # conductors = Conductor.objects.filter(
     #     sacco=request.user.supervisor.sacco_base)
 
-    if is_active == true:
-        crews = AssignCrew.objects.filter(vehicle_id = vehicleId)
-        return render(request, 'owner/crewDetails.html', {"crews":crews})
-    else:
-        messages.info(request, 'No crew has been assigned to your vehicle.')
-        return redirect('owner:home')
+    ##if is_active.vehicle == true:
+    crews = AssignCrew.objects.filter(vehicle_id = vehicleId)
+    return render(request, 'owner/crewDetails.html', {"crews":crews})
+    ##else:
+        ##messages.info(request, 'No crew has been assigned to your vehicle.')
+        ##return redirect('owner:home')
 
 
 
