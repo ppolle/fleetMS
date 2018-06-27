@@ -8,6 +8,7 @@ from django.http import (Http404, HttpResponse, HttpResponseRedirect,
                          JsonResponse)
 from django.shortcuts import redirect, render
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 from owner.models import Owner
 from sacco.models import Sacco, Super_list
@@ -49,6 +50,7 @@ def ownerSignup(request):
 		form = OwnerSignUpForm(request.POST)
 
 		if form.is_valid():
+			
 			user = form.save(commit = False)
 			user.roles = 'owner'
 			user.save()
@@ -62,8 +64,11 @@ def ownerSignup(request):
 			raw_password = form.cleaned_data.get('password1')
 			user = authenticate(username = user.username,password = raw_password)
 			user_login(request,user)
-			messages.success(request,f'Success Signup created a new Owner')
-			return redirect('owner:editProfile',request.user.owner)
+
+
+			messages.success(request, 'Success Signup created a new Owner')
+			return redirect('owner:editProfile', user.owner.id)
+
 		else:
 			messages.error(request,f'Error having the form as valid')
 			return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
@@ -95,9 +100,9 @@ def saccoSignup(request):
 			user_login(request,user)
 			messages.success(request, 'Success! You have succesfullly created a new sacco!')
 			return redirect('sacco:edit', user.sacco.id)
-		else:
-			messages.error(request,f'Error having the form as valid')
-			return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+		# else:
+		# 	messages.error(request,f'Error having the form as valid')
+		# 	return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 	else:
 		form = SaccoSignUpForm()
 	return render(request,'fleet_base/authentication/sacco_signup.html',{"form":form})

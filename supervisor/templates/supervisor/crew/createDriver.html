@@ -8,9 +8,9 @@
 		<div class="col-md-4">
 			{% include 'fleet_base/partials/_sidebar.html' %}
 		</div>
-		<div class="col-md-4">
+		<div class="col-md-6">
 			{% include 'fleet_base/partials/_messages.html' %}
-		    <div class="text-center">
+		    <div class="">
 		        Create Driver
 		         <form action="{% url 'sup:createDriver' %}" method="post" enctype="multipart/form-data">
 		            {% csrf_token %} 

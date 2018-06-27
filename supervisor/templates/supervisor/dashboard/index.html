@@ -11,6 +11,7 @@
 		<div class="col-md-8">
 			{% include 'fleet_base/partials/_messages.html' %}
 		    	<div class="">
+		    		
 			        Matatus
 			         {% if matatus%}
 			         
@@ -68,7 +69,7 @@
 		                            <td>{{owner.user.first_name.capitalize}} {{owner.user.last_name.capitalize}}</td>
 		                            <td>{{owner.nat_id}}</td>
 		                            <td>{{owner.telephone}}</td>
-		                            <td><a href="" class="btn btn-sm btn-success btn-block">View</a></td>
+		                            <td><a href="{% url 'sup:singleOwner' owner.id %}" class="btn btn-sm btn-success btn-block">View</a></td>
 		                        </tr>
 		                        {% endfor %}
 

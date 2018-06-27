@@ -8,18 +8,19 @@
 		<div class="col-md-4">
 			{% include 'fleet_base/partials/_sidebar.html' %}
 		</div>
-		<div class="col-md-4">
+		<div class="col-md-8">
 			{% include 'fleet_base/partials/_messages.html' %}
-		    <div class="text-center">
+		    <div class="">
 		        View All Conductors
 		         {% if conductors%}
-		         <div class="well">
+		         
 		         	<table class="table table-bordered">
 		         		<thead>
 		                    <tr>
 		                        <th>Full Name</th>
 		                        <th>ID Number</th>
 		                        <th>Option</th>
+		                        <th></th>
 		                    </tr>
 		                </thead>
 		                <tbody>
@@ -28,8 +29,8 @@
 	                        <tr>
 	                            <td>{{cond.fullname}}</td>
 	                            <td>{{cond.id_number}}</td>
-	                            <td><a href="{% url 'sup:editConductor' cond.id %}" class="btn btn-sm btn-success">Edit</a></td>
-	                            <td><a href="{% url 'sup:deleteConductor' cond.id %}" class="btn btn-sm btn-danger">Delete</a></td>
+	                            <td><a href="{% url 'sup:editConductor' cond.id %}" class="btn btn-sm btn-success btn-block">Edit</a></td>
+	                            <td><a href="{% url 'sup:deleteConductor' cond.id %}" class="btn btn-sm btn-danger btn-block">Delete</a></td>
 	                        </tr>
 	                        {% endfor %}
 
@@ -37,7 +38,7 @@
                 		</tbody>
 					  
 					</table>
-		         </div>
+		         
 
 		         {%else%}
 		         <p>You currently do not have any drivers registered. Create one <a href="{% url 'sup:createConductor' %}">here</a></p>

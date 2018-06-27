@@ -1,4 +1,4 @@
-{%extends 'fleet_base/base.html'%} 
+{%extends 'sacco/all/base.html'%}
 {% load bootstrap3 %}
 {% load static %}
 {% block content %}
@@ -15,20 +15,21 @@
 		    		<strong>Number Plate</strong>: {{matatu.number_plate.capitalize}}<br>
 		    		<strong>Matatu capacity</strong>:{{matatu.capacity}}<br>
 		    		<strong>Matatu owner</strong>: {{matatu.owner.user.first_name.capitalize}} {{matatu.owner.user.last_name.capitalize}}<br>
+		    		<strong>Matatu status </strong>:{% if matatu.is_active == False %}<a href="" class="btn btn-danger btn-sm"> Inactive</a>{%else%}<a href="" class="btn btn-primary btn-sm">Active</a>{%endif%}<br>
 		    		{% if crew %}
 			    		{% for crew in crew %}
 			    		<strong>Assigned crew</strong><br>
 			    		Driver: {{crew.driver_id.fullname}}<br>
 			    		Conductor: {{crew.conductor_id.fullname}}<br>
-			    		<a class="btn btn-success btn-sm" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Re-Assign Crew</a>
+			    		<a class="btn btn-success btn-sm" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Manage</a>
 			    		<a href="{% url 'sup:deleteCrew' matatu.id %}" class="btn btn-sm btn-danger">Delete Crew</a>
 			    		{% endfor %}
 		    		{% else %}
-		    			<a class="btn btn-success" class="btn btn-success" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Assign Crew</a>
+		    			<a class="btn btn-success" class="btn btn-success" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Manage</a>
 		    		{% endif %}
 		    		<div class="collapse" id="collapseExample">
 			    		<form  action="{% url 'sup:assignCrew' matatu.id %}">
-					         
+					        <div class="col-md-6">
 					          	<div class="form-group">
 					          		<label  class="control-label">Driver</label>
 						          	<select class="form-control" name = "driver">
@@ -39,6 +40,8 @@
 										 
 									</select>
 								</div>
+							</div>
+							<div class="col-md-6">
 
 								<div class="form-group">
 					          		<label  class="control-label">Conductor</label>
@@ -50,9 +53,34 @@
 										 
 									</select>
 								</div>
-					          <div class="form-group">
+
+							</div>
+							<div class="col-md-12">
+							  <label class="radio-inline">
+							  	{% if matatu.is_active == True %}
+							  	<input type="radio" name="is_active" id="inlineRadio1" value="True" checked>
+							  	{% else %}
+							  	<input type="radio" name="is_active" id="inlineRadio1" value="True">
+							  	{% endif %}
+							  	 Set Matatu To Active
+							  	
+							  </label>
+								<label class="radio-inline">
+									{% if matatu.is_active == False %}
+								  <input type="radio" name="is_active" id="inlineRadio2" value="False" checked>
+								  {% else %} 
+								  <input type="radio" name="is_active" id="inlineRadio2" value="False">
+								  {% endif %}
+								  Deactivate Matatu
+								</label>
+							
+							</div>
+							<div class="col-md-12">
+								 <div class="form-group">
 					          	<button type="submit" class="btn btn-default">Assign</button>
 					          </div>
+							</div>
+					         
 
 			          	</form>
 		          	</div>

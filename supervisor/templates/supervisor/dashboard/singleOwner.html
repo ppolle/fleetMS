@@ -1,0 +1,33 @@
+{%extends 'sacco/all/base.html'%}
+{% load bootstrap3 %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-4">
+			{% include 'fleet_base/partials/_sidebar.html' %}
+		</div>
+		<div class="col-md-8">
+			{% include 'fleet_base/partials/_messages.html' %}
+		    	<div class="">
+
+		    		<strong>Name</strong>: {{owner.user.first_name.capitalize}} {{owner.user.last_name.capitalize}}<br>
+		    		<strong>National Id</strong>: {{owner.nat_id}}<br>
+		    		<strong>Telephone Number</strong>: {{owner.telephone}}<br>
+
+		    		<strong>{{owner.user.first_name.capitalize}}'s  Matatus:</strong><br>
+		    		{% for vehicle in vehicles %}
+		    			Number plate: {{vehicle.number_plate}}<br>
+		    			Matatu capacity: {{vehicle.capacity}}<br>
+
+		    		{% endfor %}
+
+		    	
+		    		
+
+		  		</div>
+    </div>
+  
+</div>
+{% endblock %}

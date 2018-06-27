@@ -4,6 +4,7 @@ from sacco.models import Sacco
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.conf import settings
+import owner
 
 # Create your models here.
 
@@ -42,6 +43,7 @@ class Conductor(models.Model):
 class Issue(models.Model):
     subject = models.CharField(max_length=255)
     last_updated = models.DateTimeField(auto_now_add=True)
+    vehicle = models.ForeignKey(Vehicle)
     supervisor_started = models.ForeignKey(
         Supervisor, related_name='supervisor_started', null=True)
 

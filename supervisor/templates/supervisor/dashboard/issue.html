@@ -1,0 +1,21 @@
+{%extends 'fleet_base/base.html'%} 
+{% load bootstrap3 %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+{% for issue in issues %}
+<p>{{issue}}</p>
+{% empty %}
+<p>None</p>
+{% endfor %}
+</div>
+
+<form id="IssueForm" method="POST" action="{% url 'sup:issuessss' %}">
+  {% csrf_token %} 
+                {% bootstrap_form form %}
+  
+  <input type="submit" value="Post" class="btn btn-sm btn-primary">
+</form>
+
+{% endblock %}
