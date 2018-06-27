@@ -14,12 +14,12 @@ class SupervisorForm(forms.ModelForm):
 class DriverForm(forms.ModelForm):
 	class Meta:
 		model = Driver
-		fields = ('fullname','id_number','profile_picture')
+		fields = ('fullname','id_number')
 
 class ConductorForm(forms.ModelForm):
 	class Meta:
 		model = Conductor
-		fields = ('fullname','id_number','profile_picture')
+		fields = ('fullname','id_number')
 
 class AssignCrewForm(forms.Form):
 	conductor = forms.ModelChoiceField(widget=forms.Select(
