@@ -29,8 +29,8 @@
 	                        <tr>
 	                            <td>{{cond.fullname}}</td>
 	                            <td>{{cond.id_number}}</td>
-	                            <td><a href="{% url 'sup:editConductor' cond.id %}" class="btn btn-sm btn-success">Edit</a></td>
-	                            <td><a href="{% url 'sup:deleteConductor' cond.id %}" class="btn btn-sm btn-danger">Delete</a></td>
+	                            <td><a href="{% url 'sup:editConductor' cond.id %}" class="btn btn-sm btn-success btn-block">Edit</a></td>
+	                            <td><a href="{% url 'sup:deleteConductor' cond.id %}" class="btn btn-sm btn-danger btn-block">Delete</a></td>
 	                        </tr>
 	                        {% endfor %}
 

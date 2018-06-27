@@ -176,8 +176,13 @@ def assignCrew(request,matId):
 	if AssignCrew.objects.filter(vehicle_id = matId).exists():
 		if request.GET.get("driver"):
 			AssignCrew.objects.filter(vehicle_id = matId).update(driver_id = request.GET.get("driver"))
-		elif request.GET.get("conductor"):
+		if request.GET.get("conductor"):
 			AssignCrew.objects.filter(vehicle_id = matId).update(conductor_id = request.GET.get("conductor"))
+			
+		if request.GET.get("is_active") == "True":
+			Vehicle.objects.filter(id = matId).update(is_active = True)
+		elif request.GET.get("is_active") == "False":
+			Vehicle.objects.filter(id = matId).update(is_active = False)
 
 		messages.success(request,f'You have succesfully assigned a crew to the vehicle')
 		return redirect(request.META.get('HTTP_REFERER'))

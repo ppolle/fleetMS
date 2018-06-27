@@ -29,8 +29,8 @@
 	                        <tr>
 	                            <td>{{driver.fullname.capitalize}}</td>
 	                            <td>{{driver.id_number}}</td>
-	                            <td><a href="{% url 'sup:editDriver' driver.id %}" class="btn btn-sm btn-success">Edit</a></td>
-	                            <td><a href="{% url 'sup:deleteDriver' driver.id %}" class="btn btn-sm btn-danger">Delete</a></td>
+	                            <td><a href="{% url 'sup:editDriver' driver.id %}" class="btn btn-sm btn-success btn-block">Edit</a></td>
+	                            <td><a href="{% url 'sup:deleteDriver' driver.id %}" class="btn btn-sm btn-danger btn-block">Delete</a></td>
 	                        </tr>
 	                        {% endfor %}
 
