@@ -178,7 +178,7 @@ def assignCrew(request,matId):
 			AssignCrew.objects.filter(vehicle_id = matId).update(driver_id = request.GET.get("driver"))
 		if request.GET.get("conductor"):
 			AssignCrew.objects.filter(vehicle_id = matId).update(conductor_id = request.GET.get("conductor"))
-			
+
 		if request.GET.get("is_active") == "True":
 			Vehicle.objects.filter(id = matId).update(is_active = True)
 		elif request.GET.get("is_active") == "False":
@@ -191,6 +191,12 @@ def assignCrew(request,matId):
 		if request.GET.get("driver") and request.GET.get("conductor"):
 
 			AssignCrew(driver_id = Driver.objects.get(id = request.GET.get("driver")), conductor_id = Conductor.objects.get(id = request.GET.get("conductor")),vehicle_id = Vehicle.objects.get(id = matId)).save()
+			
+			if request.GET.get("is_active") == "True":
+				Vehicle.objects.filter(id = matId).update(is_active = True)
+			elif request.GET.get("is_active") == "False":
+				Vehicle.objects.filter(id = matId).update(is_active = False)
+
 			messages.success(request,f'You have succesfully assigned a crew to the vehicle')
 			return redirect(request.META.get('HTTP_REFERER'))
 		else:
@@ -203,6 +209,7 @@ def deleteCrew(request,matId):
 	This view will delete a crew instance in the assign crew table
 	'''
 	AssignCrew.objects.filter(vehicle_id = matId).delete()
+	Vehicle.objects.filter(id = matId).update(is_active = False)
 	messages.success(request,'You have succesfully deleted the crew from this matatu')
 	return redirect(request.META.get('HTTP_REFERER'))
 
