@@ -14,7 +14,8 @@ urlpatterns=[
     url(r'^deleteVehicle/(\d+)',
         views.deleteVehicle, name='deleteVehicle'),
     url(r'^editProfile/(\d+)', views.editProfile, name='editProfile'),
-
+    url(r'^crewDetails/(\d+)', views.crewDetails,  name='crewDetails'),
 ]
+
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

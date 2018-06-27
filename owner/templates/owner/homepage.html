@@ -1,11 +1,11 @@
 {%extends 'owner/all/base.html'%} {% block content %} {{block.super}}
 
-<h1 style="text-align: center">SACCO DASHBOARD</h1>
+<h1 style="text-align: center">OWNER DASHBOARD</h1>
 <!-- Side navigation -->
 <div class="sidenav" style="width: 17vw;">
     <a href="{% url 'owner:profile' %}">About Owner</a>
     <a href="{% url 'owner:createVehicle' %}">Add Vehicle</a>
-    <a href="{% url 'owner:editProfile' request.user.id %}">Edit Owner Profile</a>
+    <a href="{% url 'owner:editProfile' request.user.owner.id %}">Edit Owner Profile</a>
 </div>
 
 <!-- Page content -->
@@ -24,24 +24,33 @@
                 <tr>
                     <th>NUMBER PLATE</th>
                     <th>CAPACITY</th>
-                    <th>OPTION</th>
+                    <th>OPTIONS</th>
+                    
+                    
+
                 </tr>
             </thead>
             <tbody>
            
                 {% for vehicle in vehicle %}
-                <tr>
+                
+                        
                     <td>{{vehicle.number_plate}}</td>
-                    <td>{{vehicle.capacity}}</td>
+                    <td>{{vehicle.capacity}}</td>                    
+                     
+
+
                     <td>
                         <a href="{% url 'owner:editVehicle' vehicle.id %}" class="btn btn-sm btn-success">Edit</a>
-                    </td>
-                    <td>
                         <a href="{% url 'owner:deleteVehicle' vehicle.id %}" class="btn btn-sm btn-danger">Delete</a>
+                        <a href="{% url 'owner:crewDetails' vehicle.id %}" class="btn btn-sm btn-info">View More Details</a>
                     </td>
+                   
                 </tr>
+                 
+              
                 {% endfor %} 
-                
+              
                
               
 

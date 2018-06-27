@@ -64,8 +64,11 @@ def ownerSignup(request):
 			raw_password = form.cleaned_data.get('password1')
 			user = authenticate(username = user.username,password = raw_password)
 			user_login(request,user)
+
+
 			messages.success(request, 'Success Signup created a new Owner')
 			return redirect('owner:editProfile', user.owner.id)
+
 		else:
 			messages.error(request,f'Error having the form as valid')
 			return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
@@ -78,6 +81,7 @@ def saccoSignup(request):
 	'''
 	View function that will manage sacco signup
 	'''
+
 	if request.method == 'POST':
 		form = SaccoSignUpForm(request.POST)
 		if form.is_valid():
