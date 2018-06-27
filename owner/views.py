@@ -97,11 +97,13 @@ def crewDetails(request, vehicleId):
     View function that enables one delete a given supervisor in a sacco
 
     '''
+   
     # drivers = Driver.objects.filter(sacco=request.user.supervisor.sacco_base)
     # conductors = Conductor.objects.filter(
     #     sacco=request.user.supervisor.sacco_base)
+    
 
-    ##if is_active.vehicle == true:
+   ##if vehicle.is_active == True:
     crews = AssignCrew.objects.filter(vehicle_id = vehicleId)
     return render(request, 'owner/crewDetails.html', {"crews":crews})
     ##else:

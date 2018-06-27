@@ -1,21 +1,19 @@
-                          <!-- {% for cond in conductors %}
-	                        <tr>
-	                            <td>{{cond.fullname}}</td>
-	                            <td>{{cond.id_number}}</td>
-	                        </tr>
-	                           {% endfor %}
+                          {%extends 'owner/all/base.html'%} 
+	                           
+	                            
+{% load bootstrap3 %} 
+{% block content %} 
+{{block.super}}
 
-
-	                        {% for driver in drivers %}
-	                        <tr>
-	                            <td>{{driver.fullname}}</td>
-	                            <td>{{driver.id_number}}</td>
-	                        </tr>
-	                            {% endfor %} -->
+<div class="container">
+	
 	                            {%for crew in crews%}
-	                            Number Plate: {{crew.vehicle_id.number_plate}}<br>
-	                            Capacity:{{crew.vehicle_id.capacity}}<br>
-	                            Driver:{{crew.driver_id.fullname}} Id Number:{{crew.driver_id.id_number}}<br>
-	                            Conductor:{{crew.conductor_id.fullname}} Id Number:{{crew.conductor_id.id_number}}
+	                            Number Plate: {{crew.vehicle_id.number_plate}}<br><br>
+	                            Capacity: {{crew.vehicle_id.capacity}}<br><br>
+	                            Driver: {{crew.driver_id.fullname}}    ID Number:{{crew.driver_id.id_number}}<br><br>
+	                            Conductor: {{crew.conductor_id.fullname}}   ID Number:{{crew.conductor_id.id_number}}<br><br>
+	                            Status: {%if crew.vehicle_id.is_active == True%}Active{%else%}No crew has been assigned to your vehicle{%endif%}
 	                            {%endfor%}
-
+	
+</div>
+{% endblock %}
