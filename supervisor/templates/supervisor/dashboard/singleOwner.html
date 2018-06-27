@@ -16,12 +16,30 @@
 		    		<strong>National Id</strong>: {{owner.nat_id}}<br>
 		    		<strong>Telephone Number</strong>: {{owner.telephone}}<br>
 
-		    		<strong>{{owner.user.first_name.capitalize}}'s  Matatus:</strong><br>
-		    		{% for vehicle in vehicles %}
-		    			Number plate: {{vehicle.number_plate}}<br>
-		    			Matatu capacity: {{vehicle.capacity}}<br>
+		    		<strong>{{owner.user.first_name.capitalize}}'s  Matatus:</strong><br><br>
+		    		
+		    		<table class="table table-bordered">
+		    			<thead>
+		                    <tr>
+		                        <th>Number Plate</th>
+		                        <th>Capacity</th>
+		                        <th>Status</th>
+		                    </tr>
+			            </thead>
+			             <tbody>
 
-		    		{% endfor %}
+		                        {% for vehicle in vehicles %}
+		                        <tr>
+		                            <td>{{vehicle.number_plate.capitalize}}</td>
+		                            <td>{{vehicle.capacity}}</td>
+		                            <td>{% if vehicle.is_active == False %}<a href="" class="btn btn-danger btn-sm btn-block"> Inactive</a>{%else%}<a href="" class="btn btn-primary btn-sm btn-block">Active</a>{%endif%}</td>
+		                           		                           
+		                        </tr>
+		                        {% endfor %}
+
+
+	                		</tbody>
+		    		</table>
 
 		    	
 		    		
