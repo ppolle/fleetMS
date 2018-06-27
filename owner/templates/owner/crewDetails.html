@@ -1,4 +1,4 @@
- {% for cond in conductors %}
+                          <!-- {% for cond in conductors %}
 	                        <tr>
 	                            <td>{{cond.fullname}}</td>
 	                            <td>{{cond.id_number}}</td>
@@ -11,4 +11,11 @@
 	                            <td>{{driver.fullname}}</td>
 	                            <td>{{driver.id_number}}</td>
 	                        </tr>
-	                            {% endfor %}
+	                            {% endfor %} -->
+	                            {%for crew in crews%}
+	                            Number Plate: {{crew.vehicle_id.number_plate}}<br>
+	                            Capacity:{{crew.vehicle_id.capacity}}<br>
+	                            Driver:{{crew.driver_id.fullname}} Id Number:{{crew.driver_id.id_number}}<br>
+	                            Conductor:{{crew.conductor_id.fullname}} Id Number:{{crew.conductor_id.id_number}}
+	                            {%endfor%}
+

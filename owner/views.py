@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import Http404, HttpResponse, HttpResponseRedirect
+from supervisor.models import Driver, Conductor, AssignCrew, Supervisor
 from .models import Owner, Vehicle
 from .forms import VehicleForm, EditProfile
 from django.contrib import messages
@@ -7,14 +8,17 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 
+
 @login_required(login_url='/loginViews/')
 def home(request):
-    vehicle = Vehicle.objects.filter(owner = request.user.owner)
+    vehicle = Vehicle.objects.filter(owner=request.user.owner)
     return render(request, 'owner/homepage.html', {"vehicle": vehicle})
+
 
 def profile(request):
     profile = Owner.objects.get(user=request.user)
     return render(request, 'owner/profile.html', {"profile": profile})
+
 
 @login_required(login_url='/loginViews/')
 def vehicle(request):
@@ -22,11 +26,11 @@ def vehicle(request):
     View function to add a new vehicle
     '''
     if request.method == 'POST':
-        if Vehicle.objects.filter(owner = request.user.owner.id).count()>= 4 :
-            messages.error(request,f'Error! You have registered the maxmimum number of vehicles')
+        if Vehicle.objects.filter(owner=request.user.owner.id).count() >= 4:
+            messages.error(request, f'Error! You have registered the maxmimum number of vehicles')
             return redirect("owner:home")
         else:
-            
+
             form = VehicleForm(request.POST)
             if form.is_valid():
                 vehicle = form.save(commit=False)
@@ -34,7 +38,7 @@ def vehicle(request):
 
                 vehicle.sacco = request.user.owner.sacco
                 vehicle.save()
-                
+
                 messages.success(
                     request, f'Congratulations! You have succesfully Added a new Vehicle!')
                 return redirect('owner:home')
@@ -72,6 +76,7 @@ def deleteVehicle(request, owner_id):
         request, f'Vehicle deleted!')
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
+
 @login_required(login_url='/loginViews/')
 def editProfile(request, owner_id):
     if request.method == 'POST':
@@ -85,12 +90,24 @@ def editProfile(request, owner_id):
     return render(request, 'owner/editProfile.html', {"form": form})
 
 
-
 @login_required(login_url='/loginViews/')
-def crewDetails(request, owner_id):
+def crewDetails(request, vehicleId):
     '''
     View function that enables one delete a given supervisor in a sacco
+
     '''
-    return render(request, 'owner/crewDetails.html', {})
+    # drivers = Driver.objects.filter(sacco=request.user.supervisor.sacco_base)
+    # conductors = Conductor.objects.filter(
+    #     sacco=request.user.supervisor.sacco_base)
+
+    if is_active == true:
+        crews = AssignCrew.objects.filter(vehicle_id = vehicleId)
+        return render(request, 'owner/crewDetails.html', {"crews":crews})
+    else:
+        messages.info(request, 'No crew has been assigned to your vehicle.')
+        return redirect('owner:home')
 
 
+
+
+    
