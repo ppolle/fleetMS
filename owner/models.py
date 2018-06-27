@@ -49,7 +49,7 @@ class Vehicle(models.Model):
     capacity = models.IntegerField(null=True)
     owner = models.ForeignKey(Owner, null=True)
     sacco = models.ForeignKey(Sacco, null=True)
-    # is_active = models.
+    is_active = models.BooleanField(default = False)
     def __str__(self):
         return self.number_plate
 

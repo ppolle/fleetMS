@@ -11,13 +11,7 @@ from django.contrib.auth.decorators import login_required
 @login_required(login_url='/loginViews/')
 def home(request):
     vehicle = Vehicle.objects.filter(owner = request.user.owner)
-    issues = []
-    all_issues = Issue.objects.all()
-    owner_vehicles = Vehicle.objects.filter(owner=request.user.owner)
-    issues.append([issue.vehicle for issue in all_issues if vehicle in owner_vehicles])
-    # for issue in issues:
-    #     issue = issue.number_plate
-    return render(request, 'owner/homepage.html', {"vehicle": vehicle, 'issues':issues})
+    return render(request, 'owner/homepage.html', {"vehicle": vehicle})
 
 @login_required(login_url='/loginViews/')
 def profile(request):
