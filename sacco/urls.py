@@ -10,7 +10,8 @@ urlpatterns = [
     url(r'^new/supervisor/$', views.superlist, name='createSupervisor'),
     url(r'^editSupervisor/(\d+)', views.edit_superlist, name='editSupervisor'),
     url(r'^delete_supervisor/(\d+)', views.delete_supervisor, name='deleteSupervisor'),
-
+    
+    url(r'^ownerdetails/(\d+)', views.owner_details, name='ownerDetails'),
 
     url(r'^profile/$', views.profile, name='profile'),
     url(r'^editSacco/(\d+)', views.edit_profile, name='edit'),

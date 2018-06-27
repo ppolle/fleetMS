@@ -3,7 +3,8 @@
 {% block content %}
 <div class="sidenav" style="height: 100vh; width: 40vw; background: grey;">
     {% if profile.logo %}
-    <img src="{{profile.logo.url}}" alt="Sacco Logo" style="margin-top: 5vh; padding-left: 3vw; padding-right: 3vw; width: 10vw;"> {% else %}
+    <img src="{{profile.logo.url}}" alt="Sacco Logo" style="margin-top: 5vh; padding-left: 3vw; padding-right: 3vw; width: 10vw;"> 
+    {% else %}
     <h1 style="color: white; font-size: 10vh; padding: 3vw;">NO LOGO UPLOADED</h1>
     {% endif %}
 </div>

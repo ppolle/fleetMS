@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import login_required
 
 @login_required(login_url='/loginViews/')
 def home(request):
-    vehicle = Vehicle.objects.filter(owner = request.user.owner)
+    vehicle = Vehicle.objects.filter(owner = request.user.id)
     return render(request, 'owner/homepage.html', {"vehicle": vehicle})
 
 @login_required(login_url='/loginViews/')
