@@ -29,7 +29,8 @@ a:visited {
 button:hover {
   background-color: white;
   color: transparent;
-  background: -webkit-linear-gradient(transparent, transparent), url('http://wpnature.com/wp-content/uploads/2017/02/sky-cloudy-waterhole-nature-clouds-wallpaper-hd-1920x1080-1920x1080.jpg');
+  background: -webkit-linear-gradient(transparent, transparent),
+             url('static/images/bg01.jpg');
   background-size: cover;
   background-repeat: no-repeat;
  /* -webkit-background-clip: text; */

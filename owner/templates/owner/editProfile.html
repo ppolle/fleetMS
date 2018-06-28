@@ -4,7 +4,24 @@
 {% block content %} {{block.super}}
 <div class="container">
     <!-- Edit Profile -->
-    <div class="col-md-8 col-lg-8 col-md-offset-2">
+    <div class="col-md-4">
+    	   <div class="list-group">
+ 
+                  <a href="{% url 'owner:profile' %}" class="list-group-item ">
+                    Profile
+                  </a>
+
+                    <a href="{% url 'owner:createVehicle' %}" class="list-group-item ">
+                    Add Vehicle
+                  </a>
+                    <a href="{% url 'owner:editProfile' request.user.owner.id %}" class="list-group-item ">
+                    Edit Profile
+                  </a>
+
+                  
+            </div>
+    </div>
+    <div class="col-md-8">
         <form action="{% url 'owner:editProfile' user.owner.id %}" method="post" enctype="multipart/form-data">
             {% csrf_token %} {% bootstrap_form form %}
             <input type="submit" class="btn btn-success btn-lg">

@@ -1,6 +1,31 @@
-{% extends "fleet_base/base.html" %}
-
-{% block content %}
-{% include 'fleet_base/partials/_messages.html' %}
-<h1>Hello World</h1>
+{% extends "fleet_base/indexbase.html" %} {% load staticfiles %} _ {% block nav %} {% endblock %} {% block content %}
+<div class="dave one col-md-4">
+  <div class="fleet-title">
+    <h1>Sacco</h1>
+    <h6>If you represent an established matatu sacco, you can register here and setup your supervisor.</h6>
+    <a href="{% url 'fleet:sacco-signup' %}">
+    <button class="get_started" type="button" name="button">⮕ Get Started</button></a>
+    <p style="margin-top: 1vh;">Already have an account? <a href="{% url 'fleet:loginViews' %}">Log in!</a></p>
+  </div>
+</div>
+<div class="dave two col-md-4">
+  <div class="fleet-title">
+    <h1>Owner</h1>
+    <h6>If you are the owner of a matatu or more than one matatu, you can register here and manage your vehicles.</h6>
+    <a href="{% url 'fleet:owner-signup' %}">
+    <button class="get_started" type="button" name="button">⮕ Get Started</button></a>
+    <p style="margin-top: 1vh;">Already have an account? <a href="{% url 'fleet:loginViews' %}">Log in!</a></p>
+  </div>
+</div>
+<div class="dave three col-md-4">
+  <div class="fleet-title">
+    <h1>Supervisor</h1>
+    <h6>If you are a supervisor who's sacco has been registered, you can register here and setup your profile.</h6>
+    <a href="{% url 'fleet:sup-signup' %}">
+    <button class="get_started" type="button" name="button">⮕ Get Started</button></a>
+    <p style="margin-top: 1vh;">Already have an account? <a href="{% url 'fleet:loginViews' %}">Log in!</a></p>
+  </div>
+</div>
+{% endblock %} {% block scripts %}
+<script src="{% static " Js/scripts.js " %}" charset="utf-8"></script>
 {% endblock %}

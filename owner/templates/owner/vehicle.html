@@ -5,7 +5,24 @@
 
 <div class="container">
     <!-- Supervisor form -->
-    <div class="col-md-8 col-lg-8 col-md-offset-2">
+    <div class="col-md-4">
+    	   <div class="list-group">
+ 
+                  <a href="{% url 'owner:profile' %}" class="list-group-item ">
+                    Profile
+                  </a>
+
+                    <a href="{% url 'owner:createVehicle' %}" class="list-group-item ">
+                    Add Vehicle
+                  </a>
+                    <a href="{% url 'owner:editProfile' request.user.owner.id %}" class="list-group-item ">
+                    Edit Profile
+                  </a>
+
+                  
+            </div>
+    </div>
+    <div class="col-md-8">
     	{%include 'fleet_base/partials/_messages.html' %}
 
         <form action="{% url 'owner:createVehicle' %}" method="post">

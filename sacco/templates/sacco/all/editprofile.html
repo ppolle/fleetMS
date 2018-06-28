@@ -6,7 +6,24 @@
 {{block.super}}
 <div class="container">
     <!-- Edit Sacco form -->
-    <div class="col-md-8 col-lg-8 col-md-offset-2">
+    <div class="col-md-4">
+    	<div class="list-group">
+ 
+                  <a href="{% url 'sacco:profile' %}" class="list-group-item ">
+                    About Sacco
+                  </a>
+
+                    <a href="{% url 'sacco:createSupervisor' %}" class="list-group-item ">
+                    Add Supervisor
+                  </a>
+                    <a href="{% url 'sacco:edit' user.sacco.id %}" class="list-group-item ">
+                    Edit Sacco
+                  </a>
+
+                  
+            </div>
+    </div>
+    <div class="col-md-8">
         <form action="{% url 'sacco:edit' user.sacco.id %}" method="post" enctype="multipart/form-data">
             {% csrf_token %} 
             {% bootstrap_form form %}

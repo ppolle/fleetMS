@@ -190,5 +190,5 @@ def logout(request):
     View function to handle loggin out users
     '''
     user_logout(request)
-    messages.error(request, 'Successfully logged-Out. Please come back again!')
+    # messages.error(request, 'Successfully logged-Out. Please come back again!')
     return redirect('fleet:index')

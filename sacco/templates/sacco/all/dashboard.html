@@ -5,28 +5,39 @@
 <h1 style="text-align: center">SACCO DASHBOARD</h1>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-2" style="background: red">
-            <!-- Side navigation -->
-            <div class="sidenav" style="width:auto;">
-                <a href="{% url 'sacco:profile' %}">About Sacco</a>
-                <a href="{% url 'sacco:createSupervisor' %}">Add Supervisor</a>
-                <a href="{% url 'sacco:edit' user.sacco.id %}">Edit Sacco</a>
-                <a href="#">Delete Sacco</a>
+        <div class="col-md-3" >
+            <div class="list-group">
+ 
+                  <a href="{% url 'sacco:profile' %}" class="list-group-item ">
+                    About Sacco
+                  </a>
+
+                    <a href="{% url 'sacco:createSupervisor' %}" class="list-group-item ">
+                    Add Supervisor
+                  </a>
+                    <a href="{% url 'sacco:edit' user.sacco.id %}" class="list-group-item ">
+                    Edit Sacco
+                  </a>
+
+                  
             </div>
+            <!-- Side navigation -->
+           
         </div>
-        <div class="col-md-10">
+        <div class="col-md-9">
             <!-- Page content -->
             {% include 'sacco/partials/messages.html' %}
             <div class="container" >
                 <div class="Supervisors">
                     <h4>SUPERVISOR LIST</h4>
                     {% if supervisor %}
-                        <table class="table table-hover">
+                        <table class="table table-bordered">
                             <thead>
                                 <tr>
                                     <th>Full Name</th>
                                     <th>ID Number</th>
                                     <th>Option</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -53,7 +64,7 @@
                 </div>
                 <div class="owners">
                     <h4>OWNERS REGISTERED IN THIS SACCO</h4>
-                    <table class="table table-hover">
+                    <table class="table table-bordered">
                         <thead>
                             <tr>
                                 <th>

@@ -1,25 +1,33 @@
 {%extends 'owner/all/base.html'%} {% block content %} {{block.super}}
 
-<h1 style="text-align: center">OWNER DASHBOARD</h1>
+
 <!-- Side navigation -->
-<div class="sidenav" style="width: 17vw;">
-    <a href="{% url 'owner:profile' %}">About Owner</a>
-    <a href="{% url 'owner:createVehicle' %}">Add Vehicle</a>
-    <a href="{% url 'owner:editProfile' request.user.owner.id %}">Edit Owner Profile</a>
+<div class="col-md-4">
+ <div class="list-group">
+ 
+                  <a href="{% url 'owner:profile' %}" class="list-group-item ">
+                    Profile
+                  </a>
+
+                    <a href="{% url 'owner:createVehicle' %}" class="list-group-item ">
+                    Add Vehicle
+                  </a>
+                    <a href="{% url 'owner:editProfile' request.user.owner.id %}" class="list-group-item ">
+                    Edit Profile
+                  </a>
+
+                  
+            </div>
 </div>
 
 <!-- Page content -->
-<div class="container" style="width: 83vw; margin-left: 17vw;">
+<div class="col-md-8">
     {% include 'sacco/partials/messages.html' %}
     <div class="Supervisors">
-        {% for issue in issues %}
-        <p>{{ issue }}</p>
-        {% empty %}
-        <p>None</p>
-        {% endfor %}
-        <h4>VEHICLE LIST</h4>
+       <h4>OWNER DASHBOARD</h4>
+        <h5>VEHICLE LIST</h5>
         {% if vehicle %}
-        <table class="table table-hover">
+        <table class="table table-bordered">
             <thead>
                 <tr>
                     <th>NUMBER PLATE</th>
