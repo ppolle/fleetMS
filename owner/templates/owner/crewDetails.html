@@ -36,7 +36,7 @@
 	
 	{%else%}
 		
-        <strong>Number Plate:</strong> {{owner.vehicle_id}}<br><br>
+        <strong>Number Plate:</strong> {{owner.number_plate.capitalize}}<br><br>
         <strong>Capacity:</strong> {{owner.capacity}}<br><br>
        
         <stroong>Status:</stroong> {%if owner.is_active == True%}Active{%else%}No crew has been assigned to your vehicle{%endif%}
