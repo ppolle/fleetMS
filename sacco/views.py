@@ -79,6 +79,7 @@ def edit_profile(request, sacco_id):
         form = EditProfile(request.POST, request.FILES,instance = Sacco.objects.get(pk = sacco_id))
         if form.is_valid():
             form.save()
+            messages.success(request, f'Success! Your edit has been successful!')
             return redirect('sacco:profile')
     else:
         form = SaccoForm(instance = Sacco.objects.get(pk = sacco_id))

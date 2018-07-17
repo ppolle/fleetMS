@@ -27,8 +27,8 @@
         <div class="col-md-9">
             <!-- Page content -->
             {% include 'sacco/partials/messages.html' %}
-            <div class="container" >
-                <div class="Supervisors">
+            
+                
                     <h4>SUPERVISOR LIST</h4>
                     {% if supervisor %}
                         <table class="table table-bordered">
@@ -55,13 +55,14 @@
                             </tbody>
                         </table>
                      {% else %}
-                            <div class="emptytable">
+                            <div class="">
                                 <h3>There are no registered Supervisors just yet. <a href="{% url 'sacco:createSupervisor' %}">Click here to add</a> a supervisor</h3>
 
                             </div>
                     {% endif %}
 
-                </div>
+                
+                {% if owner %}
                 <div class="owners">
                     <h4>OWNERS REGISTERED IN THIS SACCO</h4>
                     <table class="table table-bordered">
@@ -78,7 +79,7 @@
                                 <td>
                                     <a href="{% url 'sacco:ownerDetails' owner.id %}">
                                     {{owner.user.first_name}} {{owner.user.last_name}}
-</a>
+                                    </a>
                                 </td>
                             </tr>
                             {% endfor %}
@@ -86,7 +87,13 @@
 
                     </table>
                 </div>
-            </div>
+                {% else %}
+                   <div class="emptytable">
+                                <h3>No matatu owner have registered with this sacco yet</h3>
+
+                    </div>
+                {% endif %}
+            
         </div>
 
     </div>

@@ -98,7 +98,7 @@ def saccoSignup(request):
 			raw_password = form.cleaned_data.get('password1')
 			user = authenticate(username = user.username,password = raw_password)
 			user_login(request,user)
-			messages.success(request, 'Success! You have succesfullly created a new sacco!')
+			messages.success(request, 'Success! You have succesfullly created a new sacco! You can now fill in the rest of relevant data to get started')
 			return redirect('sacco:edit', user.sacco.id)
 		# else:
 		# 	messages.error(request,f'Error having the form as valid')

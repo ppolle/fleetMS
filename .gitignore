@@ -2,6 +2,7 @@
 __pycache__
 .env
 virtual/
+venv/
 migrations/
 media/
 db.sqlite3
