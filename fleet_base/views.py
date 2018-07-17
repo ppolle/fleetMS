@@ -134,7 +134,7 @@ def supSignup(request):
 					raw_password = form.cleaned_data.get('password1')
 					user = authenticate(username = user.username,password = raw_password)
 					user_login(request,user)
-					messages.success(request,f'Success! Welcome to you new dahsboard {user.first_name}')
+					messages.success(request,f'Successful Supervisor signup {user.first_name}. Fill in your details below')
 					return redirect('sup:editSupervisor')
 			else:
 				messages.error(request,'Error! Make sure your respective sacco has already registered you on the platform!')
