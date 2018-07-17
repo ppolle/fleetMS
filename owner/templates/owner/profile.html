@@ -9,7 +9,8 @@
 </div>
 <div class="container" style="width:60vw; float:right; display: inline block; padding-left: 5vw;">
   <div class="row">
-    <div class="col-md-7">
+    <div class="col-md-9">
+    {% include 'sacco/partials/messages.html' %}
       <div>
         <h3>Owner Name: {{profile.user.first_name.capitalize}} {{profile.user.last_name.capitalize}}</h3>
       </div>

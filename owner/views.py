@@ -85,6 +85,8 @@ def editProfile(request, owner_id):
                            instance=Owner.objects.get(pk=owner_id))
         if form.is_valid():
             form.save()
+            messages.success(
+        request, f'Succesfull Edited your profile!')
             return redirect('owner:profile')
     else:
         form = EditProfile(instance=Owner.objects.get(pk=owner_id))
