@@ -11,8 +11,7 @@ class VehicleForm(forms.ModelForm):
 class EditProfile(forms.ModelForm):
     class Meta:
         model = Owner
-        fields = ( 'nat_id', 'telephone',
-                  'profile_pic')
+        fields = ( 'nat_id', 'telephone')
 
 
    

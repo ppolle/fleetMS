@@ -66,7 +66,7 @@ def ownerSignup(request):
 			user_login(request,user)
 
 
-			messages.success(request, 'Success Signup created a new Owner')
+			messages.success(request, f'Successful Signup {user.first_name}. Fill in the rest of your details below to get started')
 			return redirect('owner:editProfile', user.owner.id)
 
 		else:
