@@ -11,7 +11,7 @@ font-family: 'Raleway', sans-serif; */
 }
 
 body {
-  background: url('static/images/bg01.jpg');
+  background-image: url('static/images/bg01.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
