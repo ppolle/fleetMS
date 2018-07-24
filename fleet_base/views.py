@@ -192,3 +192,5 @@ def logout(request):
     user_logout(request)
     # messages.error(request, 'Successfully logged-Out. Please come back again!')
     return redirect('fleet:index')
+def test(request):
+	return render(request,'fleet_base/test.html')
