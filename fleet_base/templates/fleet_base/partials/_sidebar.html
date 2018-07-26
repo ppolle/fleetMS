@@ -1,39 +1,105 @@
-<div class="list-group">
- 
-  <a href="{%url 'sup:dashboard' %}" class="list-group-item ">
-    Dashboard
-  </a>
+ {% load static %}
+ <aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+      <!-- Sidebar user panel -->
+      <div class="user-panel">
+        <div class="pull-left image">
+          
+          <img src="{% static "img/user2-160x160.jpg" %}" class="img-circle" alt="User Image">
+          
+        </div>
+        <div class="pull-left info">
+          <p>
+            <a href="">
+                {% if user.roles == 'sacco' %}
+                      {{user.sacco.name.capitalize}} Sacco
+                    {% else %}
+                      {{user.first_name.capitalize}} {{user.last_name.capitalize}}
+                    {% endif %} 
+                  </span>
+            </a>
+          </p>
+          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+        </div>
+      </div>
+      <!-- search form -->
+     
+      <!-- /.search form -->
+      <!-- sidebar menu: : style can be found in sidebar.less -->
+      <ul class="sidebar-menu" data-widget="tree">
+        <li class="header">MAIN NAVIGATION</li>
+        {% if user.roles == 'owner' %}
+          <li><a href="{% url 'owner:home' %}"><i class="fa fa-dashboard"></i><span>Dashboard</span></a></li>
+          <li class="treeview">
+            <a href="">
+              <i class="fa fa-car"></i>
+              <span>Matatu Fleet</span>
+              <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="{% url 'owner:createVehicle' %}"><i class="fa fa-plus"></i> Add Vehicle</a></li>
+              
+            </ul>
+          </li>
 
-  <div class="dropdown">
-      <a href="#" class="list-group-item dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Profile<span class="caret"></span></a>  
-      <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
-        <li><a href="{% url 'sup:profile' %}">My Profile</a></li>
-        <li><a href="{% url 'sup:editSupervisor' %}">Edit Profile</a></li>
-   
+        {% elif user.roles == 'supervisor' %}
+          <li><a href="{% url 'sup:dashboard' %}"><i class="fa fa-dashboard"></i><span>Dashboard</span></a></li>
+          <li class="treeview">
+            <a href="">
+              <i class="fa fa-user"></i>
+              <span>Drivers</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="{% url 'sup:createDriver' %}"><i class="fa fa-circle-o"></i>Create Driver</a></li>
+              <li><a href="{% url 'sup:allDrivers' %}"><i class="fa fa-circle-o"></i>All Drivers</a></li>
+            </ul>
+          </li>
+
+          <li class="treeview">
+            <a href="">
+            <i class="fa fa-user"></i>
+              <span>Conductors</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="{% url 'sup:createConductor' %}"><i class="fa fa-circle-o"></i>Create Conductor</a></li>
+              <li><a href="{% url 'sup:allConductors' %}"><i class="fa fa-circle-o"></i>All Conductor</a></li>
+            </ul>
+          </li>
+
+        {% elif user.roles == 'sacco' %}
+          <li><a href="{% url 'sacco:sacco_home' %}"><i class="fa fa-dashboard"></i><span>Dashboard</span></a></li>
+          <li><a href=""><i class="fa fa-car"></i><span>Sacco Fleet</span></a></li>
+          <li><a href=""><i class="fa fa-user"></i><span>Sacco Members</span></a></li>
+          
+
+          <li class="treeview">
+            <a href="">
+              <i class="fa fa-user"></i>
+              <span>Supervisor List</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="{% url 'sacco:createSupervisor' %}"><i class="fa fa-plus"></i>Add Supervisor</a></li>
+              <li><a href=""><i class="fa fa-circle-o"></i>All Supervisor</a></li>
+            </ul>
+          </li>
+
+         
+        {%else%}
+        {%endif%}
        
-      </div>
-  </div>
-
-  <div class="dropdown">
-      <a href="#" class="list-group-item dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Drivers<span class="caret"></span></a>  
-      <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
-        <li><a href="{% url 'sup:createDriver' %}">Create Driver</a></li>
-        <li><a href="{% url 'sup:allDrivers' %}">All Drivers</a></li>
-   
-       
-      </div>
-  </div>
-  
-   <div class="dropdown">
-      <a href="#" class="list-group-item dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Conductors <span class="caret"></span></a>  
-      <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
-        <li><a href="{% url 'sup:createConductor' %}">Create Conductor</a></li>
-        <li><a href="{% url 'sup:allConductors' %}">All Conductors</a></li>
-    
-        
-        
-      </div>
-  </div>
-
-  
-</div>
+      </ul>
+    </section>
+    <!-- /.sidebar -->
+  </aside>

@@ -1,31 +1,32 @@
-{%extends 'owner/all/base.html'%} {% block content %} {{block.super}}
+{%extends 'fleet_base/adminbase.html'%} 
+
+{%block content-header%}
+     <section class="content-header">
+      <h1>
+        Owner Dashboard<small>manage evryhting from here</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">Examples</a></li>
+        <li class="active">Blank page</li>
+      </ol>
+    </section>
+{%endblock%}
 
 
-<!-- Side navigation -->
-<div class="col-md-4">
- <div class="list-group">
- 
-                  <a href="{% url 'owner:profile' %}" class="list-group-item ">
-                    Profile
-                  </a>
-
-                    <a href="{% url 'owner:createVehicle' %}" class="list-group-item ">
-                    Add Vehicle
-                  </a>
-                    <a href="{% url 'owner:editProfile' request.user.owner.id %}" class="list-group-item ">
-                    Edit Profile
-                  </a>
-
-                  
-            </div>
-</div>
+{% block content %} 
 
 <!-- Page content -->
-<div class="col-md-8">
+    
+
     {% include 'sacco/partials/messages.html' %}
-    <div class="Supervisors">
-       <h4>OWNER DASHBOARD</h4>
-        <h5>VEHICLE LIST</h5>
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Vehicle List</h3>
+        </div>
+        <div class="box-body table-responsive with-border">
+            <div class="Supervisors">
+       
         {% if vehicle %}
         <table class="table table-bordered">
             <thead>
@@ -49,9 +50,9 @@
 
 
                     <td>
-                        <a href="{% url 'owner:editVehicle' vehicle.id %}" class="btn btn-sm btn-success">Edit</a>
-                        <a href="{% url 'owner:deleteVehicle' vehicle.id %}" class="btn btn-sm btn-danger">Delete</a>
-                        <a href="{% url 'owner:crewDetails' vehicle.id %}" class="btn btn-sm btn-info">View More Details</a>
+                        <a href="{% url 'owner:editVehicle' vehicle.id %}" class="btn btn-sm btn-success btn-flat"><i class=""></i> Edit</a>
+                        <a href="{% url 'owner:deleteVehicle' vehicle.id %}" class="btn btn-sm btn-danger btn-flat"><i class=""></i> Delete</a>
+                        <a href="{% url 'owner:crewDetails' vehicle.id %}" class="btn btn-sm btn-info btn-flat"><i class=""></i> View More Details</a>
                     </td>
                    
                 </tr>
@@ -73,7 +74,10 @@
                 {%endif%}
 
     </div>
-</div>
+        </div>
+    </div>
+    
+
 
 {% endblock %}
                 
