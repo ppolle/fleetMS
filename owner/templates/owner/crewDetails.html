@@ -1,48 +1,126 @@
-                          {%extends 'owner/all/base.html'%} 
-	                           
-	                            
-{% load bootstrap3 %} 
-{% block content %} 
-{{block.super}}
-
-<div class="container">
-    <div class="col-md-4">
-         <div class="list-group">
- 
-                  <a href="{% url 'owner:profile' %}" class="list-group-item ">
-                    Profile
-                  </a>
-
-                    <a href="{% url 'owner:createVehicle' %}" class="list-group-item ">
-                    Add Vehicle
-                  </a>
-                    <a href="{% url 'owner:editProfile' request.user.owner.id %}" class="list-group-item ">
-                    Edit Profile
-                  </a>
-
+{%extends 'fleet_base/adminbase.html'%} 
+{% load staticfiles%} 
+{% load bootstrap3 %}
+<!-- Content block -->
+{%block content-header%}
+     <section class="content-header">
+      <h1>
+        Owner Dashboard<small>manage everything from here</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">Owner</a></li>
+        <li class="active">Vehicle Details</li>
+      </ol>
+    </section>
+{%endblock%}
+{% block content %}
+  <div class="box">
+      <div class="box-header with-border">
+          <h3 class="box-title">Vehicle Details</h3>
+      </div>
+      <div class="box-body table-responsive with-border"> 
+        {% if crews%}
+          <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Number plate</th>
+                    <th>Capacity</th>
+                    <th>Driver</th>
+                    <th>Conductor</th>
+                    <th>Status</th>
                   
-            </div>
-    </div>
-    <div class="col-md-8">
-	{% if crews%}
-	
-        {%for crew in crews%}
-            <strong>Number Plate:</strong> {{crew.vehicle_id.number_plate}}<br><br>
-            <strong>Capacity:</strong> {{crew.vehicle_id.capacity}}<br><br>
-            <strong>Driver:</strong> {{crew.driver_id.fullname.capitalize}}    <strong>ID Number:</strong> {{crew.driver_id.id_number}}<br><br>
-            <strong>Conductor:</strong> {{crew.conductor_id.fullname.capitalize}}   <strong>ID Number:</strong> {{crew.conductor_id.id_number}}<br><br>
-            <strong>Status:</strong> {%if crew.vehicle_id.is_active == True%}Active{%else%}No crew has been assigned to your vehicle{%endif%}
-        {%endfor%}
-	
-	{%else%}
-		
-        <strong>Number Plate:</strong> {{owner.number_plate.capitalize}}<br><br>
-        <strong>Capacity:</strong> {{owner.capacity}}<br><br>
-       
-        <stroong>Status:</stroong> {%if owner.is_active == True%}Active{%else%}No crew has been assigned to your vehicle{%endif%}
-		
-	{%endif%}
-    </div>
-	
-</div>
+                </tr>
+            </thead>
+            <tbody>
+              {%for crew in crews%}
+                  <td>{{crew.vehicle_id.number_plate}}</td>
+                  <td>{{crew.vehicle_id.capacity}}</td>
+                  <td><a href="#" data-toggle="modal" data-target="#modal-default">{{crew.driver_id.fullname.capitalize}}</a></td>
+                  <td><a href="#" data-toggle="modal" data-target="#conductor-modal">{{crew.conductor_id.fullname.capitalize}}</a></td>
+                  <td>
+                    {%if crew.vehicle_id.is_active == True%}<span class="label label-success">Active</span>{%else%}<span class="label label-danger">Inactive</span>{%endif%}
+                    
+                  </td>
+                
+
+                  <!-- Driver Modal -->
+                   <div class="modal fade" id="modal-default">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span></button>
+                          <h4 class="modal-title">Driver Details</h4>
+                        </div>
+                        <div class="modal-body">
+
+                          <p>
+                             <div class="col-md-6"><strong>Name</strong>: {{crew.driver_id.fullname.capitalize}}</div>
+                             <div class="col-md-6"><strong>ID Number</strong>: {{crew.driver_id.id_number}}</div> 
+                          </p>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                          
+                        </div>
+                      </div>
+                      <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                  </div>
+
+                  <!-- Conductor-Modal -->
+                  <div class="modal fade" id="conductor-modal">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span></button>
+                          <h4 class="modal-title">Conductor Details</h4>
+                        </div>
+                        <div class="modal-body">
+
+                          <p>
+                             <div class="col-md-6"><strong>Name</strong>:{{crew.conductor_id.fullname.capitalize}}</div>
+                             <div class="col-md-6"><strong>ID Number</strong>: {{crew.conductor_id.id_number}}</div> 
+                          </p>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                          
+                        </div>
+                      </div>
+                      <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                  </div>
+              {%endfor%}
+            </tbody>
+          </table>
+        
+        {%else%}
+          <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Number plate</th>
+                    <th>Capacity</th>
+                    <th>Status</th>
+                 
+                </tr>
+            </thead>
+            <tbody>
+          
+              <td>{{owner.number_plate.capitalize}}</td>
+              <td>{{owner.capacity}}</td>
+             
+              <td>{%if crew.vehicle_id.is_active == True%}<span class="label label-success">Active</span>{%else%}<span class="label label-danger">Inactive</span>{%endif%}</td>
+            </tbody>
+          </table>
+          
+        {%endif%}
+      </div>
+  </div>
+ 
+
 {% endblock %}
