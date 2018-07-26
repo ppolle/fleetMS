@@ -15,6 +15,7 @@
 		         <form action="{% url 'sup:editSupervisor' %}" method="post" enctype="multipart/form-data">
 		            {% csrf_token %} 
 		            {% bootstrap_form form %}
+		            
 		            <input type="submit" class="btn btn-success btn-sm btn-block">
 		        </form>
 		    </div>
