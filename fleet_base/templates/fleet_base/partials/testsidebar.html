@@ -5,27 +5,54 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
+          
           <img src="{% static "img/user2-160x160.jpg" %}" class="img-circle" alt="User Image">
+          
         </div>
         <div class="pull-left info">
-          <p>Alexander Pierce</p>
+          <p>
+            <a href="">
+                {% if user.roles == 'sacco' %}
+                      {{user.sacco.name.capitalize}} Sacco
+                    {% else %}
+                      {{user.first_name.capitalize}} {{user.last_name.capitalize}}
+                    {% endif %} 
+                  </span>
+            </a>
+          </p>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
       <!-- search form -->
-      <form action="#" method="get" class="sidebar-form">
-        <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Search...">
-          <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                </button>
-              </span>
-        </div>
-      </form>
+     
       <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
+        {% if user.roles == 'owner' %}
+          <li><a href="{% url 'owner:home' %}"><i class="fa fa-dashboard"></i><span>Dashboard</span></a></li>
+          <li class="treeview">
+            <a href="">
+              <i class="fa fa-dashboard"></i>
+              <span>Vehicle</span>
+              <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="{% url 'owner:createVehicle' %}"><i class="fa fa-circle-o"></i> Add Vehicle</a></li>
+              
+            </ul>
+          </li>
+
+        {% elif user.roles == 'supervisor' %}
+          <li><a href=""><span>Supervisor</span></a></li>
+
+        {% elif user.roles == 'sacco' %}
+          <li><a href=""><span>Sacco</span></a></li>
+        {%else%}
+        {%endif%}
+
         <li class="treeview">
           <a href="#">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
@@ -38,6 +65,7 @@
             <li><a href="../../index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
           </ul>
         </li>
+
         <li class="treeview">
           <a href="#">
             <i class="fa fa-files-o"></i>
@@ -53,6 +81,7 @@
             <li><a href="../layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
           </ul>
         </li>
+
         <li>
           <a href="../widgets.html">
             <i class="fa fa-th"></i> <span>Widgets</span>
@@ -61,6 +90,7 @@
             </span>
           </a>
         </li>
+
         <li class="treeview">
           <a href="#">
             <i class="fa fa-pie-chart"></i>
@@ -76,6 +106,7 @@
             <li><a href="../charts/inline.html"><i class="fa fa-circle-o"></i> Inline charts</a></li>
           </ul>
         </li>
+
         <li class="treeview">
           <a href="#">
             <i class="fa fa-laptop"></i>
@@ -93,6 +124,7 @@
             <li><a href="../UI/modals.html"><i class="fa fa-circle-o"></i> Modals</a></li>
           </ul>
         </li>
+
         <li class="treeview">
           <a href="#">
             <i class="fa fa-edit"></i> <span>Forms</span>
@@ -106,6 +138,7 @@
             <li><a href="../forms/editors.html"><i class="fa fa-circle-o"></i> Editors</a></li>
           </ul>
         </li>
+
         <li class="treeview">
           <a href="#">
             <i class="fa fa-table"></i> <span>Tables</span>
@@ -118,6 +151,7 @@
             <li><a href="../tables/data.html"><i class="fa fa-circle-o"></i> Data tables</a></li>
           </ul>
         </li>
+
         <li>
           <a href="../calendar.html">
             <i class="fa fa-calendar"></i> <span>Calendar</span>
@@ -127,6 +161,7 @@
             </span>
           </a>
         </li>
+
         <li>
           <a href="../mailbox/mailbox.html">
             <i class="fa fa-envelope"></i> <span>Mailbox</span>
@@ -137,6 +172,7 @@
             </span>
           </a>
         </li>
+
         <li class="treeview active">
           <a href="#">
             <i class="fa fa-folder"></i> <span>Examples</span>
@@ -156,6 +192,7 @@
             <li><a href="pace.html"><i class="fa fa-circle-o"></i> Pace Page</a></li>
           </ul>
         </li>
+
         <li class="treeview">
           <a href="#">
             <i class="fa fa-share"></i> <span>Multilevel</span>
@@ -189,6 +226,7 @@
             <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
           </ul>
         </li>
+
         <li><a href="https://adminlte.io/docs"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
         <li class="header">LABELS</li>
         <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
