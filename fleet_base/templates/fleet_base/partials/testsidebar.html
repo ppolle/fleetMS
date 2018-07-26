@@ -40,13 +40,39 @@
               </span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="{% url 'owner:createVehicle' %}"><i class="fa fa-circle-o"></i> Add Vehicle</a></li>
+              <li><a href="{% url 'owner:createVehicle' %}"><i class="fa fa-car"></i> Add Vehicle</a></li>
               
             </ul>
           </li>
 
         {% elif user.roles == 'supervisor' %}
-          <li><a href=""><span>Supervisor</span></a></li>
+          <li><a href="{% url 'sup:dashboard' %}"><span>Dashboard</span></a></li>
+          <li class="treeview">
+            <a href="">
+              <i class="fa fa-dashboard"></i>
+              <span>Drivers</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="{% url 'sup:createDriver' %}"><i class="fa fa-circle-o"></i>Create Driver</a></li>
+              <li><a href="{% url 'sup:allDrivers' %}"><i class="fa fa-circle-o"></i>All Drivers</a></li>
+            </ul>
+          </li>
+          <li class="treeview">
+            <a href="">
+            <i class="fa fa-dashboard"></i>
+              <span>Conductors</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="{% url 'sup:createConductor' %}"><i class="fa fa-circle-o"></i>Create Conductor</a></li>
+              <li><a href="{% url 'sup:allConductors' %}"><i class="fa fa-circle-o"></i>All Conductor</a></li>
+            </ul>
+          </li>
 
         {% elif user.roles == 'sacco' %}
           <li><a href=""><span>Sacco</span></a></li>
