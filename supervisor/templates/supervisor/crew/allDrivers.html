@@ -1,17 +1,27 @@
-{%extends 'fleet_base/base.html'%} 
+{%extends 'fleet_base/adminbase.html'%} 
+{% load staticfiles%} 
 {% load bootstrap3 %}
-{% load static %}
-{% block content %}
-
-<div class="container">
-	<div class="row">
-		<div class="col-md-4">
-			{% include 'fleet_base/partials/_sidebar.html' %}
-		</div>
-		<div class="col-md-8">
-			{% include 'fleet_base/partials/_messages.html' %}
-		    <div class="">
-		        View All Drivers
+<!-- Content block -->
+{%block content-header%}
+     <section class="content-header">
+      <h1>
+        Supervisor Dashboard<small>manage everything from here</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">Supervisor</a></li>
+        <li class="active">All Drivers</li>
+      </ol>
+    </section>
+{%endblock%}
+{% block content %} 
+{% include 'fleet_base/partials/_messages.html' %}
+		<div class="box">
+			<div class="box-header with-border">
+		            <h3 class="box-title">All Drivers</h3>
+	        </div>
+		    <div class="box-body table-responsive with-border">
+		       
 		         {% if drivers%}
 		         
 		         	<table class="table table-bordered">
@@ -29,8 +39,8 @@
 	                        <tr>
 	                            <td>{{driver.fullname.capitalize}}</td>
 	                            <td>{{driver.id_number}}</td>
-	                            <td><a href="{% url 'sup:editDriver' driver.id %}" class="btn btn-sm btn-success btn-block">Edit</a></td>
-	                            <td><a href="{% url 'sup:deleteDriver' driver.id %}" class="btn btn-sm btn-danger btn-block">Delete</a></td>
+	                            <td><a href="{% url 'sup:editDriver' driver.id %}" class="btn btn-sm btn-flat btn-success btn-block fa fa-edit"> Edit</a></td>
+	                            <td><a href="{% url 'sup:deleteDriver' driver.id %}" class="btn btn-flat btn-sm btn-danger btn-block fa fa-trash"> Delete</a></td>
 	                        </tr>
 	                        {% endfor %}
 
@@ -45,7 +55,5 @@
 		         {%endif%}
 		    </div>
 	    </div>
-    </div>
-  
-</div>
+
 {% endblock %}

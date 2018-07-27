@@ -1,51 +1,60 @@
-{%extends 'fleet_base/base.html'%}
-{% load bootstrap3 %} 
-{% load static %}
-{% block content %}
+{%extends 'fleet_base/adminbase.html'%} 
+{% load staticfiles%} 
+{% load bootstrap3 %}
+<!-- Content block -->
+{%block content-header%}
+     <section class="content-header">
+      <h1>
+        Supervisor Dashboard<small>manage everything from here</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">Supervisor</a></li>
+        <li class="active">All Conductors</li>
+      </ol>
+    </section>
+{%endblock%}
+{% block content %} 
+	
+	{% include 'fleet_base/partials/_messages.html' %}
+	<div class="box">
+		<div class="box-header with-border">
+	            <h3 class="box-title">All Conductors</h3>
+        </div>
+	    <div class="box-body table-responsive with-border">
+	        
+	         {% if conductors%}
+	         
+	         	<table class="table table-bordered">
+	         		<thead>
+	                    <tr>
+	                        <th>Full Name</th>
+	                        <th>ID Number</th>
+	                        <th>Option</th>
+	                        <th></th>
+	                    </tr>
+	                </thead>
+	                <tbody>
 
-<div class="container">
-	<div class="row">
-		<div class="col-md-4">
-			{% include 'fleet_base/partials/_sidebar.html' %}
-		</div>
-		<div class="col-md-8">
-			{% include 'fleet_base/partials/_messages.html' %}
-		    <div class="">
-		        View All Conductors
-		         {% if conductors%}
-		         
-		         	<table class="table table-bordered">
-		         		<thead>
-		                    <tr>
-		                        <th>Full Name</th>
-		                        <th>ID Number</th>
-		                        <th>Option</th>
-		                        <th></th>
-		                    </tr>
-		                </thead>
-		                <tbody>
-
-	                        {% for cond in conductors %}
-	                        <tr>
-	                            <td>{{cond.fullname}}</td>
-	                            <td>{{cond.id_number}}</td>
-	                            <td><a href="{% url 'sup:editConductor' cond.id %}" class="btn btn-sm btn-success btn-block">Edit</a></td>
-	                            <td><a href="{% url 'sup:deleteConductor' cond.id %}" class="btn btn-sm btn-danger btn-block">Delete</a></td>
-	                        </tr>
-	                        {% endfor %}
+                        {% for cond in conductors %}
+                        <tr>
+                            <td>{{cond.fullname.capitalize}}</td>
+                            <td>{{cond.id_number}}</td>
+                            <td><a href="{% url 'sup:editConductor' cond.id %}" class="btn btn-sm btn-success btn-block btn-flat fa fa-edit"> Edit</a></td>
+                            <td><a href="{% url 'sup:deleteConductor' cond.id %}" class="btn btn-sm btn-danger btn-block btn-flat fa fa-trash"> Delete</a></td>
+                        </tr>
+                        {% endfor %}
 
 
-                		</tbody>
-					  
-					</table>
-		         
+            		</tbody>
+				  
+				</table>
+	         
 
-		         {%else%}
-		         <p>You currently do not have any drivers registered. Create one <a href="{% url 'sup:createConductor' %}">here</a></p>
-		         {%endif%}
-		    </div>
+	         {%else%}
+	         <p>You currently do not have any drivers registered. Create one <a href="{% url 'sup:createConductor' %}">here</a></p>
+	         {%endif%}
 	    </div>
     </div>
-  
-</div>
+ 
 {% endblock %}
