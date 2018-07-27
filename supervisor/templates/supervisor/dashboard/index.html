@@ -87,7 +87,7 @@
 
                     {% for owner in owners %}
                     <tr>
-                        <td>{{owner.user.first_name.capitalize}} {{owner.user.last_name.capitalize}}</td>
+                        <td><a href="{% url 'sup:singleOwner' owner.id %}">{{owner.user.first_name.capitalize}} {{owner.user.last_name.capitalize}}</a></td>
                         <td>{{owner.nat_id}}</td>
                         <td>{{owner.telephone}}</td>
                         <td><a href="{% url 'sup:singleOwner' owner.id %}" class="btn btn-flat btn-sm btn-success btn-block"><i class="fa fa-external-link"></i> View</a></td>

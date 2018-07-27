@@ -44,9 +44,10 @@ class Vehicle(models.Model):
         capacity (TYPE): Description
         number_plate (TYPE): Description
     """
+    capacity_options = [(14,14),(45,45)]
 
     number_plate = models.CharField(max_length=200, null=True)
-    capacity = models.IntegerField(null=True)
+    capacity = models.IntegerField(null=True,choices=capacity_options)
     owner = models.ForeignKey(Owner, null=True)
     sacco = models.ForeignKey(Sacco, null=True)
     is_active = models.BooleanField(default = False)
