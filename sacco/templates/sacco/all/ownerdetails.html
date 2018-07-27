@@ -1,64 +1,76 @@
-{%extends 'sacco/all/base.html'%} 
-{% load static %} 
+{%extends 'fleet_base/adminbase.html'%} 
+{% load staticfiles%} 
+{% load bootstrap3 %}
+<!-- Content block -->
+{%block content-header%}
+     <section class="content-header">
+      <h1>
+        Sacco Dashboard<small>manage everything from here</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">Sacco</a></li>
+        <li class="active">Member Details</li>
+      </ol>
+    </section>
+{%endblock%}
+
 {% block content %}
-<div class="container">
-    <div class="row">
-        <div class="col-md-4">
-           <div class="list-group">
- 
-                  <a href="{% url 'sacco:profile' %}" class="list-group-item ">
-                    About Sacco
-                  </a>
+    <div class="box">
+    <div class="box-header with-border">
+        <h3 class="box-title">Member Details</h3>
+    </div>
+    <div class="box-body table-responsive with-border">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>ID Number</th>
+                    <th>Telephone Number</th>
+                
+                </tr>
+            </thead>
+            <tbody>
+                {% for owner in owner %}
+                <tr>
+                    <td>{{owner.user.first_name.capitalize}} {{owner.user.last_name.capitalize}}</td>
+                    <td>{{owner.nat_id}}</td>
+                    <td>{{owner.telephone}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>  
+    </div>
 
-                    <a href="{% url 'sacco:createSupervisor' %}" class="list-group-item ">
-                    Add Supervisor
-                  </a>
-                    <a href="{% url 'sacco:edit' user.sacco.id %}" class="list-group-item ">
-                    Edit Sacco
-                  </a>
-
-                  
-            </div>
-        </div>
-        <div class="col-md-8">
-            {% for owner in owner %}
-            <div>
-                <h4>OWNER NAME: {{owner.user.first_name.capitalize}} {{owner.user.last_name.capitalize}}</h4>
-            </div>
-            <div>
-                <h4>NATIONAL ID: {{owner.nat_id}}</h4>
-            </div>
-            <div>
-                <h4>TELEPHONE NUMBER: {{owner.telephone}}</h4>
-            </div>
-            {% endfor %}
-            
-            <div>
-                <h4>CARS OWNED ARE: <br><br>
-                      <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Registration</th>
-                                    <th>Capacity</th>
-                                    
-                                    
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for car_owned in car_owned %}
-                                <tr>
-                                    <td>{{car_owned.number_plate}}</td>
-                                    <td>{{car_owned.capacity}}</td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                   
-                </h4>
-            </div>
-            
-        </div>
+        
 
     </div>
-</div>
+
+    <div class="box">
+    <div class="box-header with-border">
+        <h3 class="box-title">Member's Matatu's</h3>
+    </div>
+    <div class="box-body table-responsive with-border">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Registration</th>
+                    <th>Capacity</th>
+                
+                </tr>
+            </thead>
+            <tbody>
+                {% for car_owned in car_owned %}
+                <tr>
+                    <td>{{car_owned.number_plate}}</td>
+                    <td>{{car_owned.capacity}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>  
+    </div>
+
+        
+
+    </div>
 {% endblock %}
