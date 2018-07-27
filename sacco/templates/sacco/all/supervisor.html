@@ -1,34 +1,37 @@
-{%extends 'sacco/all/base.html'%} {% load bootstrap3 %} {% block content %} {{block.super}}
+{%extends 'fleet_base/adminbase.html'%} 
+{% load staticfiles%} 
+{% load bootstrap3 %}
+<!-- Content block -->
+{%block content-header%}
+     <section class="content-header">
+      <h1>
+        Sacco Dashboard<small>manage everything from here</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">Sacco</a></li>
+        <li class="active">Add Supervisor</li>
+      </ol>
+    </section>
+{%endblock%}
 
-<div class="container">
-    <!-- Supervisor form -->
-    <div class="col-md-4">
-    	<div class="list-group">
- 
-                  <a href="{% url 'sacco:profile' %}" class="list-group-item ">
-                    About Sacco
-                  </a>
-
-                    <a href="{% url 'sacco:createSupervisor' %}" class="list-group-item ">
-                    Add Supervisor
-                  </a>
-                    <a href="{% url 'sacco:edit' user.sacco.id %}" class="list-group-item ">
-                    Edit Sacco
-                  </a>
-
-                  
-            </div>
+{% block content %}
+    <div class="box">
+    <div class="box-header with-border">
+        <h3 class="box-title">Create Supervisor</h3>
     </div>
-    <div class="col-md-8">
-
+    <div class="box-body">
         <form action="{% url 'sacco:createSupervisor' %}" method="post">
 
             {% csrf_token %} 
             {% bootstrap_form form %}
-
-            <input type="submit" class="btn btn-success btn-lg">
+            <button class="btn btn-flat btn-success fa fa-save"> Create Supervisor</button>
+            
 
         </form>
+    </div>
+
+        
 
     </div>
 </div>
