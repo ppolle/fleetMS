@@ -1,33 +1,35 @@
-{% extends 'owner/all/base.html' %} 
-{% load staticfiles%} {% load bootstrap3 %}
-<!-- Content block -->
-{% block content %} {{block.super}}
-<div class="container">
-    <!-- Edit Profile -->
-    <div class="col-md-4">
-    	   <div class="list-group">
- 
-                  <a href="{% url 'owner:profile' %}" class="list-group-item ">
-                    Profile
-                  </a>
+{%extends 'fleet_base/adminbase.html'%} 
+{% load staticfiles%} 
+{% load bootstrap3 %}
 
-                    <a href="{% url 'owner:createVehicle' %}" class="list-group-item ">
-                    Add Vehicle
-                  </a>
-                    <a href="{% url 'owner:editProfile' request.user.owner.id %}" class="list-group-item ">
-                    Edit Profile
-                  </a>
+{%block content-header%}
+     <section class="content-header">
+      <h1>
+        Owner Dashboard<small>manage evryhting from here</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">Owner</a></li>
+        <li class="active">Edit Profile</li>
+      </ol>
+    </section>
+{%endblock%}
 
-                  
-            </div>
+
+{% block content %} 
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Update Profile</h3>
+        </div>
+        <div class="box-body">
+        {% include 'sacco/partials/messages.html' %}
+            <form action="{% url 'owner:editProfile' user.owner.id %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %} {% bootstrap_form form %}
+                <button class="btn btn-success btn-flat fa fa-save" type="submit"> Update Profile</button>
+                
+            </form>
+        </div>
     </div>
-    <div class="col-md-8">
-    {% include 'sacco/partials/messages.html' %}
-        <form action="{% url 'owner:editProfile' user.owner.id %}" method="post" enctype="multipart/form-data">
-            {% csrf_token %} {% bootstrap_form form %}
-            <input type="submit" class="btn btn-success btn-lg">
-        </form>
-    </div>
-</div>
+
 
 {% endblock %}

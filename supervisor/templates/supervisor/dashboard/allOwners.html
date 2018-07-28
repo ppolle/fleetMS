@@ -1,56 +1,68 @@
-{%extends 'fleet_base/base.html'%} 
+{%extends 'fleet_base/adminbase.html'%} 
+{% load staticfiles%} 
 {% load bootstrap3 %}
-{% load static %}
+
+{%block content-header%}
+     <section class="content-header">
+      <h1>
+        Supervisor Dashboard<small>manage everyhting from here</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">Owner</a></li>
+        <li class="active">All Sacco Members</li>
+      </ol>
+    </section>
+{%endblock%}
+
+
 {% block content %}
+{% include 'fleet_base/partials/_messages.html' %} 
+<div class="box">
+		<div class="box-header with-border">
+		    <h3 class="box-title">All Owners</h3>
+        </div>
+	
+    	<div class="box-body with-border table-responsive">
+	      
 
-<div class="container">
-	<div class="row">
-		<div class="col-md-4">
-			{% include 'fleet_base/partials/_sidebar.html' %}
-		</div>
-		<div class="col-md-8">
-			{% include 'fleet_base/partials/_messages.html' %}
-		    	<div>
-			      
+	        
+	         {% if owners%}
+	         
+	         	<table class="table table-bordered">
+	         		<thead>
+	                    <tr>
+	                        <th>Full Name</th>
+	                        <th>ID Number</th>
+	                        <th>Telephone</th>
+	                        <th></th>
+	                    </tr>
+	                </thead>
+	                <tbody>
 
-			         All Owners
-			         {% if owners%}
-			         
-			         	<table class="table table-bordered">
-			         		<thead>
-			                    <tr>
-			                        <th>Full Name</th>
-			                        <th>ID Number</th>
-			                        <th>Telephone</th>
-			                        <th></th>
-			                    </tr>
-			                </thead>
-			                <tbody>
-
-		                        {% for owner in owners %}
-		                        <tr>
-		                            <td>{{owner.user.first_name.capitalize}} {{owner.user.last_name.capitalize}}</td>
-		                            <td>{{owner.nat_id}}</td>
-		                            <td>{{owner.telephone}}</td>
-		                            <td><a href="" class="btn btn-sm btn-success btn-block">View</a></td>
-		                        </tr>
-		                        {% endfor %}
+                        {% for owner in owners %}
+                        <tr>
+                            <td><a href="{% url 'sup:singleOwner' owner.id %}">{{owner.user.first_name.capitalize}} {{owner.user.last_name.capitalize}}</a></td>
+                            <td>{{owner.nat_id}}</td>
+                            <td>{{owner.telephone}}</td>
+                            <td><a href="{% url 'sup:singleOwner' owner.id %}" class="btn btn-sm btn-success btn-block"><i class="fa fa-external-link"></i> View</a></td>
+                        </tr>
+                        {% endfor %}
 
 
-	                		</tbody>
-						  
-						</table>
-						{% if owners.count > 5 %}
-						<a href="" class="pull-right">View All Owners</a>
-						{%endif%}
-			         
+            		</tbody>
+				  
+				</table>
+				{% if owners.count > 5 %}
+				<a href="" class="pull-right">View All Owners</a>
+				{%endif%}
+	         
 
-			         {%else%}
-			         <p>NO Owner currently registered in this sacco</p>
-			         {%endif%}
-		    </div>
-	    </div>
+	         {%else%}
+	         <p>NO Owner currently registered in this sacco</p>
+	         {%endif%}
     </div>
-  
 </div>
+   
+
 {% endblock %}

@@ -1,57 +1,68 @@
-{%extends 'fleet_base/base.html'%} 
+{%extends 'fleet_base/adminbase.html'%} 
+{% load staticfiles%} 
 {% load bootstrap3 %}
-{% load static %}
-{% block content %}
 
-<div class="container">
-	<div class="row">
-		<div class="col-md-4">
-			{% include 'fleet_base/partials/_sidebar.html' %}
-		</div>
-		<div class="col-md-8">
-			{% include 'fleet_base/partials/_messages.html' %}
-		    	<div>
-			        All Matatus
-			         {% if matatus%}
-			         
-			         	<table class="table table-bordered">
-			         		<thead>
-			                    <tr>
-			                        <th>Number Plate</th>
-			                        <th>Capacity</th>
-			                        <th>Status</th>
-			                        <th>Owner</th>
-			                        <th></th>
-			                    </tr>
-			                </thead>
-			                <tbody>
-
-		                        {% for matatu in matatus %}
-		                        <tr>
-		                            <td>{{matatu.number_plate}}</td>
-		                            <td>{{matatu.capacity}}</td>
-
-		                            <td>{% if matatu.is_active == False %}<a href="" class="btn btn-danger btn-sm btn-block"> Inactive</a>{%else%}<a href="" class="btn btn-primary btn-sm btn-block">Active</a>{%endif%}</td>
-
-		                            <td>{{matatu.owner.user.first_name.capitalize}} {{matatu.owner.user.first_name.capitalize}}</td>
-		                            <td><a href="{% url 'sup:singleMatatu' matatu.id %}" class="btn btn-sm btn-success btn-block">View</a></td>
-		                        </tr>
-		                        {% endfor %}
+{%block content-header%}
+     <section class="content-header">
+      <h1>
+        Supervisor Dashboard<small>manage everyhting from here</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">Owner</a></li>
+        <li class="active">All Sacco Matatus</li>
+      </ol>
+    </section>
+{%endblock%}
 
 
-	                		</tbody>
-						  
-						</table>
-						
-			         	
+{% block content %} 
+{% include 'fleet_base/partials/_messages.html' %}
+<div class="box">
+	
+		<div class="box-header with-border">
+            <h3 class="box-title">All Matatus</h3>
+        </div>
+    	<div class="box-body table-responsive with-border">
+	       
+	         {% if matatus%}
+	         
+	         	<table class="table table-bordered">
+	         		<thead>
+	                    <tr>
+	                        <th>Number Plate</th>
+	                        <th>Capacity</th>
+	                        <th>Status</th>
+	                        <th>Owner</th>
+	                        <th></th>
+	                    </tr>
+	                </thead>
+	                <tbody>
 
-			         {%else%}
-			         <p>No matatus are registered in this sacco</p>
-			         {%endif%}
+                        {% for matatu in matatus %}
+                        <tr>
+                            <td>{{matatu.number_plate}}</td>
+                            <td>{{matatu.capacity}}</td>
 
-		    </div>
-	    </div>
+                            <td>{% if matatu.is_active == False %}<a href="" class="btn btn-danger btn-sm btn-block"> Inactive</a>{%else%}<a href="" class="btn btn-primary btn-sm btn-block">Active</a>{%endif%}</td>
+
+                            <td><a href="{% url 'sup:singleOwner' matatu.owner.id %}">{{matatu.owner.user.first_name.capitalize}} {{matatu.owner.user.first_name.capitalize}}</a></td>
+                            <td><a href="{% url 'sup:singleMatatu' matatu.id %}" class="btn btn-sm btn-success btn-block"><i class="fa fa-external-link"></i> View</a></td>
+                        </tr>
+                        {% endfor %}
+
+
+            		</tbody>
+				  
+				</table>
+				
+	         	
+
+	         {%else%}
+	         <p>No matatus are registered in this sacco</p>
+	         {%endif%}
+
     </div>
-  
 </div>
+
 {% endblock %}
