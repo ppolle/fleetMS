@@ -41,7 +41,32 @@
                             <td>{{cond.fullname.capitalize}}</td>
                             <td>{{cond.id_number}}</td>
                             <td><a href="{% url 'sup:editConductor' cond.id %}" class="btn btn-sm btn-success btn-block btn-flat fa fa-edit"> Edit</a></td>
-                            <td><a href="{% url 'sup:deleteConductor' cond.id %}" class="btn btn-sm btn-danger btn-block btn-flat fa fa-trash"> Delete</a></td>
+                            <td><a href="#" class="btn btn-sm btn-danger btn-block btn-flat fa fa-trash" data-toggle="modal" data-target="#modal-default-{{cond.id}}"> Delete</a>
+
+                            <div class="modal fade" id="modal-default-{{cond.id}}">
+	                          <div class="modal-dialog">
+	                            <div class="modal-content">
+	                              <div class="modal-header">
+	                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	                                  <span aria-hidden="true">&times;</span></button>
+	                                <h4 class="modal-title">Delete Conductor?</h4>
+	                              </div>
+	                              <div class="modal-body">
+	                                <p>Are you sure you want to permanently delete this conductor?</p>
+	                              </div>
+	                              <div class="modal-footer">
+	                                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancel Deletion</button>
+	                                <a href="{% url 'sup:deleteConductor' cond.id %}" class="btn btn-danger">Delete Conductor</a>
+	                                
+	                              </div>
+	                            </div>
+	                            <!-- /.modal-content -->
+	                          </div>
+	                          <!-- /.modal-dialog -->
+	                        </div>
+	                        <!-- /.modal -->
+
+                            </td>
                         </tr>
                         {% endfor %}
 

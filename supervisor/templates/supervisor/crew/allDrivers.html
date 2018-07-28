@@ -40,7 +40,31 @@
 	                            <td>{{driver.fullname.capitalize}}</td>
 	                            <td>{{driver.id_number}}</td>
 	                            <td><a href="{% url 'sup:editDriver' driver.id %}" class="btn btn-sm btn-flat btn-success btn-block fa fa-edit"> Edit</a></td>
-	                            <td><a href="{% url 'sup:deleteDriver' driver.id %}" class="btn btn-flat btn-sm btn-danger btn-block fa fa-trash"> Delete</a></td>
+	                            <td><a href="" class="btn btn-flat btn-sm btn-danger btn-block fa fa-trash" data-toggle="modal" data-target="#modal-default-{{driver.id}}"> Delete</a>
+
+	                            	    <div class="modal fade" id="modal-default-{{driver.id}}">
+				                          <div class="modal-dialog">
+				                            <div class="modal-content">
+				                              <div class="modal-header">
+				                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				                                  <span aria-hidden="true">&times;</span></button>
+				                                <h4 class="modal-title">Delete Driver?</h4>
+				                              </div>
+				                              <div class="modal-body">
+				                                <p>Are you sure you want to permanently delete this driver?</p>
+				                              </div>
+				                              <div class="modal-footer">
+				                                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancel Deletion</button>
+				                                <a href="{% url 'sup:deleteDriver' driver.id %}" class="btn btn-danger">Delete Driver</a>
+				                                
+				                              </div>
+				                            </div>
+				                            <!-- /.modal-content -->
+				                          </div>
+				                          <!-- /.modal-dialog -->
+				                        </div>
+				                        <!-- /.modal -->
+	                            </td>
 	                        </tr>
 	                        {% endfor %}
 
