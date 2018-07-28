@@ -36,8 +36,8 @@
               {%for crew in crews%}
                   <td>{{crew.vehicle_id.number_plate}}</td>
                   <td>{{crew.vehicle_id.capacity}}</td>
-                  <td><a href="#" data-toggle="modal" data-target="#modal-default">{{crew.driver_id.fullname.capitalize}}</a></td>
-                  <td><a href="#" data-toggle="modal" data-target="#conductor-modal">{{crew.conductor_id.fullname.capitalize}}</a></td>
+                  <td><a href="#" data-toggle="modal" data-target="#modal-default" data-toggle="tooltip" data-placement="bottom" title="Driver details">{{crew.driver_id.fullname.capitalize}}</a></td>
+                  <td><a href="#" data-toggle="modal" data-target="#conductor-modal" data-toggle="tooltip" data-placement="bottom" title="Conductor details">{{crew.conductor_id.fullname.capitalize}}</a></td>
                   <td>
                     {%if crew.vehicle_id.is_active == True%}<span class="label label-success">Active</span>{%else%}<span class="label label-danger">Inactive</span>{%endif%}
                     
@@ -114,7 +114,7 @@
               <td>{{owner.number_plate.capitalize}}</td>
               <td>{{owner.capacity}}</td>
              
-              <td>{%if crew.vehicle_id.is_active == True%}<span class="label label-success">Active</span>{%else%}<span class="label label-danger">Inactive</span>{%endif%}</td>
+              <td>{%if crew.vehicle_id.is_active == True%}<span class="label label-success" data-toggle="tooltip" data-placement="bottom" title="Although this vehicle is active, no crew has been assigned to it yet">Active</span>{%else%}<span class="label label-danger" data-toggle="tooltip" data-placement="bottom" title="No crew has been assigned to this matatu yet!">Inactive</span>{%endif%}</td>
             </tbody>
           </table>
           
