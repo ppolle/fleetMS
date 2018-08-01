@@ -119,3 +119,10 @@ def saccoMembers(request):
 
     members = Owner.objects.filter(sacco = Sacco.objects.get(pk=request.user.sacco.id))
     return render(request,'sacco/all/members.html',{"members":members})
+
+def saccoSupervisors(request):
+    '''
+    View function to retrieve all sacco supervisor instances
+    '''
+    supervisors = Super_list.objects.filter(sacco = Sacco.objects.get(pk=request.user.sacco.id))
+    return render(request,'sacco/all/supervisors.html',{"supervisors":supervisors})
