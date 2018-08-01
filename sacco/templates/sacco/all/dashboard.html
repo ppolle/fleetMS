@@ -80,7 +80,7 @@
                                 {% for owner in owner %}
                                 <td>
                                     <a href="{% url 'sacco:ownerDetails' owner.id %}">
-                                    {{owner.user.first_name}} {{owner.user.last_name}}
+                                    {{owner.user.first_name.capitalize}} {{owner.user.last_name.capitalize}}
                                     </a>
                                 </td>
                             </tr>

@@ -1,0 +1,70 @@
+{%extends 'fleet_base/adminbase.html'%} 
+{% load staticfiles%} 
+{% load bootstrap3 %}
+<!-- Content block -->
+{%block content-header%}
+     <section class="content-header">
+      <h1>
+        Sacco Dashboard<small>manage everything from here</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">Sacco</a></li>
+        <li class="active">Sacco Fleet</li>
+      </ol>
+    </section>
+{%endblock%}
+{% block content %} 
+        
+            <!-- Page content -->
+        {% include 'sacco/partials/messages.html' %}
+        <div class="box">
+            <div class="box-header with-border">
+                <h3 class="box-title">Sacco Fleet</h3>
+            </div>
+            <div class="box-body table-responsive with-border">
+                 {% if fleet %}
+                    <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Registration Plate</th>
+                                    <th>Capacity</th>
+                                    <th>Status</th>
+                                    <th>Owner</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                    {% for fleet in fleet %}
+                                    <tr>
+                                        <td>{{fleet.number_plate}}</td>
+                                        <td>{{fleet.capacity}}</td>
+                                        <td>{% if fleet.is_active == True%}<a href="" class="btn btn-flat btn-success btn-block">Active</a>{%else%}<a href="" class="btn btn-flat btn-danger btn-block">Inactive</a>{%endif%}</td>
+                                        <td>{{fleet.owner.user.first_name.capitalize}} {{fleet.owner.user.last_name.capitalize}}</td>
+                                    </tr>
+                                    {% endfor %}
+
+
+                            </tbody>
+                        </table>
+                 {% else %}
+                        <div class="">
+                            <h3>The sacco doesnt have a matau sacco registered yet</h3>
+
+                        </div>
+                {% endif %}
+                
+            </div>
+                
+            
+           
+
+        </div>        
+        
+       
+        
+            
+        
+
+
+{% endblock %}
