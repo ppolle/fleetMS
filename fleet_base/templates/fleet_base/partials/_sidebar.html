@@ -78,7 +78,7 @@
         {% elif user.roles == 'sacco' %}
           <li><a href="{% url 'sacco:sacco_home' %}"><i class="fa fa-dashboard"></i><span>Dashboard</span></a></li>
           <li><a href="{% url 'sacco:fleet' %}"><i class="fa fa-car"></i><span>Sacco Fleet</span></a></li>
-          <li><a href=""><i class="fa fa-user"></i><span>Sacco Members</span></a></li>
+          <li><a href="{% url 'sacco:members' %}"><i class="fa fa-user"></i><span>Sacco Members</span></a></li>
           
 
           <li class="treeview">

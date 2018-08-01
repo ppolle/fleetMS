@@ -111,3 +111,11 @@ def saccoFleet(request):
     
     fleet = Vehicle.objects.filter(sacco = request.user.sacco.id)
     return render(request,'sacco/all/fleet.html',{'fleet':fleet})
+
+def saccoMembers(request):
+    '''
+    View function to retrive all member instances of a particular sacco
+    '''
+
+    members = Owner.objects.filter(sacco = Sacco.objects.get(pk=request.user.sacco.id))
+    return render(request,'sacco/all/members.html',{"members":members})
