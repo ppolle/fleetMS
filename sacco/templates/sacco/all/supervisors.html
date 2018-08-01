@@ -10,7 +10,7 @@
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
         <li><a href="#">Sacco</a></li>
-        <li class="active">Dashboard</li>
+        <li class="active">Sacco Supervisors</li>
       </ol>
     </section>
 {%endblock%}
@@ -18,12 +18,12 @@
         
             <!-- Page content -->
         {% include 'sacco/partials/messages.html' %}
-        <div class="box">
+      <div class="box">
             <div class="box-header with-border">
                 <h3 class="box-title">Supervisor List</h3>
             </div>
             <div class="box-body table-responsive with-border">
-                 {% if supervisor %}
+                 {% if supervisors %}
                     <table class="table table-bordered">
                             <thead>
                                 <tr>
@@ -35,7 +35,7 @@
                             </thead>
                             <tbody>
 
-                                    {% for supervisor in supervisor %}
+                                    {% for supervisor in supervisors %}
                                     <tr>
                                         <td>{{supervisor.full_name}}</td>
                                         <td>{{supervisor.id_number}}</td>
@@ -59,45 +59,8 @@
             
            
 
-        </div>        
-        
-        <div class="box">
-            <div class="box-header with-border">
-                <h3 class="box-title">Sacco Members</h3>
-            </div>
-            {% if owner %}
-                <div class="box-body table-responsive with-border">
-                     <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>
-                                    Registered Owner Name
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                {% for owner in owner %}
-                                <td>
-                                    <a href="{% url 'sacco:ownerDetails' owner.id %}">
-                                    {{owner.user.first_name.capitalize}} {{owner.user.last_name.capitalize}}
-                                    </a>
-                                </td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-
-                    </table>
-                    
-                </div>
-            {% else %}
-               <div class="emptytable">
-                    <h3>No matatu owner have registered with this sacco yet</h3>
-
-                </div>
-            {% endif %}
-           
-        </div>
+        </div> 
+       
         
             
         

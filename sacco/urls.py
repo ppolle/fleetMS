@@ -10,6 +10,9 @@ urlpatterns = [
     url(r'^new/supervisor/$', views.superlist, name='createSupervisor'),
     url(r'^editSupervisor/(\d+)', views.edit_superlist, name='editSupervisor'),
     url(r'^delete_supervisor/(\d+)', views.delete_supervisor, name='deleteSupervisor'),
+    url(r'^fleet/$', views.saccoFleet, name='fleet'),
+    url(r'^members/$', views.saccoMembers, name='members'),
+    url(r'^supervisors/$', views.saccoSupervisors, name='supervisors'),
     
     url(r'^ownerdetails/(\d+)', views.owner_details, name='ownerDetails'),
 

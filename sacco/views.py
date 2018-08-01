@@ -5,6 +5,7 @@ from .forms import SaccoForm, Super_listForm, EditProfile, EditSupervisor
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from owner.models import Owner, Vehicle
+from django.views import View
 
 # Create your views here.
 
@@ -103,3 +104,25 @@ def owner_details(request, ownerID):
     return render(request, 'sacco/all/ownerdetails.html', {"owner": owner, "car_owned": car_owned})
 
 
+def saccoFleet(request):
+    '''
+    View class to manage viewing all of the sacco fleet
+    '''
+    
+    fleet = Vehicle.objects.filter(sacco = request.user.sacco.id)
+    return render(request,'sacco/all/fleet.html',{'fleet':fleet})
+
+def saccoMembers(request):
+    '''
+    View function to retrive all member instances of a particular sacco
+    '''
+
+    members = Owner.objects.filter(sacco = Sacco.objects.get(pk=request.user.sacco.id))
+    return render(request,'sacco/all/members.html',{"members":members})
+
+def saccoSupervisors(request):
+    '''
+    View function to retrieve all sacco supervisor instances
+    '''
+    supervisors = Super_list.objects.filter(sacco = Sacco.objects.get(pk=request.user.sacco.id))
+    return render(request,'sacco/all/supervisors.html',{"supervisors":supervisors})

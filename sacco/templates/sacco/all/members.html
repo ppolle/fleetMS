@@ -1,0 +1,68 @@
+{%extends 'fleet_base/adminbase.html'%} 
+{% load staticfiles%} 
+{% load bootstrap3 %}
+<!-- Content block -->
+{%block content-header%}
+     <section class="content-header">
+      <h1>
+        Sacco Dashboard<small>manage everything from here</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">Sacco</a></li>
+        <li class="active">Sacco Members</li>
+      </ol>
+    </section>
+{%endblock%}
+{% block content %} 
+        
+            <!-- Page content -->
+        {% include 'sacco/partials/messages.html' %}
+       <div class="box">
+            <div class="box-header with-border">
+                <h3 class="box-title">Sacco Members</h3>
+            </div>
+            {% if members %}
+                <div class="box-body table-responsive with-border">
+                     <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Registered Owner Name
+                                </th>
+                                <th>National ID</th>
+                                <th>Telephone #</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                {% for member in members %}
+                                <td>
+                                    <a href="{% url 'sacco:ownerDetails' member.id %}">
+                                    {{member.user.first_name.capitalize}} {{member.user.last_name.capitalize}}
+                                    </a>
+                                </td>
+                                <td>{{member.nat_id}}</td>
+                                <td>{{member.telephone}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+
+                    </table>
+                    
+                </div>
+            {% else %}
+               <div class="emptytable">
+                    <h3>No matatu owner have registered with this sacco yet</h3>
+
+                </div>
+            {% endif %}
+           
+        </div>
+       
+        
+            
+        
+
+
+{% endblock %}
