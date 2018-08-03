@@ -89,7 +89,7 @@ def edit_profile(request, sacco_id):
 @login_required(login_url='/loginViews/')
 def delete_sacco(request, saccoID):
     '''
-    View function that enables one delete a given sacco
+    View function that enables deletion of a sacco instance
     '''
     Sacco.objects.filter(pk=saccoID).delete()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
