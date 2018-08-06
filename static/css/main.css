@@ -11,7 +11,7 @@ font-family: 'Raleway', sans-serif; */
 }
 
 body {
-  background-image: url('static/images/bg01.jpg');
+  background-image: url('../img/bg01.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
@@ -30,7 +30,7 @@ button:hover {
   background-color: white;
   color: transparent;
   background: -webkit-linear-gradient(transparent, transparent),
-             url('static/images/bg01.jpg');
+             url('../img/bg01.jpg');
   background-size: cover;
   background-repeat: no-repeat;
  /* -webkit-background-clip: text; */
