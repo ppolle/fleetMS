@@ -9,7 +9,7 @@ from django.contrib.auth import get_user_model
 class SupervisorForm(forms.ModelForm):
     class Meta:
         model = Supervisor
-        fields = ('id_number','mobile_phone_number','profile_picture')
+        fields = ('id_number','mobile_phone_number')
 
 class DriverForm(forms.ModelForm):
 	class Meta:
