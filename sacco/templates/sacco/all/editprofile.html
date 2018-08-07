@@ -1,30 +1,29 @@
-{% extends 'sacco/all/base.html' %} 
+{%extends 'fleet_base/adminbase.html'%} 
 {% load staticfiles%} 
 {% load bootstrap3 %}
-<!-- Content block -->
-{% block content %} 
-{{block.super}}
-<div class="container">
-    <!-- Edit Sacco form -->
-    <div class="col-md-4">
-    	<div class="list-group">
- 
-                  <a href="{% url 'sacco:profile' %}" class="list-group-item ">
-                    About Sacco
-                  </a>
 
-                    <a href="{% url 'sacco:createSupervisor' %}" class="list-group-item ">
-                    Add Supervisor
-                  </a>
-                    <a href="{% url 'sacco:edit' user.sacco.id %}" class="list-group-item ">
-                    Edit Sacco
-                  </a>
+{%block content-header%}
+     <section class="content-header">
+      <h1>
+        Sacco Dashboard<small>manage everyhting from here</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">Sacco</a></li>
+        <li class="active">Edit Sacco Details</li>
+      </ol>
+    </section>
+{%endblock%}
 
-                  
-            </div>
+
+{% block content %}
+{% include 'fleet_base/partials/_messages.html' %} 
+<div class="box">
+   <div class="box-header with-border">
+        <h3 class="box-title">Edit Sacco Details</h3>
     </div>
-    <div class="col-md-8">
-        {% include 'sacco/partials/messages.html' %}
+ 
+    <div class="box-body with-border">
         <form action="{% url 'sacco:edit' user.sacco.id %}" method="post" enctype="multipart/form-data">
             {% csrf_token %} 
             {% bootstrap_form form %}
