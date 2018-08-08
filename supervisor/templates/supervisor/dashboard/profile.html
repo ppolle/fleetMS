@@ -1,30 +1,78 @@
-{%extends 'fleet_base/base.html'%} 
-{% load static %} 
+{%extends 'fleet_base/adminbase.html'%} 
+{% load staticfiles%} 
+{% load bootstrap3 %}
+<!-- Content block -->
+{%block content-header%}
+     <section class="content-header">
+      <h1>
+        Owner Dashboard<small>manage everything from here</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">Supervisor</a></li>
+        <li class="active">Profile</li>
+      </ol>
+    </section>
+{%endblock%}
 {% block content %}
-<div class="sidenav" style="height: 100vh; width: 40vw; background: grey;">
-  {% if profile.profile_picture %}
-  <img src="{{profile.profile_picture.url}}" alt="Owner Image" style="margin-top: 5vh; padding-left: 3vw; padding-right: 3vw; width: 10vw;"> {% else %}
-  <h1 style="color: white; font-size: 10vh; padding: 3vw;">No Image uploaded</h1>
-  {% endif %}
-</div>
-<div class="container" style="width:60vw; float:right; display: inline block; padding-left: 5vw;">
-  <div class="row">
-    <div class="col-md-7">
-      {% include 'fleet_base/partials/_messages.html' %}
-      <div>
-        <h3>Supervisor: {{profile.user.first_name.capitalize}} {{profile.user.last_name.capitalize}}</h3>
+
+<div class="row">
+        <div class="col-md-3">
+
+
+          <!-- Profile Image -->
+          <div class="box box-primary">
+            <div class="box-body box-profile">
+              <img class="profile-user-img img-responsive img-circle" src="{% static "img/user4-128x128.jpg" %}" alt="User profile picture">
+
+              <h3 class="profile-username text-center">{{profile.user.first_name.capitalize}} {{profile.user.last_name.capitalize}}</h3>
+
+              <p class="text-muted text-center">{{profile.sacco_base}} Supervisor</p>
+              <hr>
+
+              <br>
+
+              <a href="{% url 'sup:editSupervisor'%}" class="btn btn-primary btn-block"><b>Edit Profile</b></a>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+
+          
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-9">
+          <!-- About Me Box -->
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">About Me</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <strong><i class="fa fa-book margin-r-5"></i> Telephone Number</strong>
+
+              <p class="text-muted">
+                {{profile.mobile_phone_number}}
+              </p>
+
+              <hr>
+
+              <strong><i class="fa fa-map-marker margin-r-5"></i> Sacco</strong>
+
+              <p class="text-muted">{{profile.sacco_base}}</p>
+
+              <hr>
+
+              <strong><i class="fa fa-pencil margin-r-5"></i> Id Number</strong>
+
+              <p class="text-muted">{{profile.id_number}}</p>
+
+              </div>
+            <!-- /.box-body -->
+          </div>
+        </div>
+        <!-- /.col -->
       </div>
-      <div>
-        <h4>National Id: {{profile.id_number}}</h4>
-      </div>
-      <div>
-        <h4>Telephone: {{profile.mobile_phone_number}}</h4>
-      </div>
-      <div>
-        <h4>Sacco: {{profile.sacco_base}}</h4>
-      </div>
-    </div>
-  </div>
-</div>
       
 {% endblock %}
