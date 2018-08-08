@@ -11,7 +11,15 @@
         </div>
         <div class="pull-left info">
           <p>
-            <a href="">
+            <a href="
+                {% if user.roles == 'sacco' %}
+                  {% url 'sacco:profile' %}
+                {% elif user.roles == 'supervisor' %}
+                  {% url 'sup:profile' %}
+                {%else%}
+                  {% url 'owner:profile' %}
+                {%endif%}
+                    ">
                 {% if user.roles == 'sacco' %}
                       {{user.sacco.name.capitalize}} Sacco
                     {% else %}
